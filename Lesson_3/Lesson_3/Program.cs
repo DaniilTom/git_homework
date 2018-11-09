@@ -6,12 +6,36 @@ using System.Threading.Tasks;
 
 namespace Lesson_3
 {
-    class Program
+    partial class Program
     {
+        /*
+         * Томашевич
+         * Задание 3
+         * */
+
         static void Main(string[] args)
         {
-            Console.Write("Введите номер задачи: ");
-            int task = Int32.Parse(Console.ReadLine());
+            int task = 1;
+            do
+            {
+                Console.Write("\nВведите номер задачи (или 0 для выхода): ");
+                task = Int32.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                switch (task)
+                {
+                    case 1:
+                        Task1();
+                        break;
+
+                    case 3:
+                        Task3();
+                        break;
+                }
+
+            } while (task != 0);
+
+                Console.ReadLine();
         }
     }
 }
