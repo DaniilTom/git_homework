@@ -44,7 +44,7 @@ namespace Lesson_3
                     break;
                 default:
                     Console.WriteLine("Не понял");
-                    break;
+                    return;
             }
 
             Console.WriteLine(answer);
@@ -77,26 +77,23 @@ namespace Lesson_3
             }
             public Complex Plus(Complex x2)
             {
-                Complex x3 = new Complex();
-                x3.im = x2.im + im;
-                x3.re = x2.re + re;
-                return x3;
+                double _im = x2.im + im;
+                double _re = x2.re + re;
+                return new Complex(_im, _re);
             }
             // **********************************************Добавлено вычитание
             public Complex Minus(Complex x2)
             {
-                Complex x3 = new Complex();
-                x3.im = x2.im - im;
-                x3.re = x2.re - re;
-                return x3;
+                double _im = x2.im - im;
+                double _re = x2.re - re;
+                return new Complex(_im, _re);
             }
             // **********************************************Добавлено умножение
             public Complex Multiply(Complex x2)
             {
-                Complex x3 = new Complex();
-                x3.im = x2.im * im;
-                x3.re = x2.re * re;
-                return x3;
+                double _im = re * x2.im + x2.re * im;
+                double _re = re * x2.re - im * x2.im;
+                return new Complex(_im, _re);
             }
             // Свойства - это механизм доступа к данным класса.
             public double Im

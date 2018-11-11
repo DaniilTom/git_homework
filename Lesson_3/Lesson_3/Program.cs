@@ -28,6 +28,10 @@ namespace Lesson_3
                         Task1();
                         break;
 
+                    case 2:
+                        Task2();
+                        break;
+
                     case 3:
                         Task3();
                         break;
@@ -35,7 +39,7 @@ namespace Lesson_3
 
             } while (task != 0);
 
-                Console.ReadLine();
+                //Console.ReadLine();
         }
     }
 }

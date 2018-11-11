@@ -28,11 +28,13 @@ namespace Lesson_3
             }
 
             Console.WriteLine("Введенные числа: ");
-            int sum;
-            for(int i = 0; i < listNumber.Count; i++)
+            int sum = 0;
+            foreach(var num in listNumber)
             {
-
+                Console.Write(num + " ");
+                if (num % 2 > 0) sum += num;
             }
+            Console.WriteLine("\nСумма нечетных положительных чисел: {0}", sum);
         }
 
         static int GetValue(string message)
