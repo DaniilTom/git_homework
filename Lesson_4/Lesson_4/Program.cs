@@ -8,6 +8,7 @@ namespace Lesson_4
 {
     partial class Program
     {
+        
         static void Main(string[] args)
         {
             Console.WriteLine("ДЗ 4. Массивы. Текстовые файлы. Исключения.");

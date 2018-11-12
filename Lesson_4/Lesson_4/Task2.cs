@@ -9,6 +9,15 @@ namespace Lesson_4
 {
     partial class Program
     {
+        /*  Томашевич
+         * 
+         * Реализуйте задачу 1 в виде статического класса StaticClass;
+         * а) Класс должен содержать статический метод, который принимает на вход массив и решает задачу 1;
+         * б) *Добавьте статический метод для считывания массива из текстового файла.
+         *  Метод должен возвращать массив целых чисел;
+         * в)**Добавьте обработку ситуации отсутствия файла на диске.
+         * */
+
         static void Task2()
         {
             Random rnd = new Random();
@@ -24,6 +33,7 @@ namespace Lesson_4
             /********* следующий блок используется при считывании массива из файла**********/
 
             //int[] mas = StaticTask1.ReadArrayFromFile("array.txt");
+            //if (mas == null) return;
             //Console.WriteLine("\nМассив содержит:");
             //for (int i = 0; i < mas.Length; Console.Write(mas[i++] + " ")) { }
 
@@ -46,6 +56,7 @@ namespace Lesson_4
                 //  запись массива в файл, чтоб можно было воспользоваться методом ReadArrayFromFile;
                 // можно закомментировать, если изначально массив получается путем считывания из файла,
                 //  в противном случае в файл просто перезапишутся те же значения
+
                 FileStream fstr = new FileStream("array.txt", FileMode.OpenOrCreate);
                 BinaryWriter bw = new BinaryWriter(fstr); // тут есть метод для записи Int32 (удобней чем StreaWriter)
 
@@ -59,14 +70,23 @@ namespace Lesson_4
             // использовать только после создания файла (см. начало метода Task2())
             static public int[] ReadArrayFromFile(string fileName)
             {
-                int[] mas = new int[20];
-                using (FileStream fstr = new FileStream(fileName, FileMode.Open))
+                int[] mas = null;
+                try
                 {
-                    using (BinaryReader br = new BinaryReader(fstr)) //тут есть метод для считывания Int32 (удобней StreamReader)
+                    using (FileStream fstr = new FileStream(fileName, FileMode.Open))
                     {
-                        for (int i = 0; br.BaseStream.Position < br.BaseStream.Length; i++) mas[i] = br.ReadInt32();
+                        mas = new int[20];
+                        using (BinaryReader br = new BinaryReader(fstr)) //тут есть метод для считывания Int32 (удобней StreamReader)
+                        {
+                            for (int i = 0; br.BaseStream.Position < br.BaseStream.Length; i++) mas[i] = br.ReadInt32();
+                        }
                     }
                 }
+                catch(FileNotFoundException ex)
+                {
+                    Console.WriteLine("Файл не найден");
+                }
+                
                 return mas;
             }
         }
