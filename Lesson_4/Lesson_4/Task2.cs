@@ -47,7 +47,7 @@ namespace Lesson_4
                 // можно закомментировать, если изначально массив получается путем считывания из файла,
                 //  в противном случае в файл просто перезапишутся те же значения
                 FileStream fstr = new FileStream("array.txt", FileMode.OpenOrCreate);
-                BinaryWriter bw = new BinaryWriter(fstr);
+                BinaryWriter bw = new BinaryWriter(fstr); // тут есть метод для записи Int32 (удобней чем StreaWriter)
 
                 for (int i = 0; i < mas.Length; i++)
                 {
@@ -62,7 +62,7 @@ namespace Lesson_4
                 int[] mas = new int[20];
                 using (FileStream fstr = new FileStream(fileName, FileMode.Open))
                 {
-                    using (BinaryReader br = new BinaryReader(fstr)) //тут есть метод для считывания Int32
+                    using (BinaryReader br = new BinaryReader(fstr)) //тут есть метод для считывания Int32 (удобней StreamReader)
                     {
                         for (int i = 0; br.BaseStream.Position < br.BaseStream.Length; i++) mas[i] = br.ReadInt32();
                     }
