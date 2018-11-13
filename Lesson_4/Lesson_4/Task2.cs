@@ -82,7 +82,7 @@ namespace Lesson_4
                         }
                     }
                 }
-                catch(FileNotFoundException ex)
+                catch(FileNotFoundException)
                 {
                     Console.WriteLine("Файл не найден");
                 }

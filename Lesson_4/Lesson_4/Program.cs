@@ -32,7 +32,16 @@ namespace Lesson_4
                         break;
 
                     case 3:
+                        Task3();
+                        //Console.WriteLine("Не готово");
+                        break;
+
+                    case 4:
                         Console.WriteLine("Не готово");
+                        break;
+
+                    case 5:
+                        //Task5();
                         break;
                 }
 
