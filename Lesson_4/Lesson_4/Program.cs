@@ -41,7 +41,7 @@ namespace Lesson_4
                         break;
 
                     case 5:
-                        //Task5();
+                        Task5();
                         break;
                 }
 
