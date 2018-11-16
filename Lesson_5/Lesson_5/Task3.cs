@@ -1,6 +1,8 @@
+using System;
+
 namespace Lesson_5
 {
-	partial class Programm
+	partial class Program
 	{
 		static void Task3()
 		{
@@ -20,7 +22,7 @@ namespace Lesson_5
 
 			for(int i = 0; i < str1.Length; i++)
 			{
-				if(!str1.Contains(str2[i])) return false;
+				if(!str1.Contains(str2[i].ToString()) || !str2.Contains(str1[i].ToString())) return false;
 			}
 
 			return true;

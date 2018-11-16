@@ -1,6 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 namespace Lesson_5
 {
-	partial class Programm
+	partial class Program
 	{
 		/* Томашевич
 		Разработать статический класс Message, содержащий следующие статические методы для обработки текста:
@@ -13,17 +18,54 @@ namespace Lesson_5
 		в качестве результата метод возвращает сколько раз каждое из слов массива входит в этот текст.
 		Здесь требуется использовать класс Dictionary.
 */
+
+        static void Task2()
+        {
+            Console.WriteLine("Задача 2. Статически класс Message.");
+
+            string sourceText = "Этот текст содержит набор слов, которые будут обрабатываться " +
+                "методами статического класса Message. А здесь несколько повторений: здесь, повторений, текст.";
+
+            Console.WriteLine("\nСлова, которые содержат не более 5 букв:");
+            Message.WriteWordsConstraintLength(5, sourceText);
+
+            Console.WriteLine("\nУдаление слов, оканчивающихся на \"т\": ");
+            Console.WriteLine(Message.DeleteWordsEndsWith('т', sourceText) + "\n");
+
+            Console.WriteLine("\nСамое длинное слово: {0}", Message.MostLongWordIn(sourceText));
+
+            Console.WriteLine("\nСтрока из самых длинных слов: {0}", Message.MostLongWordsSetFrom(sourceText));
+
+            Console.WriteLine("\nЧастотный анализ текста: ");
+            string[] samples = { "текст", "набор", "повторений", "кот" };
+            Dictionary<string, int> d = Message.WordsFrequencyAnalysis(samples, sourceText);
+            foreach (var elem in d) { Console.WriteLine("{0, 20} {1, 5}", elem.Key, elem.Value); }
+        }
 		
 
 		static class Message
 		{
+            /// <summary>
+            /// Набор разделителей для поиска слов в тексте.
+            /// </summary>
 			static char[] seps = {' ', '.', ',', '?', '!', ':', ';', '-'};
 
+            /// <summary>
+            /// Получение слов из текста в виде массива строк.
+            /// </summary>
+            /// <param name="msg">Исходный текст</param>
+            /// <returns></returns>
 			static string[] GetWordsFrom(string msg)
 			{
+                //msg = msg.ToLower();
 				return msg.Split(seps, StringSplitOptions.RemoveEmptyEntries);
 			}
 			
+            /// <summary>
+            /// Выводт слова, длина которых не больше заданной.
+            /// </summary>
+            /// <param name="length">Максимальная длина слова</param>
+            /// <param name="msg">Исходный текст</param>
 			public static void WriteWordsConstraintLength(int length, string msg)
 			{
 				string[] words = GetWordsFrom(msg);
@@ -31,32 +73,47 @@ namespace Lesson_5
 				foreach(var word in words) if(word.Length <= length) Console.WriteLine(word);
 			}
 
+            /// <summary>
+            /// Удаление всех слов, оканчивающихся на заданный символ.
+            /// </summary>
+            /// <param name="key">Заданный символ</param>
+            /// <param name="msg">Исходный текст</param>
+            /// <returns></returns>
 			public static string DeleteWordsEndsWith(char key, string msg)
 			{
 				string[] words = GetWordsFrom(msg);
 
-				StringBuilder newStr = StrinBuilder(msg);
+				StringBuilder newStr = new StringBuilder(msg);
 
-				foreach(var word in words) if(word.EndsWith(key)) newStr.Replace(word, "");
+				foreach(var word in words) if(word.EndsWith(key.ToString())) newStr.Replace(word, "");
 
 				return newStr.ToString();
 			}
 
+            /// <summary>
+            /// Поиск самого длинного слова в тексте.
+            /// </summary>
+            /// <param name="msg">Исходный текст</param>
+            /// <returns></returns>
 			public static string MostLongWordIn(string msg)
 			{
 				string[] words = GetWordsFrom(msg);
 				
-				int maxLength = words[0].Length;
-				string result = words[0];
+				string max = words[0];
 
 				for(int i = 1; i < words.Length; i++)
 				{
-					if(words[i].Length > maxLength) result = words[i];
+					if(words[i].Length > max.Length) max = words[i];
 				}
 
-				return result;
+				return max;
 			}
 
+            /// <summary>
+            /// Формирование строки из самых длинных слов исходного текста.
+            /// </summary>
+            /// <param name="msg">Исходный текст</param>
+            /// <returns></returns>
 			public static string MostLongWordsSetFrom(string msg)
 			{
 				int maxLength = MostLongWordIn(msg).Length;
@@ -76,6 +133,12 @@ namespace Lesson_5
 				return result.ToString();
 			}
 
+            /// <summary>
+            /// Вычисляет частоту вхождения слов словаря в исходный текст.
+            /// </summary>
+            /// <param name="wordsDictionary">Словарь</param>
+            /// <param name="text">Исходный текст</param>
+            /// <returns></returns>
 			public static Dictionary<string, int> WordsFrequencyAnalysis(string[] wordsDictionary, string text)
 			{
 				Dictionary<string, int> d = new Dictionary<string, int>();
@@ -87,9 +150,9 @@ namespace Lesson_5
 
 				string[] words = GetWordsFrom(text);
 
-				foreach(var word in words)
+				for(int i = 0; i < words.Length; i++)
 				{
-					if(wordsDictionary.Contains(word)) d[wordsDictionary]++;
+					if(wordsDictionary.Contains(words[i])) d[words[i]]++;
 				}
 
 				return d;

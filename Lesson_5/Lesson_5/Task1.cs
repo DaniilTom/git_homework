@@ -1,7 +1,11 @@
 
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+
 namespace Lesson_5
 {
-	partial class Programm
+	partial class Program
 	{
 		/* Томашевич
 		Создать программу, которая будет проверять корректность ввода логина.
@@ -13,66 +17,77 @@ namespace Lesson_5
 		static void Task1()
 		{
 			Console.WriteLine("Задача 1. Проверка логина.");
-			Сonsole.WriteLine("Использовать регулярные выражения? [Y / N] ");
+			Console.WriteLine("Использовать регулярные выражения? [Y / N] ");
 			string ans = Console.ReadLine();
 
-			if(ans.ToLower() == 'N')
+            bool correct;
+            string result;
+
+            if (ans.ToUpper() == "N")
 			{
 				do
 				{
-					bool correct = true;
+                    result = "";
+                    correct = true;
 
 					Console.Write("Введите логин: ");
-					string login = Console.ReadLine();
+                    string login = Console.ReadLine();
+					
 
-					string result = "";
-
-					if(login.Length > 10) result += "Пароль слишком длинный. ";
-					else if (login.Length < 2) result += "Пароль слишком короткий. ";
+                    if(!(login.Length >= 2 && login.Length <= 10))
+                    {
+                        correct = false;
+                        if (login.Length > 10) result += "Пароль слишком длинный. ";
+                        else if (login.Length < 2) result += "Пароль слишком короткий. ";
+                    }
 
 					for(int i = 0; i < login.Length; i++)
 					{
-						if(login[i].IsDigit())
+						if(char.IsDigit(login[i]))
 						{
 							if(i != 0) continue;
 							else 
 							{
 								result += "Первый символ не должен быть цифрой. ";
 								correct = false;
+                                continue;
 							}
 						}
 
-						if(	login[i].IsLetter() &&
+						if(	char.IsLetter(login[i]) &&
 							((login[i] >= 'A' && login[i] <= 'Z') ||
-							 (login[i] >= 'a' && login[i] <= 'z')) continue;
+							 (login[i] >= 'a' && login[i] <= 'z'))) continue;
 						else
 						{
-							result += "Обнаружен(ы) символ(ы) не латинского алфавита."
+                            result += "Обнаружен(ы) символ(ы) не латинского алфавита.";
 							correct = false;
 							break;
 						}
 					}
-					
-				} while(!correct);
+
+                    if (!correct) Console.WriteLine(result);
+
+                } while(!correct);
 			}
 			else
 			{
-				Regex reg = new Regex("[A-Za-z]{1}[A-Za-z0-9]{1,9}");
-
-				bool correct = true;
+				//Regex reg = new Regex(@"[A-Za-z]{1}[A-Za-z0-9]{1,9}");
+                correct = true;
 
 				do
 				{
 					Console.Write("Введите логин: ");
 					string login = Console.ReadLine();
-					correct = reg.IsMatch(login);
-					if(!correct) Console.WriteLine("Логин не удвлетворяет требованиям.");
+                    correct = Regex.IsMatch(login, @"^[A-Za-z]{1}[A-Za-z0-9]{1,9}$");
+                    //correct = reg.IsMatch(login);
+
+                    if (!correct) Console.WriteLine("Логин не удвлетворяет требованиям.");
 
 				} while(!correct);
 			}
 
-			if(!correct) Console.WriteLine(result);
-					else Console.WriteLine("Логин верный.");
+			//if(!correct) Console.WriteLine(result);
+		    Console.WriteLine("Логин верный.");
 		}
 	}
 }

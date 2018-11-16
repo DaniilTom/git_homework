@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lesson_5
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
@@ -21,18 +21,19 @@ namespace Lesson_5
                 switch (task)
                 {
                     case 1:
-                        //Task1();
+                        Task1();
                         break;
                     case 2:
-                        //Task2();
-                        Console.WriteLine("Не готово");
+                        Task2();
+                        //Console.WriteLine("Не готово");
                         break;
                     case 3:
-                        //Task3();
-                        Console.WriteLine("Не готово");
+                        Task3();
+                        //Console.WriteLine("Не готово");
                         break;
                     case 4:
-                        Console.WriteLine("Не готово");
+                        Task4();
+                        //Console.WriteLine("Не готово");
                         break;
                     case 5:
                         //Task5();

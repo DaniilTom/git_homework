@@ -1,6 +1,8 @@
+using System;
+
 namespace Lesson_5
 {
-	partial class Programm
+	partial class Program
 	{
 		/*	Томашевич
 		*Задача ЕГЭ.
@@ -19,9 +21,9 @@ namespace Lesson_5
 		Если среди остальных есть ученики, набравшие тот же средний балл, 
 		что и один из трёх худших, следует вывести и их фамилии и имена.
 */
-		void Task4()
+		public static void Task4()
 		{
-			string studentsNum = 10;
+			int studentsNum = 10;
 
 			Student[] stdnts = new Student[studentsNum];
 
@@ -35,19 +37,41 @@ namespace Lesson_5
 										"Михайлов Егор 3 5 4",
 										"Федоров Михаил 4 5 3",
 										"Морозов Алексей 5 5 4"};
+
+			for(int i = 0; i < exampleLines.Length; i++)
+			{
+				stdnts[i] = new Student(exampleLines[i]);
+			}
+
+			Array.Sort(stdnts, delegate(Student std1, Student std2)
+			{
+				return std1.average.CompareTo(std2.average);
+				});
+
+			float threshold = stdnts[2].average;
+
+			Console.WriteLine("Низкий средний бал у следующих учеников:");
+
+			for(int i = 0; i < studentsNum; i++)
+			{
+				if(stdnts[i].average <= stdnts[2].average)
+				Console.WriteLine($"{stdnts[i].secondName, 20} {stdnts[i].firstName, 20}   {stdnts[i].average,-5:0.##}");
+				else break;
+			}
 		}
 
 		struct Student
 		{
-			string firstName, secondName;
+			public string firstName, secondName;
 			byte mark1, mark2, mark3;
-			float average;
+			public float average;
 
 			public Student(string line)
 			{
 				string[] info = line.Split(' ');
-				firstName = info[0];
-				secondName = info[1];
+				
+				secondName = info[0];
+				firstName = info[1];
 				mark1 = byte.Parse(info[2]);
 				mark2 = byte.Parse(info[3]);
 				mark3 = byte.Parse(info[4]);
