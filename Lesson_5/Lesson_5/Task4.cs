@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace Lesson_5
 {
@@ -23,24 +24,40 @@ namespace Lesson_5
 */
 		public static void Task4()
 		{
-			int studentsNum = 10;
+            // В этом фрагменте кода идет считывание данных из консоли.
+            // закомментируйте строки 30 - 38, и раскомментируйте 42 - 53 чтобы использовать готовые данные.
+            // Начнем вводить данные в поток.
+            Console.WriteLine("Сначала кол-во учеников, затем их данные в формате\n" +
+                "<Фамилия> <Имя> <оценка1> <оценка2> <оценка3>.\n" +
+                "Когда все данные будут введены, нажмите CTRL + Z и нажмите Enter.");
+            // Предположим, что все данные уже помещены в поток. Чтаем их все.
+            string allInputData = Console.In.ReadToEnd();
+            // Каждый кортеж расположен на своей строке. Используем разбиение на строки с разделителем NewLine.
+            string[] exampleLines = allInputData.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            // Первым идет количество учеников.
+            byte studentsNum = Byte.Parse(exampleLines[0]);
 
-			Student[] stdnts = new Student[studentsNum];
 
-			string[] exampleLines = {	"Иванов Петр 4 5 3",
-										"Петров Иван 5 5 5",
-										"Павлов Александр 3 3 3",
-										"Смирнов Максим 4 4 4",
-										"Васильев Артем 5 3 3",
-										"Попов Никита 4 4 5",
-										"Соколов Дмитрий 4 5 3",
-										"Михайлов Егор 3 5 4",
-										"Федоров Михаил 4 5 3",
-										"Морозов Алексей 5 5 4"};
 
-			for(int i = 0; i < exampleLines.Length; i++)
+            //  byte studentsNum = 10;
+            //  string[] exampleLines = {   "10",
+            //                              "Иванов Петр 4 5 3",
+            //"Петров Иван 5 5 5",
+            //"Павлов Александр 3 3 3",
+            //"Смирнов Максим 4 4 4",
+            //"Васильев Артем 5 3 3",
+            //"Попов Никита 4 4 5",
+            //"Соколов Дмитрий 4 5 3",
+            //"Михайлов Егор 3 5 4",
+            //"Федоров Михаил 4 5 3",
+            //"Морозов Алексей 5 5 4"};
+
+            // Теперь заполним масиив Student[] данными
+            Student[] stdnts = new Student[studentsNum];
+
+            for (int i = 0; i < exampleLines.Length - 1; i++)
 			{
-				stdnts[i] = new Student(exampleLines[i]);
+				stdnts[i] = new Student(exampleLines[i+1]);
 			}
 
 			Array.Sort(stdnts, delegate(Student std1, Student std2)
