@@ -24,7 +24,8 @@ namespace Lesson_5
             Console.WriteLine("Задача 2. Статически класс Message.");
 
             string sourceText = "Этот текст содержит набор слов, которые будут обрабатываться " +
-                "методами статического класса Message. А здесь несколько повторений: здесь, повторений, текст.";
+                "методами статического класса Message. А здесь несколько повторений: здесь, повторений, текст. А здесь " +
+                "еще пару слов: бесконфликтный, благодетельный, единомышленник.";
 
             Console.WriteLine("\nСлова, которые содержат не более 5 букв:");
             Message.WriteWordsConstraintLength(5, sourceText);
@@ -37,7 +38,7 @@ namespace Lesson_5
             Console.WriteLine("\nСтрока из самых длинных слов: {0}", Message.MostLongWordsSetFrom(sourceText));
 
             Console.WriteLine("\nЧастотный анализ текста: ");
-            string[] samples = { "текст", "набор", "повторений", "кот" };
+            string[] samples = { "текст", "набор", "повторений", "кот" };//можно добавить чего-нибудь
             Dictionary<string, int> d = Message.WordsFrequencyAnalysis(samples, sourceText);
             foreach (var elem in d) { Console.WriteLine("{0, 20} {1, 5}", elem.Key, elem.Value); }
         }
@@ -127,10 +128,21 @@ namespace Lesson_5
 					if(words[i].Length == maxLength) result.Append(words[i] + " ");
 				}
 
-				//удалаяется последний пробел
+				//удалаяется последний пробел (просто он там не нужен, т.к. ничего не отделяет)
 				result.Remove(result.Length - 1, 1);
 
-				return result.ToString();
+                // пример реализации с List<string>
+                /*
+                List<string> lsrt = new List<string>();
+                for(int i = 0; i < words.Length; i++)
+				{
+					if(words[i].Length == maxLength) lstr.Add(words[i]);
+				}
+
+                return string.Join(" ", lstr); // или вернуть список целиком return lstr;
+                */
+                
+                return result.ToString();
 			}
 
             /// <summary>
