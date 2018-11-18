@@ -22,44 +22,95 @@ namespace Lesson_6
     {
         static void Task2()
         {
-            SaveFunc("data.bin", -100, 100, 0.5);
-            Console.WriteLine(Load("data.bin"));
+            FuncDelegate[] fd = new FuncDelegate[3];
+
+            fd[0] = new FuncDelegate(F2);
+            fd[1] = EXP;
+            fd[2] = LogDec;
+
+            int func = 0;
+
+            Console.Write("\nВыберите ф-ию (1 - полином 2-ой степени, 2 - экспонента, 3 - Log10): ");
+            func = Int32.Parse(Console.ReadLine());
+
+            Console.Write("\nВведите диапазон и шаг через пробел (min max delta): ");
+            string[] data = Console.ReadLine().Split(' ');
+
+            SaveFunc("data.bin", double.Parse(data[0]),
+                                    double.Parse(data[1]),
+                                    double.Parse(data[2]), fd[func-1]);
+            double min;
+            double[] mas = Load("data.bin", out min);
+            Console.WriteLine($"Минимальное значение: {min}");
+            Console.WriteLine("Рассчитанные значения: ");
+            foreach(var d in mas)
+            {
+                Console.WriteLine(d.ToString());
+            }
             Console.ReadKey();
         }
 
-        public static double F(double x)
+        public delegate double FuncDelegate(double x);
+
+        /// <summary>
+        /// Полином x^2 - 50*x + 10.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static double F2(double x)
         {
             return x * x - 50 * x + 10;
         }
-        public static void SaveFunc(string fileName, double a, double b, double h)
+
+        /// <summary>
+        /// Экспоненциальная ф-ия e^x.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static double EXP(double x)
+        {
+            return Math.Pow(Math.E, x);
+        }
+
+        /// <summary>
+        /// Десятичный логарифм Log10().
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static double LogDec(double x)
+        {
+            return Math.Log10(x);
+        }
+
+        public static void SaveFunc(string fileName, double a, double b, double h, FuncDelegate f)
         {
             FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
             BinaryWriter bw = new BinaryWriter(fs);
             double x = a;
             while (x <= b)
             {
-                bw.Write(F(x));
+                bw.Write(f(x));
                 x += h;// x=x+h;
             }
             bw.Close();
             fs.Close();
         }
 
-        public static double Load(string fileName)
+        public static double[] Load(string fileName, out double min)
         {
             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             BinaryReader bw = new BinaryReader(fs);
-            double min = double.MaxValue;
-            double d;
+            min = double.MaxValue;
+            double[] d = new double[fs.Length / sizeof(double)];
             for (int i = 0; i < fs.Length / sizeof(double); i++)
             {
                 // Считываем значение и переходим к следующему
-                d = bw.ReadDouble();
-                if (d < min) min = d;
+                d[i] = bw.ReadDouble();
+                if (d[i] < min) min = d[i];
             }
             bw.Close();
             fs.Close();
-            return min;
+            return d;
 
         }
     }

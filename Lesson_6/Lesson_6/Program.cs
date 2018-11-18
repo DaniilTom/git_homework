@@ -25,8 +25,8 @@ namespace Lesson_6
                         Console.WriteLine("Не готово");
                         break;
                     case 2:
-                        //Task2();
-                        Console.WriteLine("Не готово");
+                        Task2();
+                        //Console.WriteLine("Не готово");
                         break;
                     case 3:
                         //Task3();
