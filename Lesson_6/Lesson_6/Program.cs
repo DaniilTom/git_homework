@@ -21,8 +21,8 @@ namespace Lesson_6
                 switch (task)
                 {
                     case 1:
-                        //Task1();
-                        Console.WriteLine("Не готово");
+                        Task1();
+                        //Console.WriteLine("Не готово");
                         break;
                     case 2:
                         Task2();
