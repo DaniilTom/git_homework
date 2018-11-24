@@ -88,7 +88,11 @@ namespace Lesson_7
             lblNumber.Text = currentNum.ToString();
             stackBack.Push(new ActionBack(bt.AccessibleName));
 
-            if (currentNum == numToGuess) MessageBox.Show("Готово");
+            if (currentNum == numToGuess)
+            {
+                MessageBox.Show("Готово");
+                stackBack.Clear();
+            }
         }
 
         private void NumCount(object sender, EventArgs e)
@@ -147,6 +151,7 @@ namespace Lesson_7
         private void btnReset_Click(object sender, EventArgs e)
         {
             lblNumber.Text = "0";
+            stackBack.Clear();
         }
 
         private void backTo(object sender, EventArgs e)
