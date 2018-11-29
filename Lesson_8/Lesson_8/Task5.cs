@@ -8,6 +8,12 @@ namespace Lesson_8
 {
     public partial class Program
     {
+        /*
+         * Томашевич
+         * 
+         * 5. **Написать программу-преобразователь из CSV в XML-файл с информацией о студентах (6 урок).
+         * */
+
         static void Task5()
         {
             List<Student> list = new List<Student>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Lesson_8
 {
@@ -25,7 +26,8 @@ namespace Lesson_8
                         break;
                     case 2:
                         //Task2();
-                        Console.WriteLine("Не готово");
+                        Application.Run(new Form1());
+                        //Console.WriteLine("См другой проект");
                         break;
                     case 3:
                         //Task3();
@@ -33,7 +35,7 @@ namespace Lesson_8
                         break;
                     case 4:
                         //Task4();
-                        Console.WriteLine("Не готово");
+                        Console.WriteLine("См другой проект");
                         break;
                     case 5:
                         Task5();
