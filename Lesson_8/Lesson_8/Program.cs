@@ -9,8 +9,10 @@ namespace Lesson_8
 {
     public partial class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
+
             Console.WriteLine("ДЗ 8. Рекурсия. Сериализация.");
 
             int task = 1;
@@ -31,11 +33,13 @@ namespace Lesson_8
                         break;
                     case 3:
                         //Task3();
-                        Console.WriteLine("Не готово");
+                        Console.WriteLine("См задание 4");
                         break;
                     case 4:
-                        //Task4();
-                        Console.WriteLine("См другой проект");
+                        Console.WriteLine("Здесь используются формы: " +
+                            "DataBase, SetPassword, AboutBox1.");
+                        Application.Run(new DataBase());
+                        //Console.WriteLine("Не готово");
                         break;
                     case 5:
                         Task5();
