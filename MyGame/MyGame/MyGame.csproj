@@ -41,12 +41,37 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ResourceImage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceImage.resx</DependentUpon>
+    </Compile>
     <Compile Include="Star.cs" />
+    <Compile Include="Asteroid.cs" />
+    <Compile Include="StarEight.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ResourceImage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceImage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\asteroid.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asteroid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\360vr_space3004_opt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="360vr_space3004_opt.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
