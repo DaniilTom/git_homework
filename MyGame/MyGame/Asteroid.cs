@@ -7,25 +7,22 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
+    /// <summary>
+    /// Описывает объетк "астероид", с которым возможно столкновение.
+    /// </summary>
     class Asteroid : BaseObject
     {
-        Bitmap asteroidImage;
-
+        
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            asteroidImage = new Bitmap(ResourceImage.asteroid, size);
-            
+            Power = 1;
         }
+
+        public int Power { get; set; }
 
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(asteroidImage, Pos);
-        }
-
-        public override void Update()
-        {
-            Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
+            Game.Buffer.Graphics.FillEllipse(Brushes.White, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
     }
 }

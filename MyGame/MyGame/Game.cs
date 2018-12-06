@@ -84,7 +84,7 @@ namespace MyGame
             for (int i = 0; i < _objs.Length / 3; i++)
 
                 //пояс астероидов сверху
-                _objs[i] = new Asteroid(
+                _objs[i] = new Meteor(
                     new Point(600, i * rnd.Next(1, 20)), 
                     new Point(15 - i, 15 - i), 
                     new Size(rnd.Next(5, 40), rnd.Next(5, 40))

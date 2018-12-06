@@ -7,23 +7,43 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class BaseObject
+    /// <summary>
+    /// Базовый класс для отрисовываемых объектов. Определяет методы <see cref="Draw()"/>
+    /// и <see cref="Update()"/>
+    /// </summary>
+    abstract class BaseObject
     {
+        /// <summary>
+        /// Хранит текущую позицию на холсте.
+        /// </summary>
         protected Point Pos;
+
+        /// <summary>
+        /// Определяет велечину перемещения за один кадр.
+        /// </summary>
         protected Point Dir;
+
+        /// <summary>
+        /// Хранит размеры объекта.
+        /// </summary>
         protected Size Size;
-        public BaseObject(Point pos, Point dir, Size size)
+
+        protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
         }
 
-        public virtual void Draw()
-        {
-            Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
-        }
+        /// <summary>
+        /// Выполняет отрисовку объекта в буффер.
+        /// </summary>
+        public abstract void Draw();
 
+
+        /// <summary>
+        /// Выполняет расчет перемещения объекта.
+        /// </summary>
         public virtual void Update()
         {
             Pos.X = Pos.X + Dir.X;
