@@ -11,10 +11,10 @@ namespace MyGame
     /// Базовый класс для отрисовываемых объектов. Определяет методы <see cref="Draw()"/>
     /// и <see cref="Update()"/>
     /// </summary>
-    abstract class BaseObject
+    abstract class BaseObject : ICollision
     {
         /// <summary>
-        /// Хранит текущую позицию на холсте.
+        /// Содержит текущую позицию на холсте.
         /// </summary>
         protected Point Pos;
 
@@ -24,12 +24,13 @@ namespace MyGame
         protected Point Dir;
 
         /// <summary>
-        /// Хранит размеры объекта.
+        /// Содержит размеры объекта.
         /// </summary>
         protected Size Size;
 
         protected BaseObject(Point pos, Point dir, Size size)
         {
+            if (size.Height <= 0 && size.Width <= 0) throw new GameObjectException("Неверные размеры");
             Pos = pos;
             Dir = dir;
             Size = size;
@@ -44,14 +45,10 @@ namespace MyGame
         /// <summary>
         /// Выполняет расчет перемещения объекта.
         /// </summary>
-        public virtual void Update()
-        {
-            Pos.X = Pos.X + Dir.X;
-            Pos.Y = Pos.Y + Dir.Y;
-            if (Pos.X < 0) Dir.X = -Dir.X;
-            if (Pos.X > Game.Width) Dir.X = -Dir.X;
-            if (Pos.Y < 0) Dir.Y = -Dir.Y;
-            if (Pos.Y > Game.Height) Dir.Y = -Dir.Y;
-        }
+        public abstract void Update();
+
+        public bool Collision(ICollision o) => o.Rect.IntersectsWith(this.Rect);
+
+        public Rectangle Rect => new Rectangle(Pos, Size);
     }
 }

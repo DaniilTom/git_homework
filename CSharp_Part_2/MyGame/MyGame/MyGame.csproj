@@ -42,6 +42,7 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="ICollision.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ResourceImage.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -64,16 +65,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\asteroid.bmp" />
+    <None Include="Resources\meteor.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="asteroid.png" />
+    <None Include="Resources\meteor.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\360vr_space3004_opt.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="360vr_space3004_opt.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
