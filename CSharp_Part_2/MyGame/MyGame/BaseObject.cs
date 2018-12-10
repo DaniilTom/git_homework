@@ -47,6 +47,11 @@ namespace MyGame
         /// </summary>
         public abstract void Update();
 
+        /// <summary>
+        /// Вовзращает объект в первоначальную позицию.
+        /// </summary>
+        public abstract void Reset();
+
         public bool Collision(ICollision o) => o.Rect.IntersectsWith(this.Rect);
 
         public Rectangle Rect => new Rectangle(Pos, Size);

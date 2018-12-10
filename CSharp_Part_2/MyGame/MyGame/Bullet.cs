@@ -20,6 +20,12 @@ namespace MyGame
         public override void Update()
         {
             Pos.X = Pos.X + 3;
+            if (Pos.X > Game.Width) Reset();
+        }
+
+        public override void Reset()
+        {
+            Pos.X = 0 - Size.Width;
         }
     }
 }

@@ -36,5 +36,10 @@ namespace MyGame
             if (Pos.Y < 0) Dir.Y = -Dir.Y;
             if (Pos.Y > Game.Height) Dir.Y = -Dir.Y;
         }
+
+        public override void Reset()
+        {
+            Pos.X = Game.Width + Size.Width;
+        }
     }
 }

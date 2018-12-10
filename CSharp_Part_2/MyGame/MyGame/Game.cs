@@ -108,53 +108,10 @@ namespace MyGame
                 {
                     System.Media.SystemSounds.Hand.Play();
 
-                    //т.к. нельзя напрямую изменить Pos пули (protected)
-                    // присвоим переменной ссылку на новый объект
-                    // и скопируем всю информацию, какую сможем;
-                    // тогда новый экземпляр будет (в целом) идентичен предыдущему
-                    _bullet = new Bullet(
-                        new Point(0, _bullet.Rect.Top),
-                        new Point(5, 0),
-                        _bullet.Rect.Size
-                        );
-
-                    // с астероидом не так просто, ведь переменная "a" используется в foreach
-                    for(int i = 0; i < _asteroids.Length; i++)
-                    {
-                        if (a == _asteroids[i]) // узнаем, на какой элемент ссылается Asteroid "a" цикла foreach
-                            _asteroids[i] = new Asteroid( // также создадим новый объект
-                                new Point(Width, _asteroids[i].Rect.Top),   // вытаскиваем инфу об астероиде
-                                _asteroids[i].Direction, // направление создается ранодмно, поэтому пришлось добавить
-                                _asteroids[i].Rect.Size               // св-во, которое возвращает это направление
-                                );
-                    }
-
-                    // но это не совсем правильно: менять объект перечисляемой foreach коллекции;
-                    // поэтому все тоже самое лучше сделать в цикле for
+                    a.Reset();
+                    _bullet.Reset();
                 }
             }
-
-
-            //for (int i = 0; i < _asteroids.Length; i++)
-            //{
-            //    _asteroids[i].Update();
-            //    if (_asteroids[i].Collision(_bullet))
-            //    {
-            //        System.Media.SystemSounds.Hand.Play();
-
-            //        _bullet = new Bullet(
-            //            new Point(0, _bullet.Rect.Top),
-            //            new Point(5, 0),
-            //            _bullet.Rect.Size
-            //            );
-
-            //        _asteroids[i] = new Asteroid(
-            //            new Point(Width, _asteroids[i].Rect.Top),
-            //            _asteroids[i].Direction,
-            //            _asteroids[i].Rect.Size
-            //            );
-            //    }
-            //}
 
             _bullet.Update();
         }
