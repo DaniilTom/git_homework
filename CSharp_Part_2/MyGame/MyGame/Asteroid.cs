@@ -15,7 +15,7 @@ namespace MyGame
         
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            Power = 1;
+            Power = 3;
         }
 
         public int Power { get; set; }
@@ -39,7 +39,7 @@ namespace MyGame
 
         public override void Reset()
         {
-            Pos.X = Game.Width + Size.Width;
+            Pos.X = Game.Width;
         }
     }
 }

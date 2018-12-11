@@ -63,6 +63,16 @@ namespace MyGame {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap allSpritesRes {
+            get {
+                object obj = ResourceManager.GetObject("allSpritesRes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap meteor {
             get {
                 object obj = ResourceManager.GetObject("meteor", resourceCulture);

@@ -50,6 +50,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceImage.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ship.cs" />
     <Compile Include="Star.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="StarEight.cs" />
@@ -73,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\360vr_space3004_opt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spritesheetSpaceship.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

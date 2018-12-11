@@ -28,6 +28,8 @@ namespace MyGame
         /// </summary>
         protected Size Size;
 
+        public delegate void Message();
+
         protected BaseObject(Point pos, Point dir, Size size)
         {
             if (size.Height <= 0 && size.Width <= 0) throw new GameObjectException("Неверные размеры");
