@@ -19,6 +19,11 @@ namespace MyGame
         /// Содержит графические изображения корабля.
         /// </summary>
         ImageList ship = new ImageList();
+        
+        /// <summary>
+        /// Содержит ссылку на текущее изображения корабля.
+        /// </summary>
+        Image currentImg;
 
         private int _energy = 100;
         public int Energy => _energy;
@@ -35,8 +40,14 @@ namespace MyGame
                 // укажем номер нужного изображения (условно, главный спрайт можно рассматривать как матрицу)
                 // [0, 0] - прямолетящий корабль с включенными двигателями
                 ship.Images.Add(CutTheSprite(0, 0, allSprite));
+                ship.Images.Add(CutTheSprite(0, 2, allSprite));
+                ship.Images.Add(CutTheSprite(0, 5, allSprite));
                 ship.ImageSize = Size;//new Size(100, 100); // увеличим размер изображени (а то маленькие получаются)
             }
+            // задаем изображение корабля
+            currentImg = ship.Images[0];
+
+            // в игре видны какие-то полоски рядом с кораблем, м.б. это такой спрайт
         }
 
         /// <summary>
@@ -46,7 +57,7 @@ namespace MyGame
         /// <param name="imgRow">Номер изображения по вертикали</param>
         /// <param name="src">Исходное изображение</param>
         /// <returns></returns>
-        private Image CutTheSprite(int Column, int Row, Bitmap src)
+        private Image CutTheSprite(int Row, int Column, Bitmap src)
         {
             // делить на 10, т.к. 10 изображений по ширине и высоте
             int spriteHeight = src.Height / 10;
@@ -68,7 +79,7 @@ namespace MyGame
         public override void Draw()
         {
             //Game.Buffer.Graphics.FillEllipse(Brushes.Wheat, Pos.X, Pos.Y, Size.Width, Size.Height);
-            Game.Buffer.Graphics.DrawImage(ship.Images[0], Pos);
+            Game.Buffer.Graphics.DrawImage(currentImg, Pos);
         }
         public override void Update()
         { }
@@ -76,11 +87,15 @@ namespace MyGame
         public void Up()
         {
             if (Pos.Y > 0) Pos.Y = Pos.Y - Dir.Y;
+
+            currentImg = ship.Images[2];
         }
 
         public void Down()
         {
             if (Pos.Y < Game.Height) Pos.Y = Pos.Y + Dir.Y;
+
+            currentImg = ship.Images[1];
         }
 
         public void Die()
@@ -92,6 +107,6 @@ namespace MyGame
         /// Реализация метода <see cref="BaseObject.Reset()"/> в классе <see cref="Ship"/> подразумевает
         /// установку изображения корабля, летящего вперед.
         /// </summary>
-        public override void Reset() { }
+        public override void Reset() { currentImg = ship.Images[0]; }
     }
 }

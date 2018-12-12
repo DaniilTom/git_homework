@@ -73,6 +73,10 @@ namespace MyGame
             timer.Tick += Timer_Tick;
 
             form.KeyDown += Form_KeyDown;
+            form.KeyUp += Form_KeyUp;
+
+            Ship.MessageDie += Finish;
+            
         }
 
         private static void Form_KeyDown(object sender, KeyEventArgs e)
@@ -84,6 +88,11 @@ namespace MyGame
 
             if (e.KeyCode == Keys.Up) _ship.Up();
             if (e.KeyCode == Keys.Down) _ship.Down();
+        }
+
+        private static void Form_KeyUp(object sender, KeyEventArgs e)
+        {
+            _ship.Reset();
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
