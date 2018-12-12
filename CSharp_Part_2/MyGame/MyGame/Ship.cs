@@ -15,6 +15,13 @@ namespace MyGame
     {
         public static event Message MessageDie;
 
+        // создадим делегат, который определяет передачу значения
+        public delegate void AllDelegate<T>(T value);
+        // и пару событий, на которые можно будет подписаться классу ConsoleLog
+        public static event AllDelegate<int> GotDamage;
+        public static event AllDelegate<int> GotHealing;
+
+
         /// <summary>
         /// Содержит графические изображения корабля.
         /// </summary>
@@ -31,7 +38,14 @@ namespace MyGame
         public void EnergyLow(int n)
         {
             _energy -= n;
+            GotDamage?.Invoke(n);
         }
+        public void EnergyUp(int n)
+        {
+            _energy += n;
+            GotHealing(n);
+        }
+
         public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
             // подгружаем спрайт с кораблем (после выполнения конструктора объект будет выгружен из стека)

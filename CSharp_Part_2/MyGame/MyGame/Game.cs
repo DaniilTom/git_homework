@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,9 @@ namespace MyGame
         public static BaseObject[] _objs;
         private static Bullet _bullet;
         private static Asteroid[] _asteroids;
+        private static FirsAidKit _aidKit;
+
+        private static int _score;
 
         public static int Width
         {
@@ -54,6 +58,8 @@ namespace MyGame
 
         public static void Init(Form form)
         {
+
+            ConsoleLog.OpenConsoleLog();
             Graphics g;
 
 
@@ -76,6 +82,12 @@ namespace MyGame
             form.KeyUp += Form_KeyUp;
 
             Ship.MessageDie += Finish;
+
+            Ship.MessageDie += ConsoleLog.ShipDestroyed;
+
+            // подпишимся через явно создаваемый делегат
+            Ship.GotDamage += new Ship.AllDelegate<int>(ConsoleLog.ShipDamaged);
+            Ship.GotHealing += new Ship.AllDelegate<int>(ConsoleLog.ShipHealed);
             
         }
 
@@ -116,6 +128,10 @@ namespace MyGame
             _ship?.Draw();
             if (_ship != null)
                 Buffer.Graphics.DrawString("Energy:" + _ship.Energy, SystemFonts.DefaultFont, Brushes.White, 0, 0);
+            _aidKit.Draw();
+
+            Buffer.Graphics.DrawString("Score: " + _score, SystemFonts.DefaultFont, Brushes.White, 0, 30);
+
             Buffer.Render();
         }
 
@@ -134,6 +150,7 @@ namespace MyGame
                     System.Media.SystemSounds.Hand.Play();
                     _asteroids[i] = null;
                     _bullet = null;
+                    _score += 10;
                     continue;
                 }
                 if (!_ship.Collision(_asteroids[i])) continue;
@@ -141,6 +158,14 @@ namespace MyGame
                 _ship?.EnergyLow(rnd.Next(1, 10));
                 System.Media.SystemSounds.Asterisk.Play();
                 if (_ship.Energy <= 0) _ship?.Die();
+            }
+
+            _aidKit.Update();
+            if(_ship.Collision(_aidKit))
+            {
+                var rnd = new Random();
+                _ship?.EnergyUp(rnd.Next(1, 10));
+                System.Media.SystemSounds.Asterisk.Play();
             }
         }
 
@@ -150,8 +175,9 @@ namespace MyGame
 
             _objs = new BaseObject[30];
 
-            _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
+            //_bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
             _asteroids = new Asteroid[3];
+            _aidKit = new FirsAidKit(new Point(800, 500), new Point(5, 0), new Size(30, 30));
 
             for (int i = 0; i < _objs.Length / 3; i++)
 
