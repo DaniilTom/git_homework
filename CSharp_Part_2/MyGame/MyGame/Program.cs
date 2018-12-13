@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MyGame
@@ -11,6 +12,8 @@ namespace MyGame
     {
         static void Main(string[] args)
         {
+            Thread.CurrentThread.Priority = ThreadPriority.Highest;
+
             Form form = new Form
             {
                 Width = Screen.PrimaryScreen.Bounds.Width,

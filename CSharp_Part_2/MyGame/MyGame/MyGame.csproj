@@ -38,11 +38,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asteroid.cs" />
-    <Compile Include="BaseObject.cs" />
-    <Compile Include="Bullet.cs" />
+    <Compile Include="BaseObjects\Asteroid.cs" />
+    <Compile Include="BaseObjects\BaseObject.cs" />
+    <Compile Include="BaseObjects\Bullet.cs" />
     <Compile Include="ConsoleLog.cs" />
-    <Compile Include="FirsAidKit.cs" />
+    <Compile Include="BaseObjects\FirsAidKit.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjectException.cs" />
     <Compile Include="ICollision.cs" />
@@ -52,10 +52,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceImage.resx</DependentUpon>
     </Compile>
-    <Compile Include="Ship.cs" />
-    <Compile Include="Star.cs" />
-    <Compile Include="Meteor.cs" />
-    <Compile Include="StarEight.cs" />
+    <Compile Include="BaseObjects\Ship.cs" />
+    <Compile Include="BaseObjects\Star.cs" />
+    <Compile Include="BaseObjects\Meteor.cs" />
+    <Compile Include="BaseObjects\StarEight.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

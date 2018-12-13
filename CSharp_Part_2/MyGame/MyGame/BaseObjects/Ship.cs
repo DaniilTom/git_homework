@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using MyGame;
 
-namespace MyGame
+namespace GameObjects
 {
     /// <summary>
     /// Описывает объект "корабль", управляемый игроком. Наследуется от <see cref="BaseObject"/>

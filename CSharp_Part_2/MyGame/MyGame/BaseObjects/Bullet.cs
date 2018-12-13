@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using MyGame;
 
-namespace MyGame
+namespace GameObjects
 {
     class Bullet : BaseObject
     {
@@ -19,8 +20,8 @@ namespace MyGame
 
         public override void Update()
         {
-            Pos.X = Pos.X + 3;
-            if (Pos.X > Game.Width) Reset();
+            Pos.X = Pos.X + Dir.X;
+            //if (Pos.X > Game.Width)
         }
 
         public override void Reset()
