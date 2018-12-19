@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
-namespace Entities
+namespace WpfApp1
 {
     class Employee
     {
@@ -86,7 +87,7 @@ namespace Entities
         /// </summary>
         /// <param name="allEmployees"></param>
         /// <returns></returns>
-        static Department[] CreateSet(out Employee[] allEmployees)
+        public static Department[] CreateSet(out Employee[] allEmployees)
         {
             Department[] dep = new Department[depNames.Length];
             allEmployees = new Employee[fNames.Length * lNames.Length];
@@ -98,6 +99,8 @@ namespace Entities
                     allEmployees[i * fNames.Length + j] = new Employee(fNames[i] + " " + lNames[j]);
                 }
             }
+
+            allEmployees.Shuffle();
 
             int max_per_dep = allEmployees.Length / depNames.Length;
 
@@ -130,15 +133,34 @@ namespace Entities
                 "Алексей" };
 
         static string[] lNames = {
-                "Петр",
-                "Иван",
-                "Александр",
-                "Максим",
-                "Артем",
-                "Никита",
-                "Дмитрий",
-                "Егор",
-                "Михаил",
-                "Алексей" };
+                "Иванов",
+                "Петров",
+                "Павлов",
+                "Смирнов",
+                "Васильев",
+                "Попов",
+                "Соколов",
+                "Михайлов",
+                "Федоров",
+                "Морозов" };
+
+        /// <summary>
+        /// Просто разнообразить данные (делает случайную перестановку)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        private static void Shuffle<T>(this IList<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 }

@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView x:Name="listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding RelativeSource=Employees, Path=FullName}">
+                        <!--<ListBox ItemsSource="{Binding empList}">
+                            <ListBoxItem>
+                                <TextBlock Text="{Binding FullName}"/>
+                            </ListBoxItem>
+                        </ListBox> -->
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Entities;
 
 namespace WpfApp1
 {
@@ -21,9 +21,19 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<Department> col = new ObservableCollection<Department>();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            Employee[] Employees;
+            foreach (Department d in SupportMethods.CreateSet(out Employees))
+            {
+                col.Add(d);
+            }
+
+            listView.ItemsSource = col;
         }
     }
 }
