@@ -35,8 +35,13 @@ namespace WpfApp1
         /// <summary>
         /// Содержит список работников, прикрепленных к текущему <see cref="Department"/>
         /// </summary>
-        //List<Employee> empList = new List<Employee>();
-        ObservableCollection<Employee> empList { get; set; }
+        List<Employee> empList = new List<Employee>();
+        //ObservableCollection<Employee> empList { get; set; }
+
+        /// <summary>
+        /// Свойство для привязки
+        /// </summary>
+        //public ObservableCollection<Employee> EmployeesList { get => empList; }
 
         public Department(string _fullName)
         {
@@ -49,7 +54,7 @@ namespace WpfApp1
         public string FullName { get; set; }
 
 
-        public List<Employee> Employees { get; }
+        //public List<Employee> Employees { get => empList; }
 
         /// <summary>
         /// Добавляет работника в список.
@@ -59,6 +64,8 @@ namespace WpfApp1
         {
             if (!empList.Contains(emp))
             {
+                if(emp.Department != null)emp.Department.DeleteEmployee(emp); // удаляет Employee из его текущего Department
+
                 empList.Add(emp);
                 emp.Department = this;
             }
@@ -68,7 +75,7 @@ namespace WpfApp1
         /// Удаляет <see cref="Employee"/> из <see cref="Department"/>.
         /// </summary>
         /// <param name="emp"></param>
-        public void DeleteEmployee(Employee emp)
+        private void DeleteEmployee(Employee emp)
         {
             if (empList.Contains(emp))
             {
