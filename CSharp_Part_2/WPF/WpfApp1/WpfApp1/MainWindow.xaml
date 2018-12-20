@@ -6,21 +6,16 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListView x:Name="listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch">
+        <ListView x:Name="listView" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                  ItemsSource="{Binding}" Height="308">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding RelativeSource=Employees, Path=FullName}">
-                        <!--<ListBox ItemsSource="{Binding empList}">
-                            <ListBoxItem>
-                                <TextBlock Text="{Binding FullName}"/>
-                            </ListBoxItem>
-                        </ListBox> -->
-                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding FullName}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Department.FullName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-
+        <Button Height="64" VerticalAlignment="Bottom" Content="Редактировать" Width="792" Click="Button_Click"/>
     </Grid>
 </Window>

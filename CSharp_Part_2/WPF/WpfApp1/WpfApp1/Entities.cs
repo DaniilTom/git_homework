@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Collections.ObjectModel;
 
 namespace WpfApp1
 {
-    class Employee
+    public class Employee
     {
         // считаем, что Employee может работать только в одном Department
 
@@ -29,12 +30,13 @@ namespace WpfApp1
         public Department Department { get; set; }
     }
 
-    class Department
+    public class Department
     {
         /// <summary>
         /// Содержит список работников, прикрепленных к текущему <see cref="Department"/>
         /// </summary>
-        List<Employee> empList = new List<Employee>();
+        //List<Employee> empList = new List<Employee>();
+        ObservableCollection<Employee> empList { get; set; }
 
         public Department(string _fullName)
         {
