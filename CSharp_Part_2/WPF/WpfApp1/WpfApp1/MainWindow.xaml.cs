@@ -39,8 +39,9 @@ namespace WpfApp1
             //    colE.Add(e);
             //}
 
-            //listView.ItemsSource = colD;
-            listView.DataContext = colD;
+            listView.ItemsSource = colD;
+            //listView.DataContext = colD;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

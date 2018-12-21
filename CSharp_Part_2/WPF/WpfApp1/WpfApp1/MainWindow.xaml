@@ -8,17 +8,23 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid VerticalAlignment="Stretch">
         <ListView x:Name="listView" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                  ItemsSource="{Binding}" Height="308">
+                  ItemsSource="{Binding}" Height="351">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding FullName}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FullName}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FullName}" Background="AliceBlue" Foreground="Red"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ListBox>
+                                <ListBox ItemsSource="{Binding empList}" >
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding EmployeesList.FullName}"/>
+                                            <TextBlock Text="{Binding FullName}" Width="200"/>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>

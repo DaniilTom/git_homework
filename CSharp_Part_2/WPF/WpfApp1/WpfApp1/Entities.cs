@@ -35,17 +35,18 @@ namespace WpfApp1
         /// <summary>
         /// Содержит список работников, прикрепленных к текущему <see cref="Department"/>
         /// </summary>
-        List<Employee> empList = new List<Employee>();
+        //List<Employee> empList = new List<Employee>();
         //ObservableCollection<Employee> empList { get; set; }
 
         /// <summary>
         /// Свойство для привязки
         /// </summary>
-        //public ObservableCollection<Employee> EmployeesList { get => empList; }
+        public ObservableCollection<Employee> empList { get; set; }
 
         public Department(string _fullName)
         {
             FullName = _fullName;
+            empList = new ObservableCollection<Employee>();
         }
 
         /// <summary>
