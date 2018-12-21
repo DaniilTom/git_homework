@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid VerticalAlignment="Stretch">
-        <ListView x:Name="listView" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                  ItemsSource="{Binding}" Height="351">
+        <ListView x:Name="listView" VerticalAlignment="Stretch"
+                  ItemsSource="{Binding colD}" Margin="0,0,332,0" ScrollViewer.CanContentScroll="False">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding FullName}">
+                    <GridViewColumn Width="Auto" Header="Department">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FullName}" Background="AliceBlue" Foreground="Red"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    
+                    <GridViewColumn Width="Auto" Header="Employees">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ListBox ItemsSource="{Binding empList}" >
@@ -34,6 +35,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Height="64" VerticalAlignment="Bottom" Content="Редактировать" Width="792" Click="Button_Click"/>
+        <Button Height="64" VerticalAlignment="Top" Content="Редактировать" Click="Button_Click" Margin="476,0,10,346"/>
     </Grid>
 </Window>

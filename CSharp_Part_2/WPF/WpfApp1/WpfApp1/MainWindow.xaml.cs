@@ -22,11 +22,13 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         //public ObservableCollection<Employee> colE = new ObservableCollection<Employee>();
-        public ObservableCollection<Department> colD = new ObservableCollection<Department>();
+        public ObservableCollection<Department> colD { get; set; }//= new ObservableCollection<Department>();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            colD = new ObservableCollection<Department>();
 
             Employee[] Employees;
             foreach (Department d in SupportMethods.CreateSet(out Employees))
@@ -39,14 +41,17 @@ namespace WpfApp1
             //    colE.Add(e);
             //}
 
-            listView.ItemsSource = colD;
+            //listView.ItemsSource = colD;
             //listView.DataContext = colD;
+            this.DataContext = this;
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            EditWindow ew = new EditWindow(colD);
+            ew.Owner = this;
+            ew.Show();
         }
     }
 }
