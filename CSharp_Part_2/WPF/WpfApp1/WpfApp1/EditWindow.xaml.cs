@@ -38,6 +38,9 @@ namespace WpfApp1
 
         }
 
+        // MoveToRight и MoveToLeft переносят Employee между списками в направлении, 
+        // соответствующему положению столбцов
+
         private void MoveToRight(object sender, RoutedEventArgs e)
         {
             try
@@ -46,7 +49,7 @@ namespace WpfApp1
                 SendToLog("OK");
             }
             catch (NullReferenceException)
-            { SendToLog("Проверьте выбор Employee и Department и повторите попытку"); }
+            { SendToLog("Проверьте выбор Employee/Department и повторите попытку"); }
         }
 
         private void MoveToLeft(object sender, RoutedEventArgs e)
@@ -57,9 +60,11 @@ namespace WpfApp1
                 SendToLog("OK");
             }
             catch (NullReferenceException)
-            { SendToLog("Проверьте выбор Employee и Department и повторите попытку"); }
+            { SendToLog("Проверьте выбор Employee/Department и повторите попытку"); }
         }
 
+        // LeftCB_SelectionChanged и RightCB_SelectionChanged выполняют динамическую привязку
+        // списков Employee, которые принадлежат выбранному Department
         private void LeftCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             leftLB.ItemsSource = (leftCB.SelectedItem as Department).empList;
@@ -70,6 +75,7 @@ namespace WpfApp1
             rightLB.ItemsSource = (rightCB.SelectedItem as Department).empList;
         }
 
+        // AddingNewEmployee и AddingNewDepartament добавляют новые сущности
         private void AddingNewEmployee(object sender, RoutedEventArgs e)
         {
             try
@@ -78,7 +84,12 @@ namespace WpfApp1
                 SendToLog("OK");
             }
             catch (NullReferenceException)
-            { SendToLog("Проверьте выбор Employee и Department и повторите попытку"); }
+            { SendToLog("Проверьте выбор Employee/Department и повторите попытку"); }
+        }
+
+        private void AddingNewDepartament(object sender, RoutedEventArgs e)
+        {
+            colD.Add(new Department(textBoxInputDep.Text));
         }
 
         /// <summary>
@@ -87,7 +98,8 @@ namespace WpfApp1
         /// <param name="msg"></param>
         private void SendToLog(string msg)
         {
-            textBlockError.Text = msg;
+            textBlockLog.Text = msg;
+            if(msg != "OK") System.Media.SystemSounds.Hand.Play();
         }
     }
 }
