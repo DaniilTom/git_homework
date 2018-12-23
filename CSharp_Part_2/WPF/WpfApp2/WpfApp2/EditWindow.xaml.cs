@@ -21,58 +21,19 @@ namespace WpfApp1
     public partial class EditWindow : Window
     {
         public ObservableCollection<Department> colD { get; set; }
+        public ObservableCollection<Employee> colE { get; set; }
 
-        public EditWindow(ObservableCollection<Department> _colD)
+        public EditWindow(ObservableCollection<Department> _colD, ObservableCollection<Employee> _colE)
         {
             InitializeComponent();
             colD = _colD;
-
-            leftCB.ItemsSource = colD;
-            leftCB.SelectedIndex = -1;
-
-            rightCB.ItemsSource = colD;
-            rightCB.SelectedIndex = -1;
+            colE = _colE;
 
             addCB.ItemsSource = colD;
             addCB.SelectedItem = -1;
 
-        }
-
-        // MoveToRight и MoveToLeft переносят Employee между списками в направлении, 
-        // соответствующему положению столбцов
-
-        private void MoveToRight(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                (rightCB.SelectedItem as Department).AddEmployee(leftLB.SelectedItem as Employee);
-                SendToLog("OK");
-            }
-            catch (NullReferenceException)
-            { SendToLog("Проверьте выбор Employee/Department и повторите попытку"); }
-        }
-
-        private void MoveToLeft(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                (leftCB.SelectedItem as Department).AddEmployee(rightLB.SelectedItem as Employee);
-                SendToLog("OK");
-            }
-            catch (NullReferenceException)
-            { SendToLog("Проверьте выбор Employee/Department и повторите попытку"); }
-        }
-
-        // LeftCB_SelectionChanged и RightCB_SelectionChanged выполняют динамическую привязку
-        // списков Employee, которые принадлежат выбранному Department
-        private void LeftCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            leftLB.ItemsSource = (leftCB.SelectedItem as Department).empList;
-        }
-
-        private void RightCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            rightLB.ItemsSource = (rightCB.SelectedItem as Department).empList;
+            editDG.ItemsSource = colE;
+            columnCB.ItemsSource = colD;
         }
 
         // AddingNewEmployee и AddingNewDepartament добавляют новые сущности

@@ -11,34 +11,27 @@
             <ColumnDefinition Width="58*"/>
             <ColumnDefinition Width="41*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="listView" VerticalAlignment="Stretch"
-                  ItemsSource="{Binding Path=colD}" Margin="0,0,4,0" ScrollViewer.CanContentScroll="False">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="Auto" Header="Department">
-                        <GridViewColumn.CellTemplate>
+        <DataGrid ItemsSource="{Binding colD}" AutoGenerateColumns="False" Name="dg"
+                  ScrollViewer.CanContentScroll="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Department" IsReadOnly="True"
+                                    Binding="{Binding FullName}" 
+                                    CanUserSort="True"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <ListBox ItemsSource="{Binding Path=empList}" >
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=FullName}" Background="AliceBlue" Foreground="Red"/>
+                                <TextBlock Text="{Binding Path=FullName}" Width="200" TextAlignment="Right"/>
                             </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Width="Auto" Header="Employees">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ListBox ItemsSource="{Binding Path=empList}" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Path=FullName}" Width="200"/>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        
         <Button Height="64" VerticalAlignment="Top" Content="Редактировать" Click="Button_Click" Margin="12,0,10,0" Grid.Column="1"/>
+        <TextBlock Text="Выберите департамент, список работников которого хотите посмотреть." Grid.Column="1" Margin="10,100" TextWrapping="Wrap"/>
     </Grid>
 </Window>

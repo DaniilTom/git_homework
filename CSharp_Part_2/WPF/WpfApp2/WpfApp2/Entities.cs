@@ -8,26 +8,40 @@ using System.Collections.ObjectModel;
 
 namespace WpfApp1
 {
+    /******** немного изменил Employee (см. св-во Department) и Department (см. метод AddEmployee()) ********/
+    
     public class Employee
     {
         // считаем, что Employee может работать только в одном Department
 
-        
+        private Department dep;
+
         public Employee(string _FullName)
         {
             FullName = _FullName;
-            Department = null;
+            dep = null;
         }
 
         /// <summary>
         /// Полное имя работника.
         /// </summary>
-        public string FullName { get; }
+        public string FullName { get; set; }
 
         /// <summary>
         /// Содержит ссылку на объект <see cref="Department"/>, к которму прикреплен.
         /// </summary>
-        public Department Department { get; set; }
+        public Department Department
+        {
+            get
+            {
+                return dep;
+            }
+            set
+            {
+                value.AddEmployee(this);
+                dep = value;
+            }
+        }
     }
 
     public class Department
@@ -68,7 +82,7 @@ namespace WpfApp1
                 if(emp.Department != null)emp.Department.DeleteEmployee(emp); // удаляет Employee из его текущего Department
 
                 empList.Add(emp);
-                emp.Department = this;
+                //emp.Department = this;
             }
         }
 
@@ -81,7 +95,7 @@ namespace WpfApp1
             if (empList.Contains(emp))
             {
                 empList.Remove(emp);
-                emp.Department = null;
+                //emp.Department = null;
             }
         }
     }
@@ -121,6 +135,7 @@ namespace WpfApp1
                 for( ; pos < max_per_dep * (i + 1); pos++)
                 {
                     dep[i].AddEmployee(allEmployees[pos]);
+                    allEmployees[pos].Department = dep[i];
                 }
             }
 

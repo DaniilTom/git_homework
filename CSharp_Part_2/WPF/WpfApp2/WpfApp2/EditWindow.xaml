@@ -14,37 +14,18 @@
     </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Width="200">
-                <ComboBox ItemsSource="{Binding}" Name="leftCB" SelectionChanged="LeftCB_SelectionChanged"
-                          ItemTemplate="{StaticResource FullNameDataTemplate}">
-                    <!-- Произвел замену повторяющегося элемента шаблоном -->
-                    <!--<ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding FullName}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>-->
-                </ComboBox>
-                <ListBox ItemsSource="{Binding empList}" Height="500" Name="leftLB"
-                         ItemTemplate="{StaticResource FullNameDataTemplate}">
-                    <!--<ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding FullName}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>-->
-                </ListBox>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10,100,10,0" >
-                <Button Content="-&gt;" Click="MoveToRight"/>
-                <Button Content="&lt;-" Click="MoveToLeft"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Width="200">
-                <ComboBox Name="rightCB" SelectionChanged="RightCB_SelectionChanged"
-                          ItemsSource="{Binding}" 
-                          ItemTemplate="{StaticResource FullNameDataTemplate}"/>
-                <ListBox Height="500" Name="rightLB"
-                         ItemsSource="{Binding empList}"
-                         ItemTemplate="{StaticResource FullNameDataTemplate}"/>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical" Height="Auto">
+                    <DataGrid ItemsSource="{Binding}" Name="editDG" AutoGenerateColumns="False" Width="400">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Employee" Binding="{Binding FullName}" CanUserSort="True"/>
+                            <DataGridComboBoxColumn x:Name="columnCB" Header="Department"
+                                                SelectedItemBinding="{Binding Department, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                DisplayMemberPath="FullName" CanUserSort="True" SortMemberPath="Department.FullName"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
 
             <StackPanel Orientation="Vertical" Margin="10,0,0,0" HorizontalAlignment="Stretch">
                 <TextBlock Text="Добавить нового сотрудника:"/>
@@ -63,7 +44,8 @@
                 <Button Content="Добавить" Click="AddingNewDepartament"/>
                 <Separator Margin="0,50,0,0"/>
                 <TextBlock Text="Лог:"/>
-                <TextBlock Name="textBlockLog" HorizontalAlignment="Stretch" MaxWidth="200" TextWrapping="Wrap"/>
+                <TextBlock Name="textBlockLog" HorizontalAlignment="Stretch" MaxWidth="200" TextWrapping="Wrap"
+                           Text="Элементы таблицы достыпны для редактирования. Можно сортировать по колонкам."/>
             </StackPanel>
             
         </StackPanel>
