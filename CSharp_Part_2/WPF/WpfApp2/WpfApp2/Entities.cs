@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Collections.ObjectModel;
 
-namespace WpfApp1
+namespace WpfApp2
 {
     /******** немного изменил Employee (см. св-во Department) и Department (см. метод AddEmployee()) ********/
     
@@ -194,6 +194,7 @@ namespace WpfApp1
             }
         }
 
+        public static string updateEmployee = @"UPDATE Employee SET Name = @Name, Departament_ID = @Departament_ID WHERE ID = @ID";
         public static string addDepartment = @"INSERT INTO Departament(Name) VALUES(@Name);";
         public static string addEmployee = @"INSERT INTO Employee(Name, Departament_ID) VALUES (@Name, @Departament_ID);";
         public static string selectAllDepartment = @"SELECT * FROM Departament;";
@@ -202,17 +203,17 @@ namespace WpfApp1
         public static string truncateEmployee = @"TRUNCATE TABLE Employee;";
         public static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Lesson7;Integrated Security=True;Pooling=False";
         public static string createTables = 
-            @"CREATE TABLE[dbo].[Departament] (
+            @"CREATE TABLE[dbo].[Departament1] (
                                     [ID] INT IDENTITY(1, 1) NOT NULL,
                                     [Name] NVARCHAR(50) NOT NULL,
-                                    CONSTRAINT[PK_dbo.Departament] PRIMARY KEY CLUSTERED([Id] ASC)
+                                    CONSTRAINT[PK_dbo.Departament1] PRIMARY KEY CLUSTERED([Id] ASC)
                                 );
 
-CREATE TABLE[dbo].[Employee] (
+CREATE TABLE[dbo].[Employee1] (
                                     [ID] INT IDENTITY(1, 1) NOT NULL,
                                     [Name] NVARCHAR(50) NOT NULL,
 									[Departament_ID] INT NOT NULL,
-                                    CONSTRAINT[PK_dbo.Employee] PRIMARY KEY CLUSTERED([Id] ASC)
+                                    CONSTRAINT[PK_dbo.Employee1] PRIMARY KEY CLUSTERED([Id] ASC)
                                 );";
     }
 }

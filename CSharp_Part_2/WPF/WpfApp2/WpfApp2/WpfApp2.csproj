@@ -54,7 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="EditWindow.xaml">
+    <Page Include="AddWindowDepartament.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditWindowEmployee.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,8 +70,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EditWindow.xaml.cs">
-      <DependentUpon>EditWindow.xaml</DependentUpon>
+    <Compile Include="AddWindowDepartament.xaml.cs">
+      <DependentUpon>AddWindowDepartament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditWindowEmployee.xaml.cs">
+      <DependentUpon>EditWindowEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entities.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -108,6 +115,7 @@
     <Content Include="sql\selectDepartaments.sql" />
     <Content Include="sql\selectEmployees.sql" />
     <Content Include="sql\temp.sql" />
+    <Resource Include="sql\Примечание.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
