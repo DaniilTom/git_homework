@@ -6,12 +6,6 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="EditWindow" Height="450" Width="800">
-    <Window.Resources>
-        <!-- Добавить ресур DataTemplate для св-в FullName -->
-        <DataTemplate x:Key="FullNameDataTemplate">
-            <TextBlock Text="{Binding FullName}"/>
-        </DataTemplate>
-    </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
             <ScrollViewer>

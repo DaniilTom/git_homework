@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,10 @@ namespace WpfApp1
         public ObservableCollection<Employee> colE { get; set; }
         public ObservableCollection<Department> colD { get; set; }//= new ObservableCollection<Department>();
 
+        SqlConnection connection;
+        SqlDataAdapter adapter;
+        DataTable dt;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,8 +37,11 @@ namespace WpfApp1
             colD = new ObservableCollection<Department>();
             colE = new ObservableCollection<Employee>();
 
+            //создадим набор данных
             Employee[] Employees;
-            foreach (Department d in SupportMethods.CreateSet(out Employees))
+            Department[] Departments = Support.CreateSet(out Employees);
+
+            foreach (Department d in Departments)
             {
                 colD.Add(d);
             }
@@ -42,12 +51,40 @@ namespace WpfApp1
                 colE.Add(e);
             }
 
-            //listView.ItemsSource = colD;
-            //listView.DataContext = colD;
-            this.DataContext = this;
+
+            connection = new SqlConnection(Support.connectionString);
+            adapter = new SqlDataAdapter();
+            
+            connection.Open();
+
+            // если надо создать таблицы
+            //command = new SqlCommand(Support.createTables, connection);
+            //command.ExecuteNonQuery();
+
+            // заполнение таблицы Departament
+            SqlCommand command = new SqlCommand(Support.addDepartment, connection);
+            foreach (Department d in Departments)
+            {
+                command.Parameters.AddWithValue("@Name", d.FullName);
+                int i = command.ExecuteNonQuery();
+                command.Parameters.Clear();
+            }
+
+            // Заполнене таблицы Employee
+            command = new SqlCommand(Support.addEmployee, connection);
+            foreach (Employee e in Employees)
+            {
+                command.Parameters.AddWithValue("@Name", e.FullName);
+                command.Parameters.AddWithValue("@Departament_ID", e.Departament_ID);
+                int i = command.ExecuteNonQuery();
+                command.Parameters.Clear();
+            }
+
+            dt = new DataTable();
 
             
 
+            this.DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

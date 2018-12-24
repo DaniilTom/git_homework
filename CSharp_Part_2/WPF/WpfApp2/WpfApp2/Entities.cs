@@ -14,6 +14,11 @@ namespace WpfApp1
     {
         // считаем, что Employee может работать только в одном Department
 
+            /// <summary>
+            /// Первичный ключ.
+            /// </summary>
+        public int Departament_ID { get; set; }
+
         private Department dep;
 
         public Employee(string _FullName)
@@ -40,6 +45,7 @@ namespace WpfApp1
             {
                 value.AddEmployee(this);
                 dep = value;
+                Departament_ID = value.ID;
             }
         }
     }
@@ -47,13 +53,12 @@ namespace WpfApp1
     public class Department
     {
         /// <summary>
-        /// Содержит список работников, прикрепленных к текущему <see cref="Department"/>
+        /// Первичный ключ.
         /// </summary>
-        //List<Employee> empList = new List<Employee>();
-        //ObservableCollection<Employee> empList { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
-        /// Свойство для привязки
+        /// Содержит список работников, прикрепленных к текущему <see cref="Department"/>
         /// </summary>
         public ObservableCollection<Employee> empList { get; set; }
 
@@ -101,9 +106,9 @@ namespace WpfApp1
     }
     
     /// <summary>
-    /// Содержит какие-то вспомогательные методы.
+    /// Содержит какие-то вспомогательные методы и данные.
     /// </summary>
-    static class SupportMethods
+    static class Support
     {
 
         /// <summary>
@@ -132,6 +137,7 @@ namespace WpfApp1
             for(int i = 0; i < depNames.Length; i++)
             {
                 dep[i] = new Department(depNames[i]);
+                dep[i].ID = i+1;
                 for( ; pos < max_per_dep * (i + 1); pos++)
                 {
                     dep[i].AddEmployee(allEmployees[pos]);
@@ -187,5 +193,26 @@ namespace WpfApp1
                 list[n] = value;
             }
         }
+
+        public static string addDepartment = @"INSERT INTO Departament(Name) VALUES(@Name);";
+        public static string addEmployee = @"INSERT INTO Employee(Name, Departament_ID) VALUES (@Name, @Departament_ID);";
+        public static string selectAllDepartment = @"SELECT * FROM Departament;";
+        public static string selectAllEmployees = @"SELECT * FROM Employee;";
+        public static string truncateDepartament = @"TRUNCATE TABLE Departament;";
+        public static string truncateEmployee = @"TRUNCATE TABLE Employee;";
+        public static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Lesson7;Integrated Security=True;Pooling=False";
+        public static string createTables = 
+            @"CREATE TABLE[dbo].[Departament] (
+                                    [ID] INT IDENTITY(1, 1) NOT NULL,
+                                    [Name] NVARCHAR(50) NOT NULL,
+                                    CONSTRAINT[PK_dbo.Departament] PRIMARY KEY CLUSTERED([Id] ASC)
+                                );
+
+CREATE TABLE[dbo].[Employee] (
+                                    [ID] INT IDENTITY(1, 1) NOT NULL,
+                                    [Name] NVARCHAR(50) NOT NULL,
+									[Departament_ID] INT NOT NULL,
+                                    CONSTRAINT[PK_dbo.Employee] PRIMARY KEY CLUSTERED([Id] ASC)
+                                );";
     }
 }

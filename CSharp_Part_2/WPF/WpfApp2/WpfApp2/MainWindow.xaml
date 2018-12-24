@@ -18,17 +18,6 @@
                                     Binding="{Binding FullName}" 
                                     CanUserSort="True"/>
             </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <ListBox ItemsSource="{Binding Path=empList}" >
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=FullName}" Width="200" TextAlignment="Right"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
         </DataGrid>
         
         <Button Height="64" VerticalAlignment="Top" Content="Редактировать" Click="Button_Click" Margin="12,0,10,0" Grid.Column="1"/>

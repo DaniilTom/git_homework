@@ -101,5 +101,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="sql\CreateDepAndEmpTables.sql" />
+    <Content Include="sql\CreateDepartament.sql" />
+    <Content Include="sql\CreateEmployee.sql" />
+    <Content Include="sql\selectDepartaments.sql" />
+    <Content Include="sql\selectEmployees.sql" />
+    <Content Include="sql\temp.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
