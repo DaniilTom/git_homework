@@ -47,23 +47,18 @@ namespace WebApplication1.Controllers
             sqlData.Fill(dt);
 
 
-            // тест десериализации (сериализуешь DataTable, десериализуешь DataSet)
+            // тест десериализации  стандартными средствами (сериализуешь DataTable, десериализуешь DataSet)
             // десериализовать в таблицу не получилось
-            MemoryStream m = new MemoryStream();
-            dt.WriteXml(m);
-            DataSet d = new DataSet();
-            m.Position = 0;
-            d.ReadXml(m);
+            //MemoryStream m = new MemoryStream();
+            //dt.WriteXml(m);
+            //DataSet d = new DataSet();
+            //m.Position = 0;
+            //d.ReadXml(m);
 
-            m.Position = 0;
-            StreamReader s = new StreamReader(m);
-            d.ReadXml(s);
-
-            
             //m.Position = 0;
             //StreamReader s = new StreamReader(m);
-            //DataTable t = new DataTable("TableName");
-            //t.ReadXml(s);
+            //d.ReadXml(s);
+
 
             return dt;
         }
@@ -74,30 +69,11 @@ namespace WebApplication1.Controllers
             using (SqlConnection con = new SqlConnection(Support.connectionString))
             {
                 con.Open();
-
                 SqlCommand com = new SqlCommand("select * from Departament;", con);
                 SqlDataAdapter sqlData = new SqlDataAdapter(com);
                 DataTable dt = new DataTable();
                 dt.TableName = "TableName"; // без имени нельзя сериализовать
                 sqlData.Fill(dt);
-
-
-                // тест десериализации (сериализуешь DataTable, десериализуешь DataSet)
-                // десериализовать в таблицу не получилось
-                MemoryStream m = new MemoryStream();
-                dt.WriteXml(m);
-                DataSet d = new DataSet();
-                m.Position = 0;
-                d.ReadXml(m);
-
-                m.Position = 0;
-                StreamReader s = new StreamReader(m);
-                d.ReadXml(s);
-
-                //m.Position = 0;
-                //StreamReader s = new StreamReader(m);
-                //DataTable t = new DataTable("TableName");
-                //t.ReadXml(s);
 
                 return dt;
             }

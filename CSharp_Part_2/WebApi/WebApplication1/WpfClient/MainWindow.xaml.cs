@@ -1,24 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml.Linq;
 
 namespace WpfClient
@@ -28,10 +12,7 @@ namespace WpfClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        //public ObservableCollection<Employee> colE { get; set; }
-        //public ObservableCollection<Department> colD { get; set; }//= new ObservableCollection<Department>();
 
-        //SqlConnection connection;
         DataTable departamentTable;
         DataTable employeeTable;
         WebClient webClient;
