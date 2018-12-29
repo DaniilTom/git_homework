@@ -22,7 +22,7 @@ namespace WebApplication1
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            // аналогично, как в задании 7 при необхожимоси создаются и заполняются таблицы
+            // аналогично дз 7 при необхожимоси создаются и заполняются таблицы
 
             Employee[] Employees;
             Department[] Departments = Support.CreateSet(out Employees);
