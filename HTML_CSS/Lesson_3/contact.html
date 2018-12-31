@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Контакты</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <nav>
         <ul class="menu">
             <li><a href="index.html">Главная</a></li>
-            <li><a href="/catalog/main_catalog.html">Каталог</a></li>
+            <li><a href="catalog/main_catalog.html">Каталог</a></li>
             <li><a href="contact.html">Контакты</a></li>
 
         </ul>
@@ -18,7 +19,7 @@
     <article>
         <section>
             <h2>Напишите нам</h2>
-            <form action="#">
+            <form class="forma" action="#">
                 <ul>
                     <li>Имя <input type="text" placeholder="ваше имя"></li>
                     <li>Email <input type="email" placeholder="email"></li>
@@ -26,8 +27,8 @@
                     <li>Текст сообщения:<br>
                         <textarea style="width: 300px; height: 150px"></textarea>
                     </li>
-                    <li><input type="submit" value="Отправить данные"> <input type="reset"></li>
                 </ul>
+                <input type="submit" value="Отправить данные"> <input type="reset">
             </form>
         </section>
 
