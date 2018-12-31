@@ -1,0 +1,23 @@
+.heading{
+    color: darkblue;
+    background-color: #ccc;
+    border: 4px solid black;
+}
+
+.blue{
+    color: blue;
+    /*background-image: url(img/intel8086.jpg);
+    background-repeat: no-repeat;*/
+    background: url(img/intel8086.jpg) no-repeat; 
+}
+.list{
+    list-style-type: none;
+}
+.link{
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+p{
+    font-size: 14px;
+}
