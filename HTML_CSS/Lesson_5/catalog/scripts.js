@@ -1,0 +1,4 @@
+function buy()
+{
+	alert("Куплено");
+}

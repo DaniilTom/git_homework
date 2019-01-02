@@ -1,0 +1,88 @@
+/* списки на страницы index */
+.list li:nth-child(3):after{
+    content: " new";
+    color: blueviolet;
+    text-transform: uppercase;
+}
+.list2 li{
+    width: 200px;
+    height: 100px;
+    border: 2px solid red;
+    display: inline-block;
+}
+.list2 li a{
+    display: block;
+    height: inherit;
+}
+
+.list2 li ul{
+    display: none;
+}
+.list2 li:hover ul{
+    display: block;
+}
+/*******************/
+.table{
+    border: 1px solid #000;
+    width: 400px;
+    height: 200px;
+    border-collapse: collapse;
+}
+
+.table td{
+    border: 1px solid red;
+    padding-left: 10px;
+    padding-top: 10px;
+    vertical-align: top;
+}
+
+.product{
+    width: 200px;
+    height: 150px;
+    outline: 1px solid black;
+    float: left;
+}
+
+.footer{
+    height: 300px;
+    background-color: #ccc;
+    clear: both;
+    overflow: hidden;
+}
+
+.product_1{    
+    background-color: #ccc;
+    position: relative;
+    top: 50px;
+    left: 60px;
+}
+
+.product_2{
+    position: relative;
+}
+.prod_cont{
+    height: 300px;
+}
+
+.container{
+    width: 700px;
+    margin: 0 auto;
+}
+
+.head{
+    height: 200px;
+    background-color: cadetblue;
+    padding-top: 50px;
+    padding-left: 100px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+    background-color: darkred;
+    float: left;
+    
+}
