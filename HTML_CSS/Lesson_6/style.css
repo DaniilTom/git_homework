@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,700');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main_container {
+    width: 1366px;
+    margin: 0 auto;
+}
+
+.up_container {
+    height: 516px;
+    background-image: url('img/back-img.jpg');
+    overflow: hidden;
+}
+
+.text {
+    margin-left: 99px;
+    margin-top: 125px;
+}
+
+.text .up {
+    color: #6c6c6c;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 48px;
+    text-align: left;
+}
+
+.text .mid {
+    color: #212121;
+    font-size: 62px;
+    font-weight: 100;
+    line-height: 72px;
+    width: 10em;
+    text-align: left;
+}
+
+.text .bot {
+    color: #6c6c6c;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    padding-bottom: 33px;
+}
+
+a.mobile {
+    margin-right: 10px;
+}
+
+.bot_container {
+    background-color: #f7f7f7;
+    height: 384px;
+    padding-left: 97px;
+    padding-top: 120px;
+    overflow: hidden;
+}
+
+.contact {
+    width: 221px;
+    margin-right: 81px;
+}
+
+.little_header {
+    color: #6c6c6c;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+    margin-left: 2px;
+    margin-bottom: 24px;
+}
+
+.contact p:not(.little_header), .lets_stay p:not(.little_header),
+::placeholder{
+    color: #212121;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: left;
+}
+
+.useful_info {
+    width: 422px;
+    margin-right: 79px;
+}
+
+ul {
+    column-count: 2;
+}
+
+ul li {
+    list-style-type: none;
+    display: block;
+
+}
+
+ul li a {
+    text-decoration: none;
+    color: #212121;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: left;
+}
+
+.contact, .useful_info, .lets_stay{
+    float: left;
+}
+
+.lets_stay{
+    width: 388px;
+}
+
+input{
+    margin-top: 26px;
+    width: 370px;
+    height: 48px;
+    padding-left: 19px;
+}
+
+::placeholder{
+    color:  #6c6c6c;
+}
