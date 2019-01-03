@@ -59,7 +59,6 @@ a.mobile {
     background-color: #f7f7f7;
     height: 384px;
     padding-left: 97px;
-    padding-top: 120px;
     overflow: hidden;
 }
 
@@ -78,8 +77,9 @@ a.mobile {
     margin-bottom: 24px;
 }
 
-.contact p:not(.little_header), .lets_stay p:not(.little_header),
-::placeholder{
+.contact p:not(.little_header),
+.lets_stay p:not(.little_header),
+::placeholder {
     color: #212121;
     font-size: 14px;
     font-weight: 300;
@@ -111,21 +111,61 @@ ul li a {
     text-align: left;
 }
 
-.contact, .useful_info, .lets_stay{
+.contact,
+.useful_info,
+.lets_stay {
+    margin-top: 120px;
     float: left;
 }
 
-.lets_stay{
+.lets_stay {
     width: 388px;
 }
 
-input{
+input {
     margin-top: 26px;
-    width: 370px;
+    width: 310px;
     height: 48px;
     padding-left: 19px;
+    border: 1px solid black;
+    border-right: none;
+    float: left;
+    /* шрифт увеличивает высоту email*/
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-::placeholder{
-    color:  #6c6c6c;
+::placeholder {
+    color: #6c6c6c;
+}
+
+input[type="button"] {
+    background: #fff url(img/arrow.png) no-repeat center;
+    background-size: auto;
+    border: 1px solid black;
+    border-left: none;
+    width: 50px;
+}
+
+.footer img {
+    width: 30px;
+}
+
+.bot_container .footer {
+    clear: both;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.footer * {
+    float: left;
+    display: inline-block;
+    text-decoration: none;
+    font-family: Montserrat;
+    color: #6c6c6c;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: right;
 }
