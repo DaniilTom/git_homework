@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- информация для браузера -->
+    <meta charset="UTF-8"> <!-- кодировка в коде -->
+    <title>Document</title> <!-- заголовок во вкладке -->
+    <link rel="stylesheet" href="../style.css">
+    <script type="text/javascript" src="scripts.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="../catalog/main_catalog.html">Каталог</a></li>
+            <li><a href="../contact.html">Контакты</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <header>
+        <h2 style="display: inline-block;">Intel 4004</h2>
+        <input type="button" value="Купить" onclick="buy()">
+    </header>
+
+    <article class="product">
+        <h3 class="heading">Описание товара</h3>
+        <a href="../img/intel4004.jpg" target="_blank"><img src="../img/intel4004.jpg" alt="intel4004.jpg" width="300"></a>
+        
+        <h3 class="heading">Краткое описание товара</h3>
+        <p class="short_desc_text">Производство с&nbsp;15&nbsp;ноября 1971 по&nbsp;1981<br>Производители: Intel Corp.<br>Частота ЦП: 500-740 кГц<br>Наборы инструкций 46&nbsp;инструкций</p>
+        
+        <p style="clear: both;">Intel 4004&nbsp;&mdash; 4-битный микропроцессор, разработанный корпорацией Intel и&nbsp;выпущенный 15&nbsp;ноября 1971&nbsp;года. Эта микросхема считается первым в&nbsp;мире коммерчески доступным однокристальным микропроцессором.</p>
+
+        
+
+        <h3 class="heading">Характеристики товара</h3>
+        <table>
+            <tr style="height: 50px;">
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="text-align: center; border: 1px solid red;">5</td>
+                <td>6</td>
+                <td colspan="2" style="text-align: center; border: 1px solid red;">7</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+            </tr>
+        </table>
+        <p>Процессор Intel 4004&nbsp;&mdash; первый микропроцессор, который при стоимости 200 долларов реализовывал на&nbsp;одном кристалле функции процессора большой ЭВМ.</p>
+        <!-- комментарий -->
+        <h3 class="heading">Подробное описание товара:</h3>
+        <ul class="detail_desc_list">
+            <li>Тактовая частота: от 500 до 740 кГц</li>
+            <li>Разрядность шины данных: 4 бита</li>
+            <li>Разрядность шины адреса: 12 бит</li>
+            <li>Объём адресуемой памяти: 640 байт</li>
+            <li>Память команд (ПЗУ/ROM): 4 килобайта</li>
+            <li>Объём адресуемой памяти (ОЗУ/RAM): 640 байт</li>
+            <li>Количество транзисторов: 2300</li>
+            <li>Напряжение питания: −15 В (pMOS)</li>
+            <li>Количество инструкций: 46</li>
+        </ul>
+    </article>
+    <hr>
+    <footer>Все права защищены &copy;
+        <a class="link" href="http://geekbrains.ru" target="_blank">Geekbrains</a></footer>
+</body>
+
+</html>
