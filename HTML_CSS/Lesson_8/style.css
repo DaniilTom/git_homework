@@ -1,3 +1,4 @@
+/*---------- GLOBAL ------------*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,700');
 
 body {
@@ -8,6 +9,16 @@ body {
     margin: 0;
     padding: 0;
 }
+
+a {
+    outline: none;
+    border: none;
+    text-decoration: none;
+    display: block;
+    padding: 0px 20px;
+}
+
+/*----------- END GLOBAL ---------*/
 
 .main_page {
     max-width: 1366px;
@@ -38,19 +49,14 @@ body {
     float: right;
 }
 
-.head .nav_bar .menu li {
+.head .nav_bar ul.menu li {
     list-style-type: none;
     float: left;
 }
 
-.head .nav_bar .menu li a {
-    display: block;
-    text-decoration: none;
-    padding: 0px 20px;
-}
-
 .head .nav_bar .logo {
     float: left;
+    padding: 0;
 }
 
 #slider_content {
@@ -89,15 +95,131 @@ input[class="dot"] {
 
 .dots .dot {
     margin: 0 10px;
+    transition: 0.7s;
 }
 
-/*---------- Slider ----------*/
+/*---------- END Slider ----------*/
+/*---------- Featured_New --------*/
+.featured_new {
+    min-height: 369px;
+    height: 609px;
+    padding-left: 98px;
+    padding-top: 120px;
+    overflow: hidden;
+}
 
+.featured_new .content {
+    max-width: 1171px;
+    min-width: 550px;
+    height: 800px;
+}
 
+.featured_new ul.menu {
+    float: left;
+}
+
+.featured_new ul li {
+    list-style-type: none;
+    float: left;
+}
+
+.featured_new ul li a {
+    border-bottom: 4px solid #6c6c6c;
+}
+
+.featured_new .nav_content {
+    /* без задания height не работает margin */
+    height: 50px;
+}
+
+.featured_new .product_content {
+    clear: both;
+    margin-top: 50px;
+    position: relative;
+}
+
+.featured_new .product_content .description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 270px;
+    background-color: rgb(255, 255, 255, 0.9);
+    opacity: 0;
+    transition: 1s;
+}
+
+.description .p1 {
+    margin-top: 19px;
+}
+
+.description .p2 {
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 23px;
+}
+
+.product_container {
+    clear: both;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+input[class="arrow_button"] {
+    background: #fff url(img/arrow.png) no-repeat 50% 50%;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    box-shadow: 1px 1px 1px;
+    margin-top: 62px;
+    margin-left: 111px;
+    outline: none;
+    float: none;
+}
+
+input[value="EXPLORE ALL"] {
+    float: right;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    border-radius: none;
+    text-align: left;
+
+}
+
+/*---------- END Featured_New ----*/
+/*---------- Exclusive -----------*/
+.exclusive{
+    clear:both;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+.exclusive .item{
+    height: 683px;
+    width: 683px;
+    /* если flex wrap работал с процентами
+    то можно былобы выставить width: 50% */
+}
+.exclusive #slider_content{
+    margin-top: 33%;
+    margin-left: 7.4%;
+}
+.exclusive .promo1{
+    background-image: url(img/promo-img1.jpg);
+}
+.exclusive .promo2{
+    background-image: url(img/promo-img2.jpg);
+}
+/*---------- END Exclusive -----------*/
 /**************************************/
-/* :hover */
-.head .nav_bar .menu li:hover {
-    border-bottom: 3px solid black;
+/*---------- :hover -------------*/
+ul.menu li a:hover {
+    border-bottom: 2px solid black;
     color: #212121;
     font-size: 14px;
     font-weight: 700;
@@ -106,18 +228,25 @@ input[class="dot"] {
 }
 
 input[class="order_us"]:hover {
-    background: url(img/arrow.png) no-repeat 173px 16px;
+    background: url(img/arrow.png) no-repeat 90% 50%;
 }
 
-input[class="dot"]:hover{
-    transition: 0.7s;
+input[class="dot"]:hover {
     transform: scale(1.3);
     margin: 0 20px;
     opacity: 1;
 }
+
+.product_content .description:hover {
+    border: 1px solid #9c9c9c;
+    opacity: 1;
+}
+
 /**************************************/
-/* шрифты */
-ul.menu li {
+
+/*---------- шрифты ------------*/
+
+ul.menu li a {
     color: #8c8c8c;
     font-size: 14px;
     font-weight: 300;
@@ -152,6 +281,9 @@ ul.menu li {
 #slider_content .feature {
     color: #43a047;
 }
+.exclusive #slider_content .feature{
+    color:  #1e88e5;
+}
 
 input[class="order_us"] {
     color: #212121;
@@ -160,4 +292,26 @@ input[class="order_us"] {
     line-height: 24px;
     letter-spacing: 5px;
     padding-top: 5px;
+}
+
+.featured_new ul.menu li a, .exclusive .fishnet {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.description .p1 {
+    color: #212121;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+}
+
+.description .p2 {
+    color: #6c6c6c;
+    font-size: 13.94px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: center;
 }
