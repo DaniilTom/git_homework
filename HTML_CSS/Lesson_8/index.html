@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        /* чтоб не задавать каждой кнопке вручную */
+        window.onload = function() {
+            var buttons = document.getElementsByClassName("arrow_button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function(){
+                    location.href = 'product_details.html';
+                }
+            }
+            var buttons = document.getElementsByClassName("order_us");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function(){
+                    location.href = 'product_details.html';
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -14,11 +31,11 @@
                 <!-- search стоит перед списком, т.к. float меняет порядок -->
                 <a href="#" class="search"><img src="img/search.png" alt="search.png"></a>
                 <ul class="menu">
-                    <li><a href="#">HOME</a></li>
+                    <li><a href="index.html">HOME</a></li>
                     <li><a href="#">PRODUCTS</a></li>
                     <li><a href="#">HISTORY</a></li>
                     <li><a href="#">SHOWROOM</a></li>
-                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
                 </ul>
             </div>
             <div class="detailed_text" id="slider_content">

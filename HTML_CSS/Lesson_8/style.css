@@ -27,11 +27,14 @@ a {
 
 /*------- Slider -----*/
 .head {
-    background-image: url('img/slider-img.jpg');
     height: 800px;
     padding-left: 98px;
     position: relative;
     overflow: auto;
+}
+
+#slider {
+    background-image: url('img/slider-img.jpg');
 }
 
 .head .nav_bar {
@@ -105,17 +108,14 @@ input[class="dot"] {
 /*---------- END Slider ----------*/
 /*---------- Featured_New --------*/
 .featured_new {
-    min-height: 369px;
-    height: 609px;
+    min-height: 609px;
     padding-left: 98px;
     padding-top: 120px;
     overflow: hidden;
 }
 
 .featured_new .content {
-    max-width: 1171px;
     min-width: 550px;
-    height: 800px;
 }
 
 .featured_new ul.menu {
@@ -239,12 +239,9 @@ input[value="EXPLORE ALL"] {
 }
 
 #trending_products {
-    min-height: 869px;
-    height: 1008px;
-    ;
+    min-height: 1008px;
     min-width: 740px;
 }
-
 /*------------------------ END Trending Products -----------*/
 /*------------------------ Hot Deal ------------------------*/
 /*
@@ -260,16 +257,17 @@ input[value="EXPLORE ALL"] {
     padding-left: 98px;
     padding-right: 98px;
     padding-top: 120px;
-    max-height: 810px;
+    min-height: 810px;
     margin-bottom: 120px;
     display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
 }
 
 .exclusive_and_list .item {
     background-image: url('img/product-1-lg.jpg');
-    min-width: 570px;
+    width: 570px;
     height: 570px;
-    margin-right: 30px;
 }
 
 .exclusive_and_list .product_content {
@@ -278,6 +276,8 @@ input[value="EXPLORE ALL"] {
 }
 
 .exclusive_and_list .product_container {
+    height: 570px;
+    width: 570px;
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
@@ -313,7 +313,7 @@ a.mobile {
 
 .bot_container {
     background-color: #f7f7f7;
-    height: 384px;
+    min-height: 384px;
     padding-left: 97px;
     overflow: hidden;
 }
@@ -425,13 +425,14 @@ a.mobile {
     line-height: 26px;
     text-align: right;
 }
-.page_bottom a{
+
+.page_bottom a {
     padding: 0;
 }
 
 /*------------------------ END Page Bottom -----------------*/
 /**************************************/
-/*---------- :hover -------------*/
+/*------------------------ :hover --------------------------*/
 ul.menu li a:hover {
     border-bottom: 2px solid black;
     color: #212121;
@@ -456,6 +457,10 @@ input[class="dot"]:hover {
     opacity: 1;
 }
 
+.links_list li a:hover {
+    color: #212121;
+}
+
 /**************************************/
 
 /*---------- шрифты ------------*/
@@ -468,7 +473,8 @@ ul.menu li a {
     text-align: right;
 }
 
-.detailed_text .feature {
+.detailed_text .feature,
+.links_list li a {
     font-size: 18px;
     font-weight: 700;
     line-height: 48px;
@@ -515,14 +521,16 @@ input[class="order_us"] {
 
 .featured_new ul.menu li a,
 .item .fishnet,
-.featured_new span.menu {
+.featured_new span.menu,
+.product_info .name {
     font-size: 36px;
     font-weight: 700;
     text-align: left;
     letter-spacing: -1px;
 }
 
-.description .p1 {
+.description .p1,
+.contact_item .city {
     color: #212121;
     font-size: 22px;
     font-weight: 700;
@@ -530,7 +538,8 @@ input[class="order_us"] {
     text-align: center;
 }
 
-.description .p2 {
+.description .p2,
+.text_block #address {
     color: #6c6c6c;
     font-size: 13.94px;
     font-weight: 300;
@@ -544,4 +553,24 @@ input[class="order_us"] {
     font-weight: 300;
     line-height: 24px;
     text-align: left;
+}
+
+.text_block {
+    color: #212121;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+}
+
+.text_block .name,
+.links_list li a {
+    color: #6c6c6c;
+}
+
+.detailed_text .price {
+    color: #212121;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 48px;
 }
