@@ -15,8 +15,12 @@
             }
             var buttons = document.getElementsByClassName("order_us");
             for (var i = 0; i < buttons.length; i++) {
-                buttons[i].onclick = function(){
+                if(buttons[i].getAttribute("value") != "EXPLORE ALL") buttons[i].onclick = function(){
                     location.href = 'product_details.html';
+                }
+                
+                else buttons[i].onclick = function(){
+                    location.href = 'interior_product.html';
                 }
             }
         }
@@ -32,7 +36,7 @@
                 <a href="#" class="search"><img src="img/search.png" alt="search.png"></a>
                 <ul class="menu">
                     <li><a href="index.html">HOME</a></li>
-                    <li><a href="#">PRODUCTS</a></li>
+                    <li><a href="interior_product.html">PRODUCTS</a></li>
                     <li><a href="#">HISTORY</a></li>
                     <li><a href="#">SHOWROOM</a></li>
                     <li><a href="contact.html">CONTACT</a></li>

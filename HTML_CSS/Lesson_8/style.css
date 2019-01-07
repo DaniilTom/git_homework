@@ -216,7 +216,7 @@ input[value="EXPLORE ALL"] {
     margin-left: 7.4%;
 }
 
-.item .detailed_text {
+.detailed_text {
     width: 60%;
 }
 
@@ -474,7 +474,7 @@ ul.menu li a {
 }
 
 .detailed_text .feature,
-.links_list li a {
+.links_list li a, #our_products_range .mid_container .menu li a{
     font-size: 18px;
     font-weight: 700;
     line-height: 48px;
