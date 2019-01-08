@@ -1,0 +1,1 @@
+﻿INSERT INTO Employee(FIO, Departament_id) VALUES ( @FIO, @Departament);
