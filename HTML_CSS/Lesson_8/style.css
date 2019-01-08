@@ -199,7 +199,7 @@ input[value="EXPLORE ALL"] {
 .exclusive {
     clear: both;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
 }
@@ -207,11 +207,9 @@ input[value="EXPLORE ALL"] {
 .item {
     height: 683px;
     width: 683px;
-    /* если бы flex wrap работал с процентами
-    то можно былобы выставить width: 50% */
 }
 
-.item #slider_content {
+.item .slider_content {
     margin-top: 33%;
     margin-left: 7.4%;
 }
@@ -498,11 +496,11 @@ ul.menu li a {
     text-align: left;
 }
 
-#slider_content .feature {
+.slider_content .feature {
     color: #43a047;
 }
 
-.item #slider_content .feature {
+.item .slider_content .feature {
     color: #1e88e5;
 }
 
@@ -539,7 +537,7 @@ input[class="order_us"] {
 }
 
 .description .p2,
-.text_block #address {
+.text_block .address {
     color: #6c6c6c;
     font-size: 13.94px;
     font-weight: 300;

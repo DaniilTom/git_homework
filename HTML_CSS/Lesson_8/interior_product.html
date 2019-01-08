@@ -6,6 +6,27 @@
     <!-- подключать в указанном порядке, что-то где-то съехало-->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style_contact.css">
+    <script>
+        /* чтоб не задавать каждой кнопке вручную */
+        window.onload = function() {
+            var buttons = document.getElementsByClassName("arrow_button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function(){
+                    location.href = 'product_details.html';
+                }
+            }
+            var buttons = document.getElementsByClassName("order_us");
+            for (var i = 0; i < buttons.length; i++) {
+                if(buttons[i].getAttribute("value") != "EXPLORE ALL") buttons[i].onclick = function(){
+                    location.href = 'product_details.html';
+                }
+                
+                else buttons[i].onclick = function(){
+                    location.href = 'interior_product.html';
+                }
+            }
+        }
+    </script>
     <style>
         .up_container > .detailed_text{
             width: 600px;
@@ -167,7 +188,7 @@
         </div>
         <div class="exclusive">
             <div class="item promo1">
-                <div class="detailed_text" id="slider_content">
+                <div class="detailed_text slider_content">
                     <p class="feature">EXCLUSIVE</p>
                     <p class="fishnet">Fishnet Chair</p>
                     <p class="detail">Seat and back with uphoistery made of cold cure foam. Steel frame, available in matt.</p>
@@ -175,7 +196,7 @@
                 </div>
             </div>
             <div class="item promo2">
-                <div class="detailed_text" id="slider_content">
+                <div class="detailed_text slider_content">
                     <p class="feature">EXCLUSIVE</p>
                     <p class="fishnet">Fishnet Chair</p>
                     <p class="detail">Seat and back with uphoistery made of cold cure foam. Steel frame, available in matt.</p>

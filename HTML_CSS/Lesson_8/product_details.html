@@ -7,6 +7,27 @@
     <!-- подключать в указанном порядке, что-то где-то съехало-->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style_product_details.css">
+    <script>
+        /* чтоб не задавать каждой кнопке вручную */
+        window.onload = function() {
+            var buttons = document.getElementsByClassName("arrow_button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function(){
+                    location.href = 'product_details.html';
+                }
+            }
+            var buttons = document.getElementsByClassName("order_us");
+            for (var i = 0; i < buttons.length; i++) {
+                if(buttons[i].getAttribute("value") != "EXPLORE ALL") buttons[i].onclick = function(){
+                    location.href = 'product_details.html';
+                }
+                
+                else buttons[i].onclick = function(){
+                    location.href = 'interior_product.html';
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
