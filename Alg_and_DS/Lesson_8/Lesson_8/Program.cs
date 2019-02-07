@@ -10,7 +10,9 @@ namespace Lesson_8
     {
         static void Main(string[] args)
         {
-            int size = 10000;
+            System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Highest;
+
+            int size = 1000000;
 
             int[] arr = new int[size];
             int[] arr1 = new int[size];
@@ -37,7 +39,7 @@ namespace Lesson_8
             TimeSpan tres;
 
             sw.Start();
-            Console.WriteLine("Улучшенная пузырьковая: " + BubleSort(arr1) + " op.");
+            Console.WriteLine("Пузырьковая: " + BubleSort(arr1) + " op.");
             tres = sw.Elapsed;
             Console.WriteLine("Время: " + tres);
 
@@ -51,7 +53,7 @@ namespace Lesson_8
             tres = sw.Elapsed;
             Console.WriteLine("Время: " + tres);
 
-            int count = 0;
+            ulong count = 0;
             sw.Restart();
             MergeSort(arr4, ref count);
             Console.WriteLine("\nСплавлением: " + count + " op.");
@@ -84,9 +86,9 @@ namespace Lesson_8
         /// </summary>
         /// <param name="arr"></param>
         /// <returns></returns>
-        static int BubleSort(int[] arr)
+        static ulong BubleSort(int[] arr)
         {
-            int count = 1;
+            ulong count = 1;
 
             for (int i = 0; i < arr.Length - 1; i++, count++)
             {
@@ -106,9 +108,9 @@ namespace Lesson_8
         /// </summary>
         /// <param name="arr"></param>
         /// <returns></returns>
-        static int ShakeSort(int[] arr)
+        static ulong ShakeSort(int[] arr)
         {
-            int count = 0;
+            ulong count = 0;
 
             int left = 0;
             int right = arr.Length - 1;
@@ -137,7 +139,7 @@ namespace Lesson_8
 
 
         ////////////////////////Быстрая///////////////////////
-        static int partition(int[] array, int start, int end, out int count)
+        static int partition(int[] array, int start, int end, out ulong count)
         {
             count = 0;
             int temp;//swap helper
@@ -159,17 +161,17 @@ namespace Lesson_8
             return marker;
         }
 
-        static int quicksort(int[] array, int start, int end)
+        static ulong quicksort(int[] array, int start, int end)
         {
-            int res;
+            ulong res;
 
             if (start >= end)
             {
                 return 0;
             }
             int pivot = partition(array, start, end, out res);
-            int res1 = quicksort(array, start, pivot - 1);
-            int res2 = quicksort(array, pivot + 1, end);
+            ulong res1 = quicksort(array, start, pivot - 1);
+            ulong res2 = quicksort(array, pivot + 1, end);
 
             return res + res1 + res2;
         }
@@ -179,7 +181,7 @@ namespace Lesson_8
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        static Int32[] MergeSort(Int32[] array, ref int count)
+        static Int32[] MergeSort(Int32[] array, ref ulong count)
         {
             if (array.Length == 1)
             {
@@ -192,7 +194,7 @@ namespace Lesson_8
             return arr;
         }
 
-        static Int32[] Merge(Int32[] arr1, Int32[] arr2, ref int count)
+        static Int32[] Merge(Int32[] arr1, Int32[] arr2, ref ulong count)
         {
             Int32 ptr1 = 0, ptr2 = 0;
             Int32[] merged = new Int32[arr1.Length + arr2.Length];
@@ -216,9 +218,9 @@ namespace Lesson_8
         /// Сортировка Шелла
         /// </summary>
         /// <param name="vector"></param>
-        static int shellSort(int[] vector)
+        static ulong shellSort(int[] vector)
         {
-            int count = 0;
+            ulong count = 0;
             int step = vector.Length / 2;
             while (step > 0)
             {
@@ -242,12 +244,12 @@ namespace Lesson_8
         /// </summary>
         /// <param name="arr"></param>
         /// <param name="len"></param>
-        static int Pyramid_Sort(Int32[] arr)
+        static ulong Pyramid_Sort(Int32[] arr)
         {
             Int32 len = arr.Length - 1;
-            Int32 count = 0;
+            ulong count = 0;
             //step 1: building the pyramid
-            for (Int32 i = len / 2 - 1; i >= 0; --i, count++)
+            for (Int32 i = len / 2 - 1; i >= 0; --i)
             {
                 long prev_i = i;
                 i = add2pyramid(arr, i, len);
@@ -266,6 +268,7 @@ namespace Lesson_8
                 {
                     prev_i = i;
                     i = add2pyramid(arr, i, k);
+                    count++;
                 }
             }
 
