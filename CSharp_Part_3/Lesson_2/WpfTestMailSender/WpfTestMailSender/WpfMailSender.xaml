@@ -5,17 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestMailSender"
         mc:Ignorable="d"
-        Title="WpfMailSender" Height="450" Width="800">
+        Title="WpfMailSender" Height="450" Width="800"
+        Icon="img/main.ico">
 
-    <Grid>
-        <Button Content="Отправить email" HorizontalAlignment="Left" Height="60"
-                Margin="284,220,0,0" VerticalAlignment="Top" Width="136" Click="btnSendEmail_Click"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Height="28" Margin="284,164,0,0" VerticalAlignment="Top" Width="136" PasswordChar="*"/>
-        <Label Content="Тема" HorizontalAlignment="Left" Margin="160,59,0,0" VerticalAlignment="Top" Foreground="{StaticResource NormalBorderBrush}" Height="31" Width="51"/>
-        <Label Content="Текст" HorizontalAlignment="Left" Margin="160,95,0,0" VerticalAlignment="Top" Foreground="{StaticResource ResourceKey=NormalBorderBrush}" Height="31" Width="51"/>
-        <TextBox x:Name="themeBox" HorizontalAlignment="Left" Height="23" Margin="232,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="322"/>
-        <TextBox x:Name="messageBox" HorizontalAlignment="Left" Height="23" Margin="232,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="322" ToolTip="Текст сообщения"/>
-        <Label Content="Пароль" HorizontalAlignment="Left" Margin="211,161,0,0" VerticalAlignment="Top" Foreground="{StaticResource ResourceKey=NormalBorderBrush}" Height="31" Width="51"/>
+    <StackPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Click="MenuItem_Click"/>
+            </MenuItem>
+        </Menu>
 
-    </Grid>
+        <TabControl Name="tabControl">
+            <TabItem Header="Группа рассылки">
+                <DockPanel>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar Name="tbSender" Width="Auto" Height="30">
+                            <Label Name="ISender" Width="130" Height="25">Выбрать отправителя</Label>
+                            <!-- в строке 25 жалуется, что член не распознан или недоступен -->
+                            <!--<ComboBox Name="cbSenderSelect" Width="270" Height="25" ItemsSource="{x:Static local:StaticVars.SendersD}" SelectedIndex="0"></ComboBox>-->
+                            <ComboBox Name="cbSenderSelect" Width="270" Height="25" ItemsSource="{Binding}" SelectedIndex="0"></ComboBox>
+                            <Button Name="btnAddSender" ToolTip="Добавить">
+                                <Image Source="img/add.png"/>
+                            </Button>
+                            <Button Name="btnEditSender" ToolTip="Редактировать">
+                                <Image Source="img/edit.png"/>
+                            </Button>
+                            <Button Name="btnDeleteSender" ToolTip="Удалить">
+                                <Image Source="img/delete.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbSmtp" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="Auto" Band="1" BandIndex="0">
+                            <Label x:Name="lSmtp" Content="Выбрать smtp-сервер" Height="25" Width="Auto"/>
+                            <ComboBox x:Name="cbSmtpSelect" Height="25" Margin="0" VerticalAlignment="Top" Width="270" SelectedIndex="0" ToolTip="Выбрать smtp-сервер"/>
+                            <Button x:Name="btnAddSmtp" Width="25" Height="25" ToolTip="Добавить">
+                                <Image Source="img/add.png"/>
+                            </Button>
+                            <Button x:Name="btnEditSmtp" Width="25" Height="25" ToolTip="Редактировать">
+                                <Image Source="img/edit.png"/>
+                            </Button>
+                            <Button x:Name="btnDeleteSmtp" Width="25" Height="25" ToolTip="Удалить">
+                                <Image Source="img/delete.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbPlanner" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="230" Band="0" BandIndex="1" >
+                            <Label x:Name="lPlanner" Content="Перейти в планировщик" Height="25" Width="Auto"/>
+                            <Button x:Name="btnClock" Width="25" Height="25" ToolTip="Перейти в планировщик" VerticalAlignment="Top" Click="BtnClock_Click">
+                                <Image Source="img/clock.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbAddressee" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="230" Band="1" BandIndex="1" >
+                            <Label x:Name="lAddressee" Content="Список адресатов" Height="25" Width="Auto"/>
+                            <Button x:Name="btnAddAddressee" Width="25" Height="25" ToolTip="Добавить">
+                                <Image Source="img/add.png"/>
+                            </Button>
+                            <Button x:Name="btnEditAddressee" Width="25" Height="25" ToolTip="Редактировать">
+                                <Image Source="img/edit.png"/>
+                            </Button>
+                            <Button x:Name="btnDeleteAddressee" Width="25" Height="25" ToolTip="Удалить">
+                                <Image Source="img/delete.png"/>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid>
+
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Name="tabPlanner" Header="Планировщик">
+                <StackPanel>
+                    <Calendar Name="cldSchedulDateTimes" HorizontalAlignment="Left" SelectionMode="MultipleRange"/>
+                    <Button HorizontalAlignment="Left" Width="179" Height="25">Отправить сразу</Button>
+                    <Button x:Name="btnSend"  HorizontalAlignment="Left" Width="179" Click="btnSend_Click" Height="25">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="img/clock.png" Width="16" Height="16" />
+                                <TextBlock Margin="3,0,0,0" Text="Отправить запланированно" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Редактор писем">
+                <RichTextBox></RichTextBox>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </Window>

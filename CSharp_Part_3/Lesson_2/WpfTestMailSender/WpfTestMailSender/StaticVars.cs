@@ -14,5 +14,22 @@ namespace WpfTestMailSender
         public static string SenderEmail = "example@yandex.ru";
         public static string HostName = "smtp.yandex.ru";
         public static int Port = 25;
+
+
+        public static Dictionary<string, string> Senders
+        {
+            get { return dicSenders; }
+        }
+        public static Dictionary<string, string> dicSenders = new Dictionary<string, string>()
+        {
+            { "79257443993@yandex.ru",PasswordClass.getPassword("1234l;i") },
+            { "sok74@yandex.ru",PasswordClass.getPassword(";liq34tjk") }
+        };
+
+        //public static Dictionary<string, string> SendersD { get; } = new Dictionary<string, string>
+        //{
+        //    {"asdvv", "1234" },
+        //    {"ghghjm", "456" }
+        //};
     }
 }

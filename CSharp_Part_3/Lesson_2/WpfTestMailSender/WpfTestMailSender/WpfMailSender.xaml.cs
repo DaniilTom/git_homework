@@ -25,13 +25,16 @@ namespace WpfTestMailSender
         public WpfMailSender()
         {
             InitializeComponent();
+            cbSenderSelect.ItemsSource = StaticVars.Senders;
+            cbSenderSelect.DisplayMemberPath = "Key";
+            cbSenderSelect.SelectedValuePath = "Value";
         }
 
         private void btnSendEmail_Click(object sender, RoutedEventArgs e)
         {
             List<string> listStrMails = StaticVars.ListStrMails;  // Список email'ов //кому мы отправляем письмо
             string strPassword = passwordBox.Password;  // для WinForms - string strPassword = passwordBox.Text;
-            string theme = themeBox.Text;
+            string theme = "Empty";
             string message = messageBox.Text;
 
             EmailSendServiceClass essc = new EmailSendServiceClass(StaticVars.SenderEmail,
@@ -43,6 +46,16 @@ namespace WpfTestMailSender
 
             SendEndWindow sew = new SendEndWindow("Работа завершена");
             sew.ShowDialog();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnClock_Click(object sender, RoutedEventArgs e)
+        {
+            tabControl.SelectedItem = tabPlanner;
         }
     }
 }
