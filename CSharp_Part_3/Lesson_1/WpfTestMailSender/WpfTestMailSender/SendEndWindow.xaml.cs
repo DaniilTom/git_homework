@@ -19,9 +19,10 @@ namespace WpfTestMailSender
     /// </summary>
     public partial class SendEndWindow : Window
     {
-        public SendEndWindow()
+        public SendEndWindow(string message)
         {
             InitializeComponent();
+            ISendEnd.Content = message;
         }
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
