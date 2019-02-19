@@ -12,38 +12,36 @@ namespace WpfTestMailSender
 {
     class EmailSendServiceClass
     {
-        List<string> _listStrMails;
 
         string _senderEmail;
         string _hostName;
         int _port;
+        string _password;
 
-        public EmailSendServiceClass(string sender, string host, int port, List<string> addressList)
+        public EmailSendServiceClass(string sender, string password, string host, int port)
         {
             _senderEmail = sender;
+            _password = password;
             _hostName = host;
             _port = port;
-            _listStrMails = addressList;
         }
 
-        public void StartMailing(string strPassword, string theme, string message)
+        public void StartMailing(IQueryable<Emails> emails)
         {
-            foreach (string mail in _listStrMails)
+            foreach (var mail in emails)
             {
                 // Используем using, чтобы гарантированно удалить объект MailMessage после использования
-                using (MailMessage mm = new MailMessage(_senderEmail, mail))
+                using (MailMessage mm = new MailMessage(_senderEmail, mail.Email))
                 {
                     // Формируем письмо
-                    mm.Subject = theme; // Заголовок письма
-                    mm.Body = message;       // Тело письма
+                    mm.Subject = mail.Name;     // Заголовок письма
+                    mm.Body = "Hello world";       // Тело письма
                     mm.IsBodyHtml = false;           // Не используем html в теле письма
                                                      // Авторизуемся на smtp-сервере и отправляем письмо
-                                                     // Оператор using гарантирует вызов метода Dispose, даже если при вызове 
-                                                     // методов в объекте происходит исключение.
                     using (SmtpClient sc = new SmtpClient(_hostName, _port))
                     {
                         sc.EnableSsl = true;
-                        sc.Credentials = new NetworkCredential(_senderEmail, strPassword);
+                        sc.Credentials = new NetworkCredential(_senderEmail, _password);
                         try
                         {
                             sc.Send(mm);
@@ -52,11 +50,11 @@ namespace WpfTestMailSender
                         {
                             SendEndWindow sew = new SendEndWindow("Невозможно отправить письмо " + ex.ToString());
                             sew.ISendEnd.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                            sew.ISendEnd.FontSize = 20;
+                            sew.ISendEnd.FontSize = 11;
                             sew.ShowDialog();
                         }
                     }
-                } //using (MailMessage mm = new MailMessage("sender@yandex.ru", mail))
+                }
             }
         }
     }

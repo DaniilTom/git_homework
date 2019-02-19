@@ -15,6 +15,14 @@ namespace WpfTestMailSender
         public static string HostName = "smtp.yandex.ru";
         public static int Port = 25;
 
+        public static Dictionary<string, int> Servers
+        {
+            get { return smtpServers; }
+        }
+        public static Dictionary<string, int> smtpServers = new Dictionary<string, int>()
+        {
+            { "smtp.yandex.ru", 25 }
+        };
 
         public static Dictionary<string, string> Senders
         {

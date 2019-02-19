@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestMailSender"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="WpfMailSender" Height="450" Width="800"
         Icon="img/main.ico">
@@ -21,8 +22,8 @@
                     <ToolBarTray DockPanel.Dock="Top">
                         <ToolBar Name="tbSender" Width="Auto" Height="30">
                             <Label Name="ISender" Width="130" Height="25">Выбрать отправителя</Label>
-                            <!-- в строке 25 жалуется, что член не распознан или недоступен -->
-                            <!--<ComboBox Name="cbSenderSelect" Width="270" Height="25" ItemsSource="{x:Static local:StaticVars.SendersD}" SelectedIndex="0"></ComboBox>-->
+                            <!-- в строке 25 жалуется, что член "Senders" не распознан или недоступен -->
+                            <!--<ComboBox Name="cbSenderSelect" Width="270" Height="25" ItemsSource="{x:Static local:StaticVars.Senders}" SelectedIndex="0"></ComboBox>-->
                             <ComboBox Name="cbSenderSelect" Width="270" Height="25" ItemsSource="{Binding}" SelectedIndex="0"></ComboBox>
                             <Button Name="btnAddSender" ToolTip="Добавить">
                                 <Image Source="img/add.png"/>
@@ -66,16 +67,17 @@
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
-                    <DataGrid>
-
-                    </DataGrid>
+                    <!-- в строке 70 ошибка почему-то -->
+                    <!--<DataGrid Name="dgEmails" ItemsSource="{x:Static local:Database.Emails}"/>-->
+                    <DataGrid Name="dgEmails" ItemsSource="{Binding}"/>
                 </DockPanel>
             </TabItem>
             <TabItem Name="tabPlanner" Header="Планировщик">
                 <StackPanel>
                     <Calendar Name="cldSchedulDateTimes" HorizontalAlignment="Left" SelectionMode="MultipleRange"/>
-                    <Button HorizontalAlignment="Left" Width="179" Height="25">Отправить сразу</Button>
-                    <Button x:Name="btnSend"  HorizontalAlignment="Left" Width="179" Click="btnSend_Click" Height="25">
+                    <xctk:TimePicker Name="tbTimePicker" Width="{Binding ElementName=btnSend, Path=Width}" HorizontalAlignment="Left"/>
+                    <Button HorizontalAlignment="Left" Width="179" Height="25" Click="btnSendEmail_Click">Отправить сразу</Button>
+                    <Button x:Name="btnSend"  HorizontalAlignment="Left" Width="179" Height="25" Click="btnSend_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="img/clock.png" Width="16" Height="16" />
@@ -85,8 +87,11 @@
                     </Button>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Редактор писем">
-                <RichTextBox></RichTextBox>
+            <TabItem Header="Редактор писем" Name="tabEdit">
+                <StackPanel>
+                    <TextBox Text="Re: "></TextBox>
+                    <TextBox Text="Текст" Height="Auto" Name="tbMessage"></TextBox>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </StackPanel>

@@ -28,24 +28,62 @@ namespace WpfTestMailSender
             cbSenderSelect.ItemsSource = StaticVars.Senders;
             cbSenderSelect.DisplayMemberPath = "Key";
             cbSenderSelect.SelectedValuePath = "Value";
+
+            cbSmtpSelect.ItemsSource = StaticVars.Servers;
+            cbSmtpSelect.DisplayMemberPath = "Key";
+            cbSmtpSelect.SelectedValuePath = "Value";
+
+            dgEmails.ItemsSource = Database.Emails;
         }
 
+        /// <summary>
+        /// Отправка сразу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSendEmail_Click(object sender, RoutedEventArgs e)
         {
-            List<string> listStrMails = StaticVars.ListStrMails;  // Список email'ов //кому мы отправляем письмо
-            string strPassword = passwordBox.Password;  // для WinForms - string strPassword = passwordBox.Text;
-            string theme = "Empty";
-            string message = messageBox.Text;
+            if (ValidateMessage() == false) return;
 
-            EmailSendServiceClass essc = new EmailSendServiceClass(StaticVars.SenderEmail,
-                                                                    StaticVars.HostName,
-                                                                    StaticVars.Port,
-                                                                    StaticVars.ListStrMails);
+            EmailSendServiceClass essc = 
+                new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString(),
+                                            cbSmtpSelect.Text, (int)cbSmtpSelect.SelectedValue);
 
-            essc.StartMailing(strPassword, theme, message);
+            essc.StartMailing((IQueryable<Emails>) dgEmails.ItemsSource);
 
             SendEndWindow sew = new SendEndWindow("Работа завершена");
             sew.ShowDialog();
+        }
+
+        /// <summary>
+        /// Отправка по расписанию
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSend_Click(object sender, RoutedEventArgs e)
+        {
+            if (ValidateMessage() == false) return;
+
+            SchedulerClass sc = new SchedulerClass();
+            TimeSpan tsSendTime = sc.GetSendTime(tbTimePicker.Text);
+            if (tsSendTime == new TimeSpan())
+            {
+                MessageBox.Show("Некорректный формат даты");
+                return;
+            }
+            DateTime dtSendDateTime = (cldSchedulDateTimes.SelectedDate ?? DateTime.Today).Add(tsSendTime);
+
+            if (dtSendDateTime < DateTime.Now)
+            {
+                MessageBox.Show("Раньше, чем настоящее время.");
+                return;
+            }
+
+            EmailSendServiceClass emailSender = 
+                new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString(),
+                                            cbSmtpSelect.Text, (int)cbSmtpSelect.SelectedValue);
+
+            sc.SendEmails(dtSendDateTime, emailSender, (IQueryable<Emails>)dgEmails.ItemsSource);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -56,6 +94,17 @@ namespace WpfTestMailSender
         private void BtnClock_Click(object sender, RoutedEventArgs e)
         {
             tabControl.SelectedItem = tabPlanner;
+        }
+
+        private bool ValidateMessage()
+        {
+            if (String.IsNullOrEmpty(tbMessage.Text))
+            {
+                MessageBox.Show("Сообщение не может быть пустым.");
+                tabControl.SelectedItem = tabEdit;
+                return false;
+            }
+            return true;
         }
     }
 }
