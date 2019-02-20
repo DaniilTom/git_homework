@@ -45,7 +45,18 @@ namespace WpfTestMailSender
         {
             if (ValidateMessage() == false) return;
 
-            EmailSendServiceClass essc = 
+            // c использованием библиотеки
+            //EmailSenderLib.EmailSendServiceClass essc =
+            //    new EmailSenderLib.EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString(),
+            //                                cbSmtpSelect.Text, (int)cbSmtpSelect.SelectedValue);
+
+            // в EmailSendServiceClass требуется использовать класс Emails. Но этот класс есть и в текущем приложении, и в библиотеке,
+            //  в связи с чем возникает конфилкт имен. Чтобы использовать библиотеку в этом приложении, надо еще везде заменить Emails класс
+            //  текущего приложения на EmailSenderLib.Emails класс библиотеки, но это как-то неудобно и рабочее приложение не хочется
+            //  лишний раз трогать. (Но можно было бы описать интерфейс, но я не успеваю так быстро схватывать материал).
+
+
+            EmailSendServiceClass essc =
                 new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString(),
                                             cbSmtpSelect.Text, (int)cbSmtpSelect.SelectedValue);
 

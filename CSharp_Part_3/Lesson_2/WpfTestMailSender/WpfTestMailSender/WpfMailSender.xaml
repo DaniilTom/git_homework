@@ -72,11 +72,18 @@
                     <DataGrid Name="dgEmails" ItemsSource="{Binding}"/>
                 </DockPanel>
             </TabItem>
-            <TabItem Name="tabPlanner" Header="Планировщик">
+            <TabItem Name="tabPlanner" Header="Планировщик" Height="23" VerticalAlignment="Bottom">
                 <StackPanel>
                     <Calendar Name="cldSchedulDateTimes" HorizontalAlignment="Left" SelectionMode="MultipleRange"/>
                     <xctk:TimePicker Name="tbTimePicker" Width="{Binding ElementName=btnSend, Path=Width}" HorizontalAlignment="Left"/>
-                    <Button HorizontalAlignment="Left" Width="179" Height="25" Click="btnSendEmail_Click">Отправить сразу</Button>
+                    <Button HorizontalAlignment="Left" Width="179" Height="25" Click="btnSendEmail_Click">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="img/now.png" Width="16" Height="16"/>
+                                <TextBlock Margin="3,0,0,0" Text="Отправить сейчас" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
                     <Button x:Name="btnSend"  HorizontalAlignment="Left" Width="179" Height="25" Click="btnSend_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">

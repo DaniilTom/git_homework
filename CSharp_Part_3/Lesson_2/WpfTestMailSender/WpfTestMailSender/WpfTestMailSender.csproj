@@ -161,5 +161,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmailSenderLib\EmailSenderLib.csproj">
+      <Project>{4453db9d-2d5f-457c-b872-4609c869cba3}</Project>
+      <Name>EmailSenderLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
