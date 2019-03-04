@@ -139,7 +139,7 @@
                         </ToolBar>
                     </ToolBarTray>
                     <view:SaveEmailView />
-                    <view:EmailInfo/>
+                    <view:EmailInfo Width="Auto" Height="Auto"/>
                    
                 </DockPanel>
             </TabItem>

@@ -94,6 +94,8 @@
     <Compile Include="ApplicationCloseCommand.cs" />
     <Compile Include="EmailSendServiceClass.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="Validation\DatabaseName.cs" />
+    <Compile Include="Validation\EmailsValidation.cs" />
     <Compile Include="Views\SaveEmailView.xaml.cs">
       <DependentUpon>SaveEmailView.xaml</DependentUpon>
     </Compile>

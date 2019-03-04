@@ -24,5 +24,15 @@ namespace MailSender.Views
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Validation_OnError(object sender, ValidationErrorEventArgs e)
+        {
+            switch(e.Action)
+            {
+                case ValidationErrorEventAction.Added:
+                    MessageBox.Show("Валидация через событие.");
+                    break;
+            }
+        }
+    }
 }
