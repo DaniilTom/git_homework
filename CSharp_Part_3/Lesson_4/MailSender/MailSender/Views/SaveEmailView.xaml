@@ -30,12 +30,9 @@
         <!--<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Name, NotifyOnValidationError=True}" Validation.Error="Validation_OnError"/>-->
         <TextBox Grid.Column="1" Grid.Row="2" Validation.Error="Validation_OnError">
             <TextBox.Text>
-                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.NotifyOnValidationError>True</Binding.NotifyOnValidationError>
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
-                        <DataErrorValidationRule/>
-                        <valid:DatabaseName/>
+                        <!--<valid:DatabaseName/>--> <!-- ValidationRule перекрывает IDataErrorInfo и OnNameChanging(), поэтому пока закомментирую-->
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

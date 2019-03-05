@@ -13,12 +13,11 @@ namespace MailSender.Validation
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            MessageBox.Show("Валидация через ValidationRule.");
-
             string Name = value as string;
 
             if (!(Name.Length > 3 && Name.Length < 20))
             {
+                MessageBox.Show("Валидация через ValidationRule. Длина выходит за пределы.");
                 return new ValidationResult(false, "Валидация через ValidationRule. Длина выходит за пределы.");
             }
 

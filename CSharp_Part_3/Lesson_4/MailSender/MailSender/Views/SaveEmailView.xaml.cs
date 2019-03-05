@@ -30,6 +30,9 @@ namespace MailSender.Views
             switch(e.Action)
             {
                 case ValidationErrorEventAction.Added:
+                    //string name = ((TextBox)sender).Text;
+                    //MessageBox.Show(name);
+                    //if (name.Length > 3 || name.Length < 20) MessageBox.Show("Валидация через событие.");
                     MessageBox.Show("Валидация через событие.");
                     break;
             }

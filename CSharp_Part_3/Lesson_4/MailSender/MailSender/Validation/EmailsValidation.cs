@@ -14,13 +14,12 @@ namespace MailSender
         {
             get
             {
-                
                 switch(columnName)
                 {
                     case nameof(Name):
                         string result = "Валидация через IDataErrorInfo. ";
-                        MessageBox.Show(result);
-                        if (!(Name.Length > 3 && Name.Length < 20)) MessageBox.Show(result + "Длина выходит за пределы.");
+                        //MessageBox.Show(result);
+                        if (!(_Name.Length > 3 && _Name.Length < 20)) MessageBox.Show(result + "Длина выходит за пределы.");
                         return result;
 
                     default: return "";
@@ -29,6 +28,14 @@ namespace MailSender
             }
         }
 
-        public string Error => throw new NotImplementedException();
+        //public string Error => throw new NotImplementedException();
+        public string Error { get; }
+
+        partial void OnNameChanging(string Name)
+        {
+            string result = "Валидация через OnNameChanging(). ";
+            //MessageBox.Show(result);
+            if (!(Name.Length > 3 && Name.Length < 20)) MessageBox.Show(result + "Длина выходит за пределы.");
+        }
     }
 }
