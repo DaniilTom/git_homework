@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using Xceed.Words.NET;
 
 namespace MailSender
 {
@@ -57,5 +58,12 @@ namespace MailSender
 			//_emailSender.SendMails((IQueryable<Emails>)dgEmails.ItemsSource);
 
 		}
+
+        private void CreateReport(object sender, RoutedEventArgs)
+        {
+            DocX dco = DocX.Create("report.docx");
+
+            dco.AddHeaders();
+        }
 	}
 }
