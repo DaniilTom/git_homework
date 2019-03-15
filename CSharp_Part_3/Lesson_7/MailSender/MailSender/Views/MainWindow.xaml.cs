@@ -58,12 +58,5 @@ namespace MailSender
 			//_emailSender.SendMails((IQueryable<Emails>)dgEmails.ItemsSource);
 
 		}
-
-        private void CreateReport(object sender, RoutedEventArgs)
-        {
-            DocX dco = DocX.Create("report.docx");
-
-            dco.AddHeaders();
-        }
 	}
 }

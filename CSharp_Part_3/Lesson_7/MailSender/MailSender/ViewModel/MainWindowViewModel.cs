@@ -8,6 +8,7 @@ using MailSender.Service;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System;
+using Xceed.Words.NET;
 
 namespace MailSender.ViewModel
 {
@@ -45,6 +46,8 @@ namespace MailSender.ViewModel
 
             DataGridFilter = new RelayCommand<object>(DataGridFiltering);
             GetMyCommand = new MyCommand(DataGridFiltering);
+            CommandCreateReport = new RelayCommand(CreateReport);
+            
         }
 
         private void SaveEmail(Emails email)
@@ -95,6 +98,25 @@ namespace MailSender.ViewModel
             {
                 _methToDo(ob);
             }
+        }
+
+        
+        public RelayCommand CommandCreateReport { get; }
+        private void CreateReport()
+        {
+            DocX doc = DocX.Create("report.docx");
+
+            Paragraph title = doc.InsertParagraph();
+            title.Append("Список:").Bold().Alignment = Alignment.center;
+
+            List list = doc.AddList(listType: ListItemType.Bulleted);
+
+            foreach(var email in Emails)
+            {
+                doc.AddListItem(list, email.Name + ": " + email.Email);
+            }
+            doc.InsertList(list);
+            doc.Save();
         }
     }
 }
