@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketSeller.Model;
+using TicketSeller.ViewModel;
 
 namespace TicketSeller
 {
@@ -23,6 +27,9 @@ namespace TicketSeller
         public MainWindow()
         {
             InitializeComponent();
+
+            //MainWindowVM mv = (MainWindowVM)Application.Current.FindResource("MainVM");
+            //DataContext = mv;
         }
     }
 }

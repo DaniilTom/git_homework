@@ -55,3 +55,7 @@ GO
 -- --------------------------------------------------
 
 select * from TicketSet;
+
+insert into TicketSet (FilmName, Date, Count) values ('Film 1', '20120618 10:34:09 AM', 2);
+
+truncate table TicketSet;
