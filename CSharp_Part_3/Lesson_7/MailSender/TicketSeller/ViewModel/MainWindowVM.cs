@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Data.Entity;
 using TicketSeller.Model;
 
 namespace TicketSeller.ViewModel
@@ -15,17 +16,23 @@ namespace TicketSeller.ViewModel
     public class MainWindowVM : ViewModelBase
     {
         public ICommand CommandConfirm { get; }
+        public ICommand CommandEdit { get; }
+
         public ObservableCollection<Film> GetFilms { get; set; } = new ObservableCollection<Film>();
         public TicketsContainer GetTicketsContainer { get; } = new TicketsContainer();
-        public ObservableCollection<Ticket> _tickets;
+        private ObservableCollection<Ticket> _tickets;
+        
 
         public MainWindowVM()
         {
             CommandConfirm = new RelayCommand(ConfrimFilmSelect);
+            CommandEdit = new RelayCommand(ConfirmEdit);
 
             GetFilms.Add(new Film { Title = "Film 1"});
-            GetFilms.Add(new Film { Title = "Film 2" });
-            _tickets = new ObservableCollection<Ticket>(GetTicketsContainer.TicketSet.ToList());
+            GetFilms.Add(new Film { Title = "Film 2"});
+            GetFilms.Add(new Film { Title = "Film 3"});
+
+            GetTickets = new ObservableCollection<Ticket>(GetTicketsContainer.TicketSet.ToList());
 
         }
         
@@ -47,9 +54,18 @@ namespace TicketSeller.ViewModel
             GetTicketsContainer.SaveChanges();
 
             //обновляем коллекция проданных билетов
-            _tickets = new ObservableCollection<Ticket>(GetTicketsContainer.TicketSet.ToList());
+            //_tickets = new ObservableCollection<Ticket>(GetTicketsContainer.TicketSet.ToList());
+            GetTickets = new ObservableCollection<Ticket>(GetTicketsContainer.TicketSet.ToList());
 
-            OnPropertyChanged("GetTickets");
+        }
+
+        /// <summary>
+        /// Метод комманды сохранения изменений
+        /// </summary>
+        /// <param name="content"></param>
+        private void ConfirmEdit()
+        {
+            GetTicketsContainer.SaveChanges();
         }
 
         /// <summary>
@@ -58,7 +74,7 @@ namespace TicketSeller.ViewModel
         public ObservableCollection<Ticket> GetTickets
         {
             get { return _tickets; }
-            set { _tickets = value; OnPropertyChanged("GetTickets"); }
+            private set { _tickets = value; OnPropertyChanged("GetTickets"); }
         }
 
     }
@@ -70,14 +86,17 @@ namespace TicketSeller.ViewModel
     {
         public event EventHandler CanExecuteChanged;
         private Action<object> _act;
+        private Action _act_no_param;
 
         public RelayCommand(Action<object> act) { _act = act; }
+        public RelayCommand(Action act) { _act_no_param = act; }
 
         public bool CanExecute(object parameter) { return true; }
 
         public void Execute(object parameter)
         {
-            _act(parameter);
+            if (parameter != null) _act(parameter);
+            else _act_no_param();
         }
     }
 

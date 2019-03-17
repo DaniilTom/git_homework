@@ -27,9 +27,6 @@ namespace TicketSeller
         public MainWindow()
         {
             InitializeComponent();
-
-            //MainWindowVM mv = (MainWindowVM)Application.Current.FindResource("MainVM");
-            //DataContext = mv;
         }
     }
 }
