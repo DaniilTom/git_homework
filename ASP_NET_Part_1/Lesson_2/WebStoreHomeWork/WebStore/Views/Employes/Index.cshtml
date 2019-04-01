@@ -16,15 +16,17 @@
     <tbody>
         @foreach (var emp in Model)
         {
-            <tr>
-                <th>@emp.Id</th>
-                <th>@emp.SurName</th>
-                <th>@emp.FirstName</th>
-                <th>@emp.Patronymic</th>
-                <th>@emp.Age</th>
-                <th><a asp-action="Details" asp-route-id="@emp.Id">Детали</a></th>
-                <th><a asp-action="Dossier" asp-route-id="@emp.Id">Досье</a></th>
-            </tr>
+        <tr>
+            <th>@emp.Id</th>
+            <th>@emp.SurName</th>
+            <th>@emp.FirstName</th>
+            <th>@emp.Patronymic</th>
+            <th>@emp.Age</th>
+            <th><a asp-action="Details" asp-route-id="@emp.Id">Детали</a></th>
+            <th><a asp-action="Dossier" asp-route-id="@emp.Id">Досье</a></th>
+            <th><a asp-action="Edit" asp-route-id="@emp.Id">Редактировать</a></th>
+            <th><a asp-action="Delete" asp-route-id="@emp.Id">Удалить</a></th>
+        </tr>
         }
     </tbody>
 </table>
