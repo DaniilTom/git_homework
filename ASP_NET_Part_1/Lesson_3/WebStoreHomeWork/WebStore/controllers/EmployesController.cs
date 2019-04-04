@@ -4,29 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Models;
+using WebStore.Infrastructure.Interfaces;
+using System.Text;
 
 namespace WebStore.controllers
 {
     public class EmployesController : Controller
     {
-        static string dossier = "Прочая текстовая информация для отображения где-нибудь.";
+        IServiceEmployeeData _EmployeesData;
 
-        // static, чтобы не удалялись вместе с экземпляром контроллера
-        private static List<Employee> _Employes = new List<WebStore.Models.Employee>()
+        public EmployesController(IServiceEmployeeData ed)
         {
-            new Employee{Id = 1, FirstName = "Иван", SurName = "Иванов", Patronymic = "Иванович", Age = 20},
-            new Employee{Id = 2, FirstName = "Вася", SurName = "Васильев", Patronymic = "Васильевич", Age = 25, Dossier = dossier}
-        };
+            _EmployeesData = ed;
+        }
 
         public IActionResult Index()
         {
             //return Content("Hello World!!");
-            return View(_Employes);
+            return View(_EmployeesData.Employees);
         }
 
         public IActionResult Details(int id)
         {
-            var employe = _Employes.FirstOrDefault(e => e.Id == id);
+            var employe = _EmployeesData.Employees.FirstOrDefault(e => e.Id == id);
             if (employe == null) return NotFound();
 
             return View(employe);
@@ -34,49 +34,50 @@ namespace WebStore.controllers
 
         public IActionResult Dossier(int id)
         {
-            var employe = _Employes.FirstOrDefault(e => e.Id == id);
+            var employe = _EmployeesData.Employees.FirstOrDefault(e => e.Id == id);
             if (employe == null) return NotFound();
+
+            //хотел вместо NotFound() показывать alert() поверх текущего View (без его обновления), но новый ответ загружает все по-новой
+            //string str = "<script>alert(\"Не найдено\");</script>";
+            //byte[] b = Encoding.UTF8.GetBytes(str);
+            //HttpContext.Response.Body.WriteAsync(b);
 
             return View(employe);
         }
 
-        //public IActionResult Edit()
-        //{
-        //    return View();
-        //}
-
         public IActionResult Edit(int Id)
         {
-            if (Id != 0) return View(_Employes.First(emp => emp.Id == Id));
+            if (Id != 0) return View(_EmployeesData.Employees.First(emp => emp.Id == Id));
             else return View();
         }
 
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
-            _Employes.RemoveAll(e => e.Id == Id);
+            _EmployeesData.Delete(id);
             return Redirect("/Employes/Index");
         }
 
         [HttpPost]
-        public IActionResult Add(string _FirstName, string _SecondName, int _Age, int _Id = -1)
+        public IActionResult Edit(Employee employee)
         {
-            if(_Id == -1)
+
+            if (employee.Id == 0)
             {
-                _Employes.Add(
+                _EmployeesData.AddNew(
                 new Employee
                 {
-                    Id = _Employes.Count + 1,
-                    FirstName = _FirstName,
-                    SurName = _SecondName,
-                    Age = _Age
+                    Id = _EmployeesData.Employees.Count() + 1,
+                    FirstName = employee.FirstName,
+                    SurName = employee.SurName,
+                    Age = employee.Age
                 });
             }
             else
             {
-                Employee emp = _Employes.First(e => e.Id == _Id);
-                emp.FirstName = _FirstName;
-                emp.SurName = _SecondName;
-                emp.Age = _Age;
+                Employee emp = _EmployeesData.Employees.First(e => e.Id == employee.Id);
+                emp.FirstName = employee.FirstName;
+                emp.SurName = employee.SurName;
+                emp.Age = employee.Age;
             }
 
             return Redirect("/Employes/Index");
