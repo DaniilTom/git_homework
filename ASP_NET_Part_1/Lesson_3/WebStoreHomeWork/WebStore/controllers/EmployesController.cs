@@ -35,12 +35,16 @@ namespace WebStore.controllers
         public IActionResult Dossier(int id)
         {
             var employe = _EmployeesData.Employees.FirstOrDefault(e => e.Id == id);
-            if (employe == null) return NotFound();
+            if (employe == null)
+            {
+                return NotFound();
 
-            //хотел вместо NotFound() показывать alert() поверх текущего View (без его обновления), но новый ответ загружает все по-новой
-            //string str = "<script>alert(\"Не найдено\");</script>";
-            //byte[] b = Encoding.UTF8.GetBytes(str);
-            //HttpContext.Response.Body.WriteAsync(b);
+                //хотел вместо NotFound() показывать alert() поверх текущего View (без его обновления),
+                // но способ снизу загружает новую страницу и исполняет JS
+                //string str = "<script>alert(\"Не найдено\");</script>";
+                //byte[] b = Encoding.UTF8.GetBytes(str);
+                //HttpContext.Response.Body.WriteAsync(b);
+            }
 
             return View(employe);
         }
