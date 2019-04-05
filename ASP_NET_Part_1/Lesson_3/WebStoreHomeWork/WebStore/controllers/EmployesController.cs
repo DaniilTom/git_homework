@@ -39,7 +39,7 @@ namespace WebStore.controllers
             {
                 return NotFound();
 
-                //хотел вместо NotFound() показывать alert() поверх текущего View (без его обновления),
+                //хотел вместо NotFound() показывать alert() поверх текущего View (без перезагрузки страницы),
                 // но способ снизу загружает новую страницу и исполняет JS
                 //string str = "<script>alert(\"Не найдено\");</script>";
                 //byte[] b = Encoding.UTF8.GetBytes(str);
