@@ -16,5 +16,10 @@ namespace WebStore.controllers
             //return Content("Hello World!!");
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }
