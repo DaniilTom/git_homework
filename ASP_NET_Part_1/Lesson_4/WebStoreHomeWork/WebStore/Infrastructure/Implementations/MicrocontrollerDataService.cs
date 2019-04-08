@@ -12,6 +12,8 @@ namespace WebStore.Infrastructure.Implementations
     {
         public IEnumerable<Microcontroller> Microcontrollers => TestData.Microcontrollers;
 
+        public IEnumerable<MCDescription> DetailedDescription => TestData.MCDetailedDescriptions;
+
         // все ниже пока не нужно
         public void AddNew(Microcontroller employee)
         {

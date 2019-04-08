@@ -5,7 +5,7 @@
 
 <article>
     <h3>Товары:</h3>
-    <ul class="cat_menu" style="list-style: none;">
+    @*<ul class="cat_menu" style="list-style: none;">
         @foreach (var mc in Model)
         {
             <li>
@@ -14,21 +14,9 @@
                 <a href="intel4004.html">@mc.Name</a>
             </li>
         }
-        @*<li>
-            <img src="~/img/intel4004.jpg" alt="intel4004.jpg" width="70">
-            <br>
-            <a href="intel4004.html">Intel 4004</a>
-        </li>
-        <li>
-            <img src="~/img/intel8086.jpg" alt="intel8086.jpg" width="70">
-            <br>
-            <a href="intel8086.html">Intel 8086</a>
-        </li>
-        <li>
-            <img src="~/img/intel80186.jpg" alt="intel80186.jpg" width="70">
-            <br>
-            <a href="intel80186.html">Intel 80186</a>
-        </li>*@
-    </ul>
+    </ul>*@
+
+    @await Component.InvokeAsync("Microcontroller")
+
 </article>
 

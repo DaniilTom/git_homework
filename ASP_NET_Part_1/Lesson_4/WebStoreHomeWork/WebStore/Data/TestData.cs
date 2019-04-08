@@ -8,20 +8,27 @@ namespace WebStore.Data
 {
     public static class TestData
     {
-        public static List<Microcontroller> Microcontrollers = new List<Microcontroller>
+        static TestData()
         {
-            new Microcontroller{ Id=0, Name="Intel 4004", ImageUrl="/img/intel4004.jpg" },
-            new Microcontroller{ Id=1, Name="Intel 80186", ImageUrl="/img/intel80186.jpg" },
-            new Microcontroller{ Id=2, Name="Intel 8086", ImageUrl="/img/intel8086.jpg" }
-        };
+            MCDetailedDescriptions = new List<MCDescription>
+            {
+                new MCDescription{ ProductId = 0, DetailedDesriptionList = str1 },
+                new MCDescription{ ProductId = 1, DetailedDesriptionList = str2 },
+                new MCDescription{ ProductId = 2, DetailedDesriptionList = str3 }
+            };
 
-        public static List<MCDescription> MCDetailedDescriptions = new List<MCDescription>
-        {
-            new MCDescription{ ProductId = 0, DetailedDesriptionList = str1 },
-            new MCDescription{ ProductId = 1, DetailedDesriptionList = str2 },
-            new MCDescription{ ProductId = 2, DetailedDesriptionList = str3 }
-        };
+            Microcontrollers = new List<Microcontroller>
+            {
+                new Microcontroller{ Id=0, Name="Intel 4004", ImageUrl="/img/intel4004.jpg" },
+                new Microcontroller{ Id=1, Name="Intel 80186", ImageUrl="/img/intel80186.jpg" },
+                new Microcontroller{ Id=2, Name="Intel 8086", ImageUrl="/img/intel8086.jpg" }
+            };
+        }
 
+
+        public static List<MCDescription> MCDetailedDescriptions;
+        public static List<Microcontroller> Microcontrollers;
+        
         static string[] str1 =
             {
                 "Тактовая частота: от 500 до 740 кГц",
@@ -37,7 +44,7 @@ namespace WebStore.Data
 
         static string[] str2 = 
             {
-                "Тактовая частота: 6, 8, 10, 12, 13, 16, 20, 25 МГц",
+                "Тактовая частота: от 6 до 25 МГц",
                 "Разрядность шины данных: 16 бит",
                 "Разрядность шины адреса: 20 бит",
                 "Объём адресуемой памяти: 1 Мбайт",
@@ -56,7 +63,7 @@ namespace WebStore.Data
                 "Объём адресуемой памяти: 1 Мбайт",
                 "Адресное пространство I/O: 64 Кбайт",
                 "Количество транзисторов: 29 000",
-                "Максимальное тепловыделение корпуса: 1,75 Вт (фактическое потребление — 0,65 Вт)",
+                "Потребление: 0,65 Вт",
                 "Напряжение питания: +5 В",
                 "Поддерживаемые технологии: 98 инструкций"
             };

@@ -12,6 +12,8 @@ namespace WebStore.Infrastructure.Interfaces
     {
         IEnumerable<Microcontroller> Microcontrollers { get; }
 
+        IEnumerable<MCDescription> DetailedDescription { get; }
+
         Microcontroller GetById(int id);
 
         void AddNew(Microcontroller employee);
