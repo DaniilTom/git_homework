@@ -24,6 +24,7 @@ namespace WebStore
             services.AddMvc(); // добавляет сервисов для работы MVC
             services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
             services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
+            services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

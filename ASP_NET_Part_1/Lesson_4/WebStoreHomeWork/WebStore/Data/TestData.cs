@@ -23,12 +23,20 @@ namespace WebStore.Data
                 new Microcontroller{ Id=1, Name="Intel 80186", ImageUrl="/img/intel80186.jpg" },
                 new Microcontroller{ Id=2, Name="Intel 8086", ImageUrl="/img/intel8086.jpg" }
             };
+
+            Categories = new List<Category>
+            {
+                new Category{ Id = 0, Name = "Microcontrollers", TotalProductsCount = Microcontrollers.Count },
+                new Category{ Id = 1, Name = "RAM", TotalProductsCount = 0 },
+                new Category{ Id = 2, Name = "Transistors", TotalProductsCount = 0 }
+            };
         }
 
 
         public static List<MCDescription> MCDetailedDescriptions;
         public static List<Microcontroller> Microcontrollers;
-        
+        public static List<Category> Categories;
+
         static string[] str1 =
             {
                 "Тактовая частота: от 500 до 740 кГц",
