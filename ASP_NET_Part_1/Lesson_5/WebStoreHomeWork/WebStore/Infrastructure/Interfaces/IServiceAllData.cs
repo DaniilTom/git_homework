@@ -9,12 +9,8 @@ namespace WebStore.Infrastructure.Interfaces
     /// <summary>
     /// Служит для объединения данных о микроконтроллерах, их описаний и категорий товаров
     /// </summary>
-    public interface IServiceAllData
+    public interface IServiceAllData : IServiceCategoryData, IServiceMicrocontrollerData
     {
-        IEnumerable<Microcontroller> Microcontrollers { get; }
 
-        IEnumerable<MCDescription> DetailedDescription { get; }
-
-        IEnumerable<Category> GetCategories { get; }
     }
 }

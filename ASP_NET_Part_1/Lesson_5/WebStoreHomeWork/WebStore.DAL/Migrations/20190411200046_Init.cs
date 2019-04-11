@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebStore.DAL.Migrations
 {
-    public partial class WebStoreContext : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,8 @@ namespace WebStore.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    TotalProductsCount = table.Column<int>(nullable: false)
+                    TotalProductsCount = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,12 +46,14 @@ namespace WebStore.DAL.Migrations
                 name: "MCDescriptions",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ProductId = table.Column<int>(nullable: false),
                     DetailedDesription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MCDescriptions", x => x.ProductId);
+                    table.PrimaryKey("PK_MCDescriptions", x => x.Id);
                     table.ForeignKey(
                         name: "FK_MCDescriptions_Microcontrollers_ProductId",
                         column: x => x.ProductId,
@@ -59,6 +61,11 @@ namespace WebStore.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MCDescriptions_ProductId",
+                table: "MCDescriptions",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Microcontrollers_CategoryId",

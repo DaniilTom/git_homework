@@ -9,8 +9,8 @@ using WebStore.DAL.Context;
 namespace WebStore.DAL.Migrations
 {
     [DbContext(typeof(WebStoreContext))]
-    [Migration("20190411185037_WebStoreContext")]
-    partial class WebStoreContext
+    [Migration("20190411200046_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,11 +37,17 @@ namespace WebStore.DAL.Migrations
 
             modelBuilder.Entity("WebStore.Domain.Implementations.MCDescription", b =>
                 {
-                    b.Property<int>("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DetailedDesription");
 
-                    b.HasKey("ProductId");
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("MCDescriptions");
                 });

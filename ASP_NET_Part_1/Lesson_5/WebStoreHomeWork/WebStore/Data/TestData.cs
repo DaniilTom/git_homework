@@ -19,9 +19,9 @@ namespace WebStore.Data
 
             Microcontrollers = new List<Microcontroller>
             {
-                new Microcontroller{ Id=0, Name="Intel 4004", ImageUrl="/img/intel4004.jpg" },
-                new Microcontroller{ Id=1, Name="Intel 80186", ImageUrl="/img/intel80186.jpg" },
-                new Microcontroller{ Id=2, Name="Intel 8086", ImageUrl="/img/intel8086.jpg" }
+                new Microcontroller{ Id=0, Name="Intel 4004", ImageUrl="/img/intel4004.jpg", CategoryId = 0},
+                new Microcontroller{ Id=1, Name="Intel 80186", ImageUrl="/img/intel80186.jpg", CategoryId = 0},
+                new Microcontroller{ Id=2, Name="Intel 8086", ImageUrl="/img/intel8086.jpg", CategoryId = 0}
             };
 
             Categories = new List<Category>

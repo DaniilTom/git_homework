@@ -35,11 +35,17 @@ namespace WebStore.DAL.Migrations
 
             modelBuilder.Entity("WebStore.Domain.Implementations.MCDescription", b =>
                 {
-                    b.Property<int>("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DetailedDesription");
 
-                    b.HasKey("ProductId");
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("MCDescriptions");
                 });

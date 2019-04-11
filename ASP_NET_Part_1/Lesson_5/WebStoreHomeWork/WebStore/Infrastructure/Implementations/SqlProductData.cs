@@ -21,6 +21,26 @@ namespace WebStore.Infrastructure.Implementations
 
         public IEnumerable<MCDescription> DetailedDescription => _db.MCDescriptions;
 
-        public IEnumerable<Category> GetCategories => _db.Categories;
+        public IEnumerable<Category> GetCategories() => _db.Categories;
+
+        public void AddNew(Microcontroller employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Microcontroller GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -26,12 +26,14 @@ namespace WebStore
         {
             services.AddMvc(); // добавляет сервисов для работы MVC
             services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
-            services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
-            services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
+            //services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
+            //services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
+            services.AddSingleton<IServiceMicrocontrollerData, SqlProductData>();
+            services.AddSingleton<IServiceCategoryData, SqlProductData>();
 
             services.AddSingleton<IServiceAllData, SqlProductData>();
-            services.AddDbContext<WebStoreContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<WebStoreDBInitializer>();
+            services.AddDbContext<WebStoreContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
+            services.AddTransient<WebStoreDBInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

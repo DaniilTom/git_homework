@@ -25,6 +25,17 @@ namespace WebStore.Data
 
             using (var transaction = _db.Database.BeginTransaction())
             {
+                _db.Categories.AddRange(TestData.Categories);
+
+                //_db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] ON");
+                _db.SaveChanges();
+                //_db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] OFF");
+
+                transaction.Commit();
+            }
+
+            using (var transaction = _db.Database.BeginTransaction())
+            {
                 _db.Microcontrollers.AddRange(TestData.Microcontrollers);
 
                 _db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Microcontrollers] ON");
@@ -33,17 +44,7 @@ namespace WebStore.Data
 
                 transaction.Commit();
             }
-
-            using (var transaction = _db.Database.BeginTransaction())
-            {
-                _db.Categories.AddRange(TestData.Categories);
-
-                _db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] ON");
-                _db.SaveChanges();
-                _db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] OFF");
-
-                transaction.Commit();
-            }
+            
 
             using (var transaction = _db.Database.BeginTransaction())
             {
