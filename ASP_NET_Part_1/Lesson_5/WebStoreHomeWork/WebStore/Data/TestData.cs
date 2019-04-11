@@ -10,7 +10,7 @@ namespace WebStore.Data
     {
         static TestData()
         {
-            MCDetailedDescriptions = new List<MCDescription>
+            MCDescriptions = new List<MCDescription>
             {
                 new MCDescription{ ProductId = 0, DetailedDesriptionList = str1 },
                 new MCDescription{ ProductId = 1, DetailedDesriptionList = str2 },
@@ -33,7 +33,7 @@ namespace WebStore.Data
         }
 
 
-        public static List<MCDescription> MCDetailedDescriptions;
+        public static List<MCDescription> MCDescriptions;
         public static List<Microcontroller> Microcontrollers;
         public static List<Category> Categories;
 

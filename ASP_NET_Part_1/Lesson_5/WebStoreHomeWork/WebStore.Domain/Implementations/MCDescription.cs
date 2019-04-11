@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,9 +15,25 @@ namespace WebStore.Domain.Implementations
     {
         [Key]
         public int ProductId { get; set; }
-        public string[] DetailedDesriptionList { get; set; }
+
+        [NotMapped]
+        public string[] DetailedDesriptionList {
+            get => DetailedDesription.Split(';');
+            set => DetailedDesription = String.Join(";", value);
+        }
+
+        private string DetailedDesription { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         public virtual Microcontroller Microcontroller { get; set; }
+
+        // нужен для приватного св-ва DetailedDescription
+        public class MCDescriptionConfiguration : IEntityTypeConfiguration<MCDescription>
+        {
+            public void Configure(EntityTypeBuilder<MCDescription> builder)
+            {
+                builder.Property(nameof(DetailedDesription));
+            }
+        }
     }
 }
