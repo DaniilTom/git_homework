@@ -12,23 +12,23 @@ namespace WebStore.Data
         {
             MCDescriptions = new List<MCDescription>
             {
-                new MCDescription{ ProductId = 0, DetailedDesriptionList = str1 },
-                new MCDescription{ ProductId = 1, DetailedDesriptionList = str2 },
-                new MCDescription{ ProductId = 2, DetailedDesriptionList = str3 }
+                new MCDescription{Id = 1, ProductId = 1, DetailedDesriptionList = str1 },
+                new MCDescription{Id = 2, ProductId = 2, DetailedDesriptionList = str2 },
+                new MCDescription{Id = 3, ProductId = 3, DetailedDesriptionList = str3 }
             };
 
             Microcontrollers = new List<Microcontroller>
             {
-                new Microcontroller{ Id=0, Name="Intel 4004", ImageUrl="/img/intel4004.jpg", CategoryId = 0},
-                new Microcontroller{ Id=1, Name="Intel 80186", ImageUrl="/img/intel80186.jpg", CategoryId = 0},
-                new Microcontroller{ Id=2, Name="Intel 8086", ImageUrl="/img/intel8086.jpg", CategoryId = 0}
+                new Microcontroller{ Id=1, Name="Intel 4004", ImageUrl="/img/intel4004.jpg", CategoryId = 1},
+                new Microcontroller{ Id=2, Name="Intel 80186", ImageUrl="/img/intel80186.jpg", CategoryId = 1},
+                new Microcontroller{ Id=3, Name="Intel 8086", ImageUrl="/img/intel8086.jpg", CategoryId = 1}
             };
 
             Categories = new List<Category>
             {
-                new Category{ Id = 0, Name = "Microcontrollers", TotalProductsCount = Microcontrollers.Count },
-                new Category{ Id = 1, Name = "RAM", TotalProductsCount = 0 },
-                new Category{ Id = 2, Name = "Transistors", TotalProductsCount = 0 }
+                new Category{ Id = 1, Name = "Microcontrollers", TotalProductsCount = Microcontrollers.Count },
+                new Category{ Id = 2, Name = "RAM", TotalProductsCount = 0 },
+                new Category{ Id = 3, Name = "Transistors", TotalProductsCount = 0 }
             };
         }
 

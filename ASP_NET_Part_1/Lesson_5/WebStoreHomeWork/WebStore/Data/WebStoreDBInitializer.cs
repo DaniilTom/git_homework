@@ -27,9 +27,9 @@ namespace WebStore.Data
             {
                 _db.Categories.AddRange(TestData.Categories);
 
-                //_db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] ON");
+                _db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] ON");
                 _db.SaveChanges();
-                //_db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] OFF");
+                _db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] OFF");
 
                 transaction.Commit();
             }
