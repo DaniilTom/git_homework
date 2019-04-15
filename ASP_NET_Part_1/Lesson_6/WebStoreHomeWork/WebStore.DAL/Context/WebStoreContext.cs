@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebStore.Domain;
 using WebStore.Domain.Implementations;
 
 namespace WebStore.DAL.Context
 {
-    public class WebStoreContext : DbContext
+    public class WebStoreContext : IdentityDbContext<User>
     {
         public DbSet<Microcontroller> Microcontrollers { get; set; }
         public DbSet<Category> Categories { get; set; }

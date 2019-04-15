@@ -12,6 +12,8 @@ using WebStore.Infrastructure.Implementations;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
+using Microsoft.AspNetCore.Identity;
+using WebStore.Domain;
 
 namespace WebStore
 {
@@ -28,12 +30,41 @@ namespace WebStore
             services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
             //services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
             //services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
-            services.AddSingleton<IServiceMicrocontrollerData, SqlProductData>();
-            services.AddSingleton<IServiceCategoryData, SqlProductData>();
+            services.AddScoped<IServiceMicrocontrollerData, SqlProductData>();
+            services.AddScoped<IServiceCategoryData, SqlProductData>();
 
-            services.AddSingleton<IServiceAllData, SqlProductData>();
-            services.AddDbContext<WebStoreContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
+            services.AddScoped<IServiceAllData, SqlProductData>();
+            services.AddDbContext<WebStoreContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<WebStoreDBInitializer>();
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<WebStoreContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(cfg =>
+            {
+                cfg.Password.RequiredLength = 3;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+
+                cfg.Lockout.MaxFailedAccessAttempts = 10;
+                cfg.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                cfg.Lockout.AllowedForNewUsers = true;
+            });
+
+            services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.Cookie.HttpOnly = true;
+                cfg.Cookie.Expiration = TimeSpan.FromDays(150);
+                cfg.Cookie.MaxAge = TimeSpan.FromDays(150);
+
+                cfg.LoginPath = "/Account/Login";   // незарегистрированный пользователь требует доступ к особому ресурсу
+                cfg.LogoutPath = "/Account/Logout";  // пользователь вышел
+                cfg.AccessDeniedPath = "/Account/AccessDenied"; //если доступ запрещен
+
+                cfg.SlidingExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

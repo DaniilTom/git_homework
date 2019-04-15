@@ -145,3 +145,15 @@ input[type="button"][value="Купить"]
 .cat_menu > li{
     display: inline-block;
 }
+
+ul.top-menu {
+    display: inline-block;
+    padding: 0;
+    float: right;
+}
+
+ul.top-menu > li {
+    float: left;
+    list-style: none;
+    margin: 0 10px;
+}
