@@ -8,8 +8,11 @@
     {
         <li>@User.Identity.Name</li>
         <li>Корзина</li>
+        <li><a asp-controller="Account" asp-action="Logout">Выход</a></li>
     }
-
-    <li>Регистрация</li>
-    <li>Вход</li>
+    else
+    {
+        <li><a asp-controller="Account" asp-action="Register">Регистрация</a></li>
+        <li><a asp-controller="Account" asp-action="Login">Вход</a></li>
+    }
 </ul>

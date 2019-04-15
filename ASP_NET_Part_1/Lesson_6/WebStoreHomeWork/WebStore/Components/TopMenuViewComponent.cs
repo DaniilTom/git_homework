@@ -8,6 +8,11 @@ namespace WebStore.Components
 {
     public class TopMenuViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke() => View();
+        public IViewComponentResult Invoke()
+        {
+            //if (User.Identity.IsAuthenticated)
+                return View();
+            //else return Content("NO.");
+        }
     }
 }

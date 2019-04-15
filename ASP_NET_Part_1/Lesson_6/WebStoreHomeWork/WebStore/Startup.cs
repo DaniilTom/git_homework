@@ -79,6 +79,8 @@ namespace WebStore
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             //app.Use(async(context, next) =>
             //{
             //    await context.Response.WriteAsync("<script>alert(\"Hey\");</script>");

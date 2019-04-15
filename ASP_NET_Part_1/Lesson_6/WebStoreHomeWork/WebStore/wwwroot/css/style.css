@@ -157,3 +157,7 @@ ul.top-menu > li {
     list-style: none;
     margin: 0 10px;
 }
+
+.form-group > label{
+    display: block;
+}

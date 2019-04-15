@@ -14,6 +14,12 @@ namespace WebStore.controllers
         private readonly UserManager<User> _UM;
         private readonly SignInManager<User> _SM;
 
+        public AccountController(UserManager<User> UM, SignInManager<User> SM)
+        {
+            _UM = UM;
+            _SM = SM;
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -33,6 +39,36 @@ namespace WebStore.controllers
 
             ModelState.AddModelError("", "Имя пользователя или пароль неверны");
             return View(login);
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid) return View();
+
+            var new_user = new User { UserName = model.UserName };
+
+            var create_result = await _UM.CreateAsync(new_user, model.Password);
+            if(create_result.Succeeded)
+            {
+                await _SM.SignInAsync(new_user, false);
+
+                return RedirectToAction("Index", "Home");
+            }
+            foreach (var error in create_result.Errors)
+                ModelState.AddModelError("",error.Description);
+            return View(model);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _SM.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
