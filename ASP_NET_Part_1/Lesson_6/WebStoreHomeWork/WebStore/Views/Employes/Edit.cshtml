@@ -5,9 +5,30 @@
 }
 
 <form action="Edit" method="post">
-    <span>Имя: </span><input asp-for="FirstName" />
-    <span>Фамилия: </span><input asp-for="SurName" />
-    <span>Возраст: </span><input asp-for="Age" />
-    <input asp-for="Id" hidden="hidden"/>
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-group">
+        <label asp-for="FirstName">Имя:</label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <br />
+    <label asp-for="SurName">Фамилия: </label>
+    <input asp-for="SurName" />
+    <span asp-validation-for="SurName"></span>
+    <br />
+    <label asp-for="Age">Возраст: </label>
+    <input asp-for="Age" />
+    <span asp-validation-for="Age"></span>
+    <br />
+    <input asp-for="Id" hidden="hidden" />
     <input type="submit" />
 </form>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery-validate/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

@@ -64,6 +64,8 @@ namespace WebStore.controllers
         [HttpPost]
         public IActionResult Edit(Employee employee)
         {
+            if (!ModelState.IsValid)
+                return View(employee);
 
             if (employee.Id == 0)
             {
