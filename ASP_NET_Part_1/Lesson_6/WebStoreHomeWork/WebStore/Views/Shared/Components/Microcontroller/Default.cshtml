@@ -5,15 +5,15 @@
     @foreach (var view in Model)
     {
         <li>
-            <img src="@view.Microcontroller.ImageUrl" alt="@view.Microcontroller.Name" width="100">
+            <a href="@view.Microcontroller.ImageUrl" target="_blank"><img src="@view.Microcontroller.ImageUrl" alt="@view.Microcontroller.Name" width="100"></a>
             <br>
             <a href="intel4004.html">@view.Microcontroller.Name</a>
             <ul>
-                @foreach(var d in view.DetailedDescription.DetailedDesriptionList)
+                @foreach (var d in view.DetailedDescription.DetailedDesriptionList)
                 {
                     <li>@d</li>
                 }
             </ul>
-        </li>
+</li>
     }
 </ul>

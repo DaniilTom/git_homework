@@ -43,16 +43,6 @@ textarea {
     font-size: 1.01em;
 }
 
-a img {
-    border: 5px dotted darkviolet;
-    float: left;
-}
-
-/* при наведении рамки делаются прозрачными*/
-a img:hover {
-    border-color: transparent;
-}
-
 .menu li:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -113,10 +103,6 @@ form input[type="email"]:focus {
     color: darkcyan;
 }
 
-form input[type="text"] {
-    text-transform: capitalize;
-}
-
 article[class="product"] p:first-letter {
     font-family: Courier;
     font-size: 20px;
@@ -142,7 +128,6 @@ input[type="button"][value="Купить"]
     width: 80px;
     float: right;
 }
-
 .cat_menu > li{
     display: inline-block;
 }
