@@ -25,8 +25,8 @@
             <td>
                 <a asp-action="Details" asp-route-id="@emp.Id">Детали</a> | 
                 <a asp-action="Dossier" asp-route-id="@emp.Id">Досье</a> | 
-                <a asp-action="Edit" asp-route-id="@emp.Id">Редактировать</a> | 
-                <a asp-action="Delete" asp-route-id="@emp.Id">Удалить</a>
+                <a asp-action="Edit" asp-route-id="@emp.Id"><i class="fa fa-edit text-edit"></i></a> | 
+                <a asp-action="Delete" asp-route-id="@emp.Id"><i class="fa fa-times text-danger"></i></a>
             </td>
         </tr>
         }
