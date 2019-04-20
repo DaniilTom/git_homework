@@ -24,9 +24,9 @@ namespace WebStore.Data
 
         public async Task InitializeAsync()
         {
-            await InitRoleAsync();
-
             await _db.Database.MigrateAsync();
+
+            await InitRoleAsync();
 
             if (await _db.Microcontrollers.AnyAsync())
                 return;
