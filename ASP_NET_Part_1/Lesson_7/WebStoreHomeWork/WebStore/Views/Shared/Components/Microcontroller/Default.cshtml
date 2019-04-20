@@ -7,7 +7,8 @@
         <li>
             <a href="@view.Microcontroller.ImageUrl" target="_blank"><img src="@view.Microcontroller.ImageUrl" alt="@view.Microcontroller.Name" width="100"></a>
             <br>
-            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@view.Microcontroller.Id">@view.Microcontroller.Name</a>
+            <h5>@view.Microcontroller.Name</h5>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@view.Microcontroller.Id">Добавить в корзину</a>
             <ul>
                 @foreach(var d in view.DetailedDescription.DetailedDesriptionList)
                 {

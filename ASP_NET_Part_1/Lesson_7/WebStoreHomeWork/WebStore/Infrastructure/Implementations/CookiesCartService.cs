@@ -70,7 +70,7 @@ namespace WebStore.Infrastructure.Implementations
             {
                 cart.Items.Add(new ProductContainer
                     {
-                        Product = (ProductBase)product,
+                        Product = (ProductBase)product, //приведение к абст.кл. т.к. нельзя сериализовать интерфейсы
                         Count = 1
                     });
             }
