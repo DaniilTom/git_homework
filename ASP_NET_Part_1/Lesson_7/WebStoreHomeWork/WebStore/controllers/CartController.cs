@@ -39,5 +39,19 @@ namespace WebStore.controllers
             _CartService.AddToCart(product);
             return RedirectToAction("Cart");
         }
+
+        public IActionResult DecrementProduct(int id)
+        {
+            IProduct product = _DataBase.Microcontrollers.FirstOrDefault(m => m.Id == id);
+            _CartService.DecrementProduct(product);
+            return RedirectToAction("Cart");
+        }
+
+        public IActionResult RemoveFromCart(int id)
+        {
+            IProduct product = _DataBase.Microcontrollers.FirstOrDefault(m => m.Id == id);
+            _CartService.RemoveFromCart(product);
+            return RedirectToAction("Cart");
+        }
     }
 }
