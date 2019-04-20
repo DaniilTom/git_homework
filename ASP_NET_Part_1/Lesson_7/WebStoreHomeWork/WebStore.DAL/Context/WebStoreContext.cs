@@ -18,7 +18,6 @@ namespace WebStore.DAL.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration<MCDescription.MCDescriptionConfiguration>(new MCDescription.MCDescriptionConfiguration());
             modelBuilder.ApplyConfiguration<MCDescription>(new MCDescription.MCDescriptionConfiguration());
             base.OnModelCreating(modelBuilder);
         }

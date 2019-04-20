@@ -7,5 +7,9 @@ namespace WebStore.Domain
 {
     public class User : IdentityUser
     {
+        public const string AdminRoleName = "Admin";
+        public const string DefaultAdminPassword = "Qwer";
+
+        public const string UserRoleName = "User";
     }
 }

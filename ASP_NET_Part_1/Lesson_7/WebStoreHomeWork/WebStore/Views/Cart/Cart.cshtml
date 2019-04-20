@@ -1,0 +1,31 @@
+﻿@model WebStore.Models.Cart
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h3>Корзина</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th></th>
+            <th>Наименование</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var prodCont in Model.Items)
+        {
+            <tr>
+                <td>@prodCont.Product.Id</td>
+                <td><img src="@prodCont.Product.ImageUrl" alt="@prodCont.Product.Name" width="50"/></td>
+                <td>@prodCont.Product.Name</td>
+                <td>@prodCont.Count</td>
+                <td>@((prodCont.Count * prodCont.Product.Price).ToString("C"))</td>
+            </tr>
+        }
+    </tbody>
+</table>

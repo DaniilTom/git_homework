@@ -22,5 +22,7 @@ namespace WebStore.Domain.Implementations
 
         [ForeignKey(nameof(CategoryId))]
         public virtual Category Category { get; set; }
+
+        public int Price { get; set; }
     }
 }

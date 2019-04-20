@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Models;
 using WebStore.Infrastructure.Interfaces;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebStore.controllers
 {
@@ -49,12 +50,14 @@ namespace WebStore.controllers
             return View(employe);
         }
 
+        [Authorize(Roles = Domain.User.AdminRoleName)]
         public IActionResult Edit(int Id)
         {
             if (Id != 0) return View(_EmployeesData.Employees.First(emp => emp.Id == Id));
             else return View();
         }
 
+        [Authorize(Roles = Domain.User.AdminRoleName)]
         public IActionResult Delete(int id)
         {
             _EmployeesData.Delete(id);
@@ -62,6 +65,7 @@ namespace WebStore.controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Domain.User.AdminRoleName)]
         public IActionResult Edit(Employee employee)
         {
             if (!ModelState.IsValid && employee.Id != 0)

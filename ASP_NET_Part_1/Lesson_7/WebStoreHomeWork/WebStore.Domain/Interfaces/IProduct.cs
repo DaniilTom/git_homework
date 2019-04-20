@@ -10,5 +10,6 @@ namespace WebStore.Domain.Interfaces
         string Name { get; set; }
         int CategoryId { get; set; }
         string ImageUrl { get; set; }
+        int Price { get; set; }
     }
 }
