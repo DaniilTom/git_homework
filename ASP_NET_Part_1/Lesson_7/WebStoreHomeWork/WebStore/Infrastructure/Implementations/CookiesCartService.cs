@@ -70,7 +70,7 @@ namespace WebStore.Infrastructure.Implementations
             {
                 cart.Items.Add(new ProductContainer
                     {
-                        Product = (Microcontroller)product,
+                        Product = (ProductBase)product,
                         Count = 1
                     });
             }

@@ -10,7 +10,7 @@ namespace WebStore.Models
     public class ProductContainer
     {
         //public int Id { get; set; }
-        public Microcontroller Product { get; set; }
+        public ProductBase Product { get; set; }
         public int Count { get; set; }
     }
 
