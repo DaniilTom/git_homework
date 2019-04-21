@@ -7,6 +7,10 @@
     @if (User.Identity.IsAuthenticated)
     {
         <li>@User.Identity.Name</li>
+        @if(User.IsInRole(WebStore.Domain.User.AdminRoleName))
+        {
+            <li><a asp-area="Admin" asp-controller="Tools" asp-action="Index">Администрирование</a></li>
+        }
         <li><a asp-controller="Cart" asp-action="Cart">Корзина</a></li>
         <li><a asp-controller="Account" asp-action="Logout">Выход</a></li>
     }
