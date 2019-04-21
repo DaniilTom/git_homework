@@ -1,0 +1,13 @@
+﻿@model IEnumerable<WebStore.Domain.Implementations.Microcontroller>
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+@await  Component.InvokeAsync("SideMenu")
+<article>
+    <h3>Товары:</h3>
+
+    @await Component.InvokeAsync("Microcontroller")
+
+</article>
+
