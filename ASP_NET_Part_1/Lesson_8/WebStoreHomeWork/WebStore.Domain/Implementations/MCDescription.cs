@@ -20,7 +20,7 @@ namespace WebStore.Domain.Implementations
 
         [NotMapped]
         public string[] DetailedDesriptionList {
-            get => DetailedDesription.Split(';');
+            get => DetailedDesription.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
             set => DetailedDesription = String.Join(";", value);
         }
 
