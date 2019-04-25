@@ -14,6 +14,9 @@ namespace WebStore.DAL.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<MCDescription> MCDescriptions { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
         public WebStoreContext(DbContextOptions<WebStoreContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
