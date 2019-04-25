@@ -29,8 +29,8 @@ namespace WebStore.Domain.Implementations
 
         // т.к. добавлено отношение в Order, колонка в OrderItem с указание на кортеж Order добавиться автоматически (OrderId)
 
-        public Order Order { get; set; }
-        public ProductBase Product { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual ProductBase Product { get; set; }
 
         //[ForeignKey(nameof(OrderId))]
         //public virtual Order Order { get; set; }
