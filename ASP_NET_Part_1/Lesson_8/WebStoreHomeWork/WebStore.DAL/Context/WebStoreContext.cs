@@ -10,7 +10,7 @@ namespace WebStore.DAL.Context
 {
     public class WebStoreContext : IdentityDbContext<User>
     {
-        public DbSet<Microcontroller> Microcontrollers { get; set; }
+        public DbSet<ProductBase> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<MCDescription> MCDescriptions { get; set; }
 

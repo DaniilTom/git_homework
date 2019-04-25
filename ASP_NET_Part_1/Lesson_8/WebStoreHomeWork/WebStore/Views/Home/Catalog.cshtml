@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebStore.Domain.Implementations.Microcontroller>
+﻿@model IEnumerable<WebStore.Domain.Implementations.ProductBase>
 @{
     ViewData["Title"] = "Catalog";
 }
@@ -7,7 +7,7 @@
 <article>
     <h3>Товары:</h3>
 
-    @await Component.InvokeAsync("Microcontroller")
+    @await Component.InvokeAsync("ProductBase")
 
 </article>
 

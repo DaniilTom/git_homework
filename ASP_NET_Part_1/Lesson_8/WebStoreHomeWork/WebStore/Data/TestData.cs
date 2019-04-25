@@ -17,16 +17,16 @@ namespace WebStore.Data
                 new MCDescription{Id = 3, ProductId = 3, DetailedDesriptionList = str3 }
             };
 
-            Microcontrollers = new List<Microcontroller>
+            Products = new List<ProductBase>
             {
-                new Microcontroller{ Id=1, Name="Intel 4004", ImageUrl="/img/intel4004.jpg", Price = 100, CategoryId = 1},
-                new Microcontroller{ Id=2, Name="Intel 80186", ImageUrl="/img/intel80186.jpg", Price = 150, CategoryId = 1},
-                new Microcontroller{ Id=3, Name="Intel 8086", ImageUrl="/img/intel8086.jpg", Price = 200, CategoryId = 1}
+                new ProductBase{ Id=1, Name="Intel 4004", ImageUrl="/img/intel4004.jpg", Price = 100, CategoryId = 1},
+                new ProductBase{ Id=2, Name="Intel 80186", ImageUrl="/img/intel80186.jpg", Price = 150, CategoryId = 1},
+                new ProductBase{ Id=3, Name="Intel 8086", ImageUrl="/img/intel8086.jpg", Price = 200, CategoryId = 1}
             };
 
             Categories = new List<Category>
             {
-                new Category{ Id = 1, Name = "Microcontrollers", TotalProductsCount = Microcontrollers.Count },
+                new Category{ Id = 1, Name = "Microcontroller", TotalProductsCount = Products.Count },
                 new Category{ Id = 2, Name = "RAM", TotalProductsCount = 0 },
                 new Category{ Id = 3, Name = "Transistors", TotalProductsCount = 0 }
             };
@@ -34,7 +34,7 @@ namespace WebStore.Data
 
 
         public static List<MCDescription> MCDescriptions;
-        public static List<Microcontroller> Microcontrollers;
+        public static List<ProductBase> Products;
         public static List<Category> Categories;
 
         static string[] str1 =

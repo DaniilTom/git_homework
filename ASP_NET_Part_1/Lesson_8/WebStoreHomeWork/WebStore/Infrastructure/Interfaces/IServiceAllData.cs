@@ -11,6 +11,8 @@ namespace WebStore.Infrastructure.Interfaces
     /// </summary>
     public interface IServiceAllData : IServiceCategoryData, IServiceMicrocontrollerData
     {
+        IEnumerable<Order> Orders();
 
+        IEnumerable<OrderItem> OrderItems();
     }
 }

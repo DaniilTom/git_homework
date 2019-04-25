@@ -31,10 +31,10 @@ namespace WebStore.Areas.Admin.Controllers
         public IActionResult StoreHouse()
         {
             // сначала в представление передавался контекст БД (т.е. _db)
-            // но при вызове _db.Microcontroller.Category.Name
+            // но при вызове _db.ProductBase.Category.Name
             // выбрасывалось NullReferenceExecption
 
-            var storeHouseVM = from mic in _db.Microcontrollers
+            var storeHouseVM = from mic in _db.Products
                                from cat in _db.Categories
                                where mic.CategoryId == cat.Id
                                select new StoreHouseViewModel { Product = mic, Category = cat};
@@ -48,7 +48,7 @@ namespace WebStore.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult CreateNew(string name, int price, string catId)
         {
-            _db.Microcontrollers.Add(new Domain.Implementations.Microcontroller { Name = name, Price = price, CategoryId = int.Parse(catId)});
+            _db.Products.Add(new Domain.Implementations.ProductBase { Name = name, Price = price, CategoryId = int.Parse(catId)});
 
             _db.SaveChanges();
 
@@ -78,10 +78,15 @@ namespace WebStore.Areas.Admin.Controllers
             {
                 await file.CopyToAsync(fileStream);
             }
-            _db.Microcontrollers.First(m => m.Id == id).ImageUrl = "/img/" + file.FileName;
+            _db.Products.First(m => m.Id == id).ImageUrl = "/img/" + file.FileName;
             _db.SaveChanges();
 
             return RedirectToAction("StoreHouse");
+        }
+
+        public IActionResult Orders()
+        {
+            return View(_db.Orders.AsEnumerable());
         }
     }
 }

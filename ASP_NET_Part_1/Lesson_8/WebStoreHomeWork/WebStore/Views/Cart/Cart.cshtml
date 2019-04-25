@@ -21,7 +21,7 @@
         {
             <tr>
                 <td>@prodCont.Product.Id</td>
-                <td><img src="@prodCont.Product.ImageUrl" alt="@prodCont.Product.Name" width="100"/></td>
+                <td><img src="@prodCont.Product.ImageUrl" alt="@prodCont.Product.Name" width="100" /></td>
                 <td>@prodCont.Product.Name</td>
                 <td>
                     <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@prodCont.Product.Id">
@@ -40,3 +40,4 @@
         }
     </tbody>
 </table>
+<form><button asp-action="Checkout">Оформить заказ</button></form>

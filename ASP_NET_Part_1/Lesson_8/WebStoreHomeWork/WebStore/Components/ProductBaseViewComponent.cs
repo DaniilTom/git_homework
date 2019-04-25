@@ -8,13 +8,13 @@ using WebStore.ViewModel;
 
 namespace WebStore.Components
 {
-    public class MicrocontrollerViewComponent : ViewComponent
+    public class ProductBaseViewComponent : ViewComponent
     {
         private readonly IServiceMicrocontrollerData _MicrocontrollerData;
 
-        public MicrocontrollerViewComponent(IServiceMicrocontrollerData MicrocontrollerData)
+        public ProductBaseViewComponent(IServiceMicrocontrollerData ProductData)
         {
-            _MicrocontrollerData = MicrocontrollerData;
+            _MicrocontrollerData = ProductData;
         }
 
         public IViewComponentResult Invoke()
@@ -24,13 +24,13 @@ namespace WebStore.Components
 
         private IEnumerable<MicrocontrollerViewModel> GetProducts()
         {
-            var mc = _MicrocontrollerData.Microcontrollers;
+            var mc = _MicrocontrollerData.Products;
             var desc = _MicrocontrollerData.DetailedDescription;
 
             return from m in mc
                    from d in desc
                    where m.Id == d.ProductId
-                   select new MicrocontrollerViewModel {Microcontroller = m, DetailedDescription = d };
+                   select new MicrocontrollerViewModel {ProductBase = m, DetailedDescription = d };
         }
     }
 }

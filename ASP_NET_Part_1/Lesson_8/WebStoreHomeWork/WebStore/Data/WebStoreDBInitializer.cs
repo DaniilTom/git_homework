@@ -28,7 +28,9 @@ namespace WebStore.Data
 
             await InitRoleAsync();
 
-            if (await _db.Microcontrollers.AnyAsync())
+            var y = _db.Products.First();
+
+            if (await _db.Products.AnyAsync())
                 return;
 
             using (var transaction = await _db.Database.BeginTransactionAsync())
@@ -44,11 +46,11 @@ namespace WebStore.Data
 
             using (var transaction = await _db.Database.BeginTransactionAsync())
             {
-                await _db.Microcontrollers.AddRangeAsync(TestData.Microcontrollers);
+                await _db.Products.AddRangeAsync(TestData.Products);
 
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Microcontrollers] ON");
+                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
                 await _db.SaveChangesAsync();
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Microcontrollers] OFF");
+                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
 
                 transaction.Commit();
             }

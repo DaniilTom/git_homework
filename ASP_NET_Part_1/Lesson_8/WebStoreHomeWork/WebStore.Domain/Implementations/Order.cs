@@ -18,7 +18,7 @@ namespace WebStore.Domain.Implementations
 
         public int TotalPrice { get; set; }
 
-        public ICollection<OrderItem> Items { get; set; } // отношение один Order ко многим OrderItem
+        public virtual ICollection<OrderItem> Items { get; set; } // отношение один Order ко многим OrderItem
     }
 
     [Table("OrderItems")]
@@ -29,12 +29,16 @@ namespace WebStore.Domain.Implementations
 
         // т.к. добавлено отношение в Order, колонка в OrderItem с указание на кортеж Order добавиться автоматически (OrderId)
 
-        //public int OrderId { get; set; }
+        public Order Order { get; set; }
+        public ProductBase Product { get; set; }
 
-        //[ForeignKey(nameof(OrderId))]   // явное задание имени столбца внешнего ключа к таблице Order
-        //public virtual Order Order { get; set; } 
+        //[ForeignKey(nameof(OrderId))]
+        //public virtual Order Order { get; set; }
 
-        public ProductBase Product { get; set; } // неявное задание имени столбца внешнего ключа к таблице Order
+        //public int ProductId { get; set; }
+
+        //[ForeignKey(nameof(ProductId))]
+        //public virtual ProductBase Product { get; set; }
 
         public int Quantity { get; set; }
     }

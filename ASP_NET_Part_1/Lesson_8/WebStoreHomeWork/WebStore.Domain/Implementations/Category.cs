@@ -10,7 +10,6 @@ namespace WebStore.Domain.Implementations
     [Table("Categories")]
     public class Category : ICategory
     {
-
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 

@@ -10,12 +10,12 @@ namespace WebStore.Infrastructure.Implementations
 {
     public class MicrocontrollerDataService : IServiceMicrocontrollerData
     {
-        public IEnumerable<Microcontroller> Microcontrollers => TestData.Microcontrollers;
+        public IEnumerable<ProductBase> Products => TestData.Products;
 
         public IEnumerable<MCDescription> DetailedDescription => TestData.MCDescriptions;
 
         // все ниже пока не нужно
-        public void AddNew(Microcontroller employee)
+        public void AddNew(ProductBase employee)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace WebStore.Infrastructure.Implementations
             throw new NotImplementedException();
         }
 
-        public Microcontroller GetById(int id)
+        public ProductBase GetById(int id)
         {
             throw new NotImplementedException();
         }

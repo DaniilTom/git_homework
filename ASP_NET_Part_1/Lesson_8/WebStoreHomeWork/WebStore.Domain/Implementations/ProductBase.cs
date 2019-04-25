@@ -7,6 +7,7 @@ using WebStore.Domain.Interfaces;
 
 namespace WebStore.Domain.Implementations
 {
+    [Table("Products")]
     public class ProductBase : IProduct
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

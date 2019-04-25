@@ -13,9 +13,9 @@ namespace WebStore.controllers
     {
         private readonly IServiceMicrocontrollerData _MicrocontrollerData;
 
-        public HomeController(IServiceMicrocontrollerData MicrocontrollerData)
+        public HomeController(IServiceMicrocontrollerData ProductData)
         {
-            _MicrocontrollerData = MicrocontrollerData;
+            _MicrocontrollerData = ProductData;
         }
 
         public IActionResult Index()
@@ -31,7 +31,7 @@ namespace WebStore.controllers
 
         public IActionResult Catalog()
         {
-            return View(_MicrocontrollerData.Microcontrollers);
+            return View(_MicrocontrollerData.Products);
         }
     }
 }

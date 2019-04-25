@@ -8,7 +8,7 @@ namespace WebStore.ViewModel
 {
     public class MicrocontrollerViewModel
     {
-        public Microcontroller Microcontroller { get; set; }
+        public ProductBase ProductBase { get; set; }
         public MCDescription DetailedDescription { get; set; }
     }
 }

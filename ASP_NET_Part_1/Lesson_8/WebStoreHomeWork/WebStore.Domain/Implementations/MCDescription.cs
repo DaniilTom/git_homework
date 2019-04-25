@@ -27,7 +27,7 @@ namespace WebStore.Domain.Implementations
         private string DetailedDesription { get; set; }
 
         [ForeignKey(nameof(ProductId))]
-        public virtual Microcontroller Microcontroller { get; set; }
+        public virtual ProductBase Product { get; set; }
 
         // нужен для приватного св-ва DetailedDescription
         public class MCDescriptionConfiguration : IEntityTypeConfiguration<MCDescription>

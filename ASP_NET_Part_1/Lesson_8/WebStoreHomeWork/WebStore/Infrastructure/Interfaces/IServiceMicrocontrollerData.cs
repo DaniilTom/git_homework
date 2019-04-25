@@ -10,13 +10,13 @@ namespace WebStore.Infrastructure.Interfaces
     // какой-нибудь один интерфейс
     public interface IServiceMicrocontrollerData
     {
-        IEnumerable<Microcontroller> Microcontrollers { get; }
+        IEnumerable<ProductBase> Products { get; }
 
         IEnumerable<MCDescription> DetailedDescription { get; }
 
-        Microcontroller GetById(int id);
+        ProductBase GetById(int id);
 
-        void AddNew(Microcontroller employee);
+        void AddNew(ProductBase employee);
 
         void Delete(int id);
 

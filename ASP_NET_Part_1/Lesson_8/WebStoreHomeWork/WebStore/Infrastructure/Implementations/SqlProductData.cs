@@ -17,13 +17,17 @@ namespace WebStore.Infrastructure.Implementations
             _db = db;
         }
 
-        public IEnumerable<Microcontroller> Microcontrollers => _db.Microcontrollers;
+        public IEnumerable<ProductBase> Products => _db.Products;
 
         public IEnumerable<MCDescription> DetailedDescription => _db.MCDescriptions;
 
         public IEnumerable<Category> GetCategories() => _db.Categories;
 
-        public void AddNew(Microcontroller employee)
+        public IEnumerable<Order> Orders() => _db.Orders;
+
+        public IEnumerable<OrderItem> OrderItems() => _db.OrderItems;
+
+        public void AddNew(ProductBase employee)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +37,7 @@ namespace WebStore.Infrastructure.Implementations
             throw new NotImplementedException();
         }
 
-        public Microcontroller GetById(int id)
+        public ProductBase GetById(int id)
         {
             throw new NotImplementedException();
         }
