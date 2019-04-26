@@ -76,7 +76,8 @@ namespace WebStore.controllers
                 var order_item = new OrderItem
                 {
                     Order = order,
-                    Product = item.Product,
+                    Product = _db.Products.FirstOrDefault(p => p.Id == item.Product.Id),
+                    //Product = item.Product,
                     Quantity = item.Count
                 };
                 _db.OrderItems.Add(order_item);

@@ -10,6 +10,8 @@ using WebStore.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using WebStore.Domain.Implementations;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStore.Areas.Admin.Controllers
 {
@@ -86,7 +88,8 @@ namespace WebStore.Areas.Admin.Controllers
 
         public IActionResult Orders()
         {
-            return View(_db.Orders.AsEnumerable());
+            List<Order> orders = _db.Orders.Include(o => o.Items).ThenInclude(i => i.Product).ToList();
+            return View(_db.Orders.Select(o => o).AsEnumerable());
         }
     }
 }

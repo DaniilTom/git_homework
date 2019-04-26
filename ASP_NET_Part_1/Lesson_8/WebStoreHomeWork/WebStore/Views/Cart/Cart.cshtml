@@ -40,4 +40,9 @@
         }
     </tbody>
 </table>
-<form><button asp-action="Checkout">Оформить заказ</button></form>
+@if (Model.Items.Count == 0)
+{
+    <form><button asp-action="Checkout" disabled>Оформить заказ</button></form>
+}
+else
+{<form><button asp-action="Checkout">Оформить заказ</button></form>}
