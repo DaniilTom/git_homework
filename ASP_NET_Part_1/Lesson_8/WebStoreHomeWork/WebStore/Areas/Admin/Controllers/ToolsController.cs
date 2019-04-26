@@ -88,8 +88,7 @@ namespace WebStore.Areas.Admin.Controllers
 
         public IActionResult Orders()
         {
-            List<Order> orders = _db.Orders.Include(o => o.Items).ThenInclude(i => i.Product).ToList();
-            return View(_db.Orders.Select(o => o).AsEnumerable());
+            return View(_db.Orders.Include(o => o.Items).ThenInclude(i => i.Product).AsEnumerable());
         }
     }
 }
