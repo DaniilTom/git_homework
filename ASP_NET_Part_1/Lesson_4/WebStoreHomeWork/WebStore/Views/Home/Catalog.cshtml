@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebStore.Domain.Implementations.Microcontroller>
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+@await  Component.InvokeAsync("SideMenu")
+<article>
+    <h3>Товары:</h3>
+    @*<ul class="cat_menu" style="list-style: none;">
+        @foreach (var mc in Model)
+        {
+            <li>
+                <img src="@mc.ImageUrl" alt="@mc.Name" width="70">
+                <br>
+                <a href="intel4004.html">@mc.Name</a>
+            </li>
+        }
+    </ul>*@
+
+    @await Component.InvokeAsync("Microcontroller")
+
+</article>
+

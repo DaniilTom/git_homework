@@ -1,0 +1,20 @@
+﻿
+@model IEnumerable<WebStore.ViewModel.MicrocontrollerViewModel>
+
+<ul class="cat_menu" style="list-style: none;">
+    @foreach (var view in Model)
+    {
+        <li>
+            <a href="@view.Microcontroller.ImageUrl" target="_blank"><img src="@view.Microcontroller.ImageUrl" alt="@view.Microcontroller.Name" width="100"></a>
+            <br>
+            <h5>@view.Microcontroller.Name</h5>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@view.Microcontroller.Id">Добавить в корзину</a>
+            <ul>
+                @foreach(var d in view.DetailedDescription.DetailedDesriptionList)
+                {
+                    <li>@d</li>
+                }
+            </ul>
+</li>
+    }
+</ul>
