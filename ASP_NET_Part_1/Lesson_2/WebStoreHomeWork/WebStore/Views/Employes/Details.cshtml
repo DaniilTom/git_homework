@@ -1,0 +1,11 @@
+﻿
+@model WebStore.Models.Employee
+
+@{ 
+    ViewData["Title"] = "Детали";
+}
+
+<a asp-controller="Employes" asp-action="Index">Назад</a>
+
+<p>@Model.Id _ @Model.FirstName _ @Model.SurName _ @Model.Patronymic</p>
+
