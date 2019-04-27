@@ -28,8 +28,6 @@ namespace WebStore.Data
 
             await InitRoleAsync();
 
-            var y = _db.Products.First();
-
             if (await _db.Products.AnyAsync())
                 return;
 
