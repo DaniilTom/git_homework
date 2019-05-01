@@ -1,1 +1,0 @@
-﻿INSERT INTO Departament(Name) VALUES (@Name);
