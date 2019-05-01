@@ -8,14 +8,19 @@ using WebStore.Domain.Implementations;
 
 namespace WebStore.Infrastructure.Implementations
 {
-    public class MicrocontrollerDataService : IServiceMicrocontrollerData
+    public class ProductDataService : IServiceProductData
     {
         public IEnumerable<ProductBase> Products => TestData.Products;
 
         public IEnumerable<MCDescription> DetailedDescription => TestData.MCDescriptions;
 
         // все ниже пока не нужно
-        public void AddNew(ProductBase employee)
+        public void AddNewProduct(ProductBase product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddNewDescription(MCDescription description)
         {
             throw new NotImplementedException();
         }

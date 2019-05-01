@@ -30,7 +30,7 @@ namespace WebStore
             services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
             //services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
             //services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
-            services.AddScoped<IServiceMicrocontrollerData, SqlProductData>();
+            services.AddScoped<IServiceProductData, SqlProductData>();
             services.AddScoped<IServiceCategoryData, SqlProductData>();
 
             services.AddScoped<IServiceAllData, SqlProductData>();

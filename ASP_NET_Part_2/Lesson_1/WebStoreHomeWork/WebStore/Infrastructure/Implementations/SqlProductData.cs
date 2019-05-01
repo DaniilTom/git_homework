@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,13 +24,32 @@ namespace WebStore.Infrastructure.Implementations
 
         public IEnumerable<Category> GetCategories() => _db.Categories;
 
-        public IEnumerable<Order> Orders() => _db.Orders;
+        public IEnumerable<Order> Orders => _db.Orders.Include(o => o.Items).ThenInclude(i => i.Product).AsEnumerable();
 
-        public IEnumerable<OrderItem> OrderItems() => _db.OrderItems;
+        public IEnumerable<OrderItem> OrderItems => _db.OrderItems;
 
-        public void AddNew(ProductBase employee)
+        public void AddNewProduct(ProductBase prod)
         {
-            throw new NotImplementedException();
+            _db.Products.Add(prod);
+            _db.SaveChanges();
+        }
+
+        public void AddNewDescription(MCDescription description)
+        {
+            _db.MCDescriptions.Add(description);
+            _db.SaveChanges();
+        }
+
+        public void AddNewOrder(Order order)
+        {
+            _db.Orders.Add(order);
+            _db.SaveChanges();
+        }
+
+        public void AddNewOrderItem(OrderItem orderItem)
+        {
+            _db.OrderItems.Add(orderItem);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
@@ -42,9 +62,6 @@ namespace WebStore.Infrastructure.Implementations
             throw new NotImplementedException();
         }
 
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

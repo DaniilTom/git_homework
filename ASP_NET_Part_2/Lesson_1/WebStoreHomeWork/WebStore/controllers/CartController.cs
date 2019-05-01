@@ -56,7 +56,7 @@ namespace WebStore.controllers
             return RedirectToAction("Cart");
         }
 
-        public IActionResult Checkout([FromServices] WebStoreContext _db)
+        public IActionResult Checkout()
         {
             string _CartName = $"{User.Identity.Name}_cart";
             var cookie = HttpContext.Request.Cookies[_CartName];
@@ -69,22 +69,18 @@ namespace WebStore.controllers
                 TotalPrice = cart.Items.Sum(pc => pc.Count * pc.Product.Price)
             };
 
-            _db.Orders.Add(order);
+            _DataBase.AddNewOrder(order);
 
             foreach(var item in cart.Items)
             {
                 var order_item = new OrderItem
                 {
                     Order = order,
-                    Product = _db.Products.FirstOrDefault(p => p.Id == item.Product.Id),
-                    //Product = item.Product,
+                    Product = _DataBase.Products.FirstOrDefault(p => p.Id == item.Product.Id),
                     Quantity = item.Count
                 };
-                _db.OrderItems.Add(order_item);
+                _DataBase.AddNewOrderItem(order_item);
             }
-            
-            _db.SaveChanges();
-
             HttpContext.Response.Cookies.Delete(_CartName);
 
             return RedirectToAction("Catalog", "Home");

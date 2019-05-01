@@ -11,9 +11,9 @@ namespace WebStore.controllers
     //[Controller]
     public class HomeController : Controller
     {
-        private readonly IServiceMicrocontrollerData _MicrocontrollerData;
+        private readonly IServiceProductData _MicrocontrollerData;
 
-        public HomeController(IServiceMicrocontrollerData ProductData)
+        public HomeController(IServiceProductData ProductData)
         {
             _MicrocontrollerData = ProductData;
         }

@@ -18,9 +18,9 @@ namespace WebStore.Areas.Admin.Controllers
     [Area("Admin"), Authorize(Roles = Domain.User.AdminRoleName)]
     public class ToolsController : Controller
     {
-        private readonly WebStoreContext _db;
+        private readonly IServiceAllData _db;
 
-        public ToolsController(WebStoreContext db)
+        public ToolsController(IServiceAllData db)
         {
             _db = db;
         }
@@ -37,22 +37,20 @@ namespace WebStore.Areas.Admin.Controllers
             // выбрасывалось NullReferenceExecption
 
             var storeHouseVM = from mic in _db.Products
-                               from cat in _db.Categories
+                               from cat in _db.GetCategories()
                                where mic.CategoryId == cat.Id
                                select new StoreHouseViewModel { Product = mic, Category = cat};
 
-            var categories = _db.Categories;
-            ViewBag.Categories = categories.AsEnumerable();
-            ViewData["Cat"] = categories.AsEnumerable();
+            var categories = _db.GetCategories();
+            ViewBag.Categories = categories;
+            ViewData["Cat"] = categories;
             return View(storeHouseVM);
         }
 
         [HttpPost]
         public IActionResult CreateNew(string name, int price, string catId)
         {
-            _db.Products.Add(new Domain.Implementations.ProductBase { Name = name, Price = price, CategoryId = int.Parse(catId)});
-
-            _db.SaveChanges();
+            _db.AddNewProduct(new Domain.Implementations.ProductBase { Name = name, Price = price, CategoryId = int.Parse(catId)});
 
             return RedirectToAction("StoreHouse");
         }
@@ -62,13 +60,12 @@ namespace WebStore.Areas.Admin.Controllers
         {
             string[] format_desc = desc.Split("\r\n", StringSplitOptions.RemoveEmptyEntries) ;
 
-            _db.MCDescriptions.Add(new Domain.Implementations.MCDescription
+            _db.AddNewDescription(new Domain.Implementations.MCDescription
             {
                 ProductId = id,
                 DetailedDesriptionList = format_desc
             });
 
-            _db.SaveChanges();
             return RedirectToAction("StoreHouse");
         }
 
@@ -81,14 +78,13 @@ namespace WebStore.Areas.Admin.Controllers
                 await file.CopyToAsync(fileStream);
             }
             _db.Products.First(m => m.Id == id).ImageUrl = "/img/" + file.FileName;
-            _db.SaveChanges();
 
             return RedirectToAction("StoreHouse");
         }
 
         public IActionResult Orders()
         {
-            return View(_db.Orders.Include(o => o.Items).ThenInclude(i => i.Product).AsEnumerable());
+            return View(_db.Orders);
         }
     }
 }

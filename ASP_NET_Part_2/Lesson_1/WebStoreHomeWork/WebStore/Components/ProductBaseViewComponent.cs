@@ -10,9 +10,9 @@ namespace WebStore.Components
 {
     public class ProductBaseViewComponent : ViewComponent
     {
-        private readonly IServiceMicrocontrollerData _MicrocontrollerData;
+        private readonly IServiceProductData _MicrocontrollerData;
 
-        public ProductBaseViewComponent(IServiceMicrocontrollerData ProductData)
+        public ProductBaseViewComponent(IServiceProductData ProductData)
         {
             _MicrocontrollerData = ProductData;
         }

@@ -8,7 +8,7 @@ namespace WebStore.Infrastructure.Interfaces
 {
     // очень похож на IServiceEmployeeData, м.б. стоит использовать
     // какой-нибудь один интерфейс
-    public interface IServiceMicrocontrollerData
+    public interface IServiceProductData
     {
         IEnumerable<ProductBase> Products { get; }
 
@@ -16,10 +16,10 @@ namespace WebStore.Infrastructure.Interfaces
 
         ProductBase GetById(int id);
 
-        void AddNew(ProductBase employee);
+        void AddNewProduct(ProductBase product);
+
+        void AddNewDescription(MCDescription description);
 
         void Delete(int id);
-
-        void SaveChanges();
     }
 }
