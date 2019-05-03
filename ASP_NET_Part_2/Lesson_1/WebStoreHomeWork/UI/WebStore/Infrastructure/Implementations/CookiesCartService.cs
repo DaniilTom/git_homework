@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.Implementations;
 using WebStore.Domain.Interfaces;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 using WebStore.Models;
 
 namespace WebStore.Infrastructure.Implementations

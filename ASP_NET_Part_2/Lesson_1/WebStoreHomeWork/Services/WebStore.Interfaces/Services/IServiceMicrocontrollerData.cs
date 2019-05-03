@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.Implementations;
 
-namespace WebStore.Infrastructure.Interfaces
+namespace WebStore.Interfaces.Services
 {
     // очень похож на IServiceEmployeeData, м.б. стоит использовать
     // какой-нибудь один интерфейс

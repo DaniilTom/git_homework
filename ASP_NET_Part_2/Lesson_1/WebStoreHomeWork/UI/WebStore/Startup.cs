@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 using WebStore.Infrastructure.Implementations;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
 using Microsoft.AspNetCore.Identity;
 using WebStore.Domain;
+using WebStore.Interfaces.Api;
+using WebStore.ServiceHosting.Controllers;
+using WebStore.Clients.Values;
 
 namespace WebStore
 {
@@ -37,6 +40,8 @@ namespace WebStore
             services.AddScoped<IServiceCart, CookiesCartService>();
             services.AddDbContext<WebStoreContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<WebStoreDBInitializer>();
+
+            services.AddTransient<IValueService, ValuesClient>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<WebStoreContext>()

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using WebStore.DAL.Context;
 using WebStore.Domain.Implementations;
 using WebStore.Domain.Interfaces;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 using WebStore.Models;
 
 namespace WebStore.controllers
