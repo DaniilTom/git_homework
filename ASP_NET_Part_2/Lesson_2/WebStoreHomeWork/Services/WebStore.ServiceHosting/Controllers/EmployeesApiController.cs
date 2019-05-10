@@ -26,5 +26,17 @@ namespace WebStore.ServiceHosting.Controllers
         {
             return _EmployeeData.Employees;
         }
+
+        [HttpPut]
+        public void PutNew([FromBody] Employee employee)
+        {
+            _EmployeeData.AddNew(employee);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _EmployeeData.Delete(id);
+        }
     }
 }
