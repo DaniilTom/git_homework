@@ -52,16 +52,21 @@ namespace WebStore.Infrastructure.Implementations
             _db.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var prod = _db.Products.FirstOrDefault(p => p.Id == id);
+            _db.Products.Remove(prod);
+            _db.SaveChanges();
         }
 
-        public ProductBase GetById(int id)
+        public ProductBase GetProductById(int id)
         {
-            throw new NotImplementedException();
+            return _db.Products.FirstOrDefault(p => p.Id == id);
         }
 
-        
+        public Order GetOrderById(int Id)
+        {
+            return _db.Orders.FirstOrDefault(o => o.Id == Id);
+        }
     }
 }

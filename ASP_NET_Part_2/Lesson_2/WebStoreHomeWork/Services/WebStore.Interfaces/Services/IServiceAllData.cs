@@ -18,5 +18,7 @@ namespace WebStore.Interfaces.Services
         void AddNewOrder(Order order);
 
         void AddNewOrderItem(OrderItem orderItem);
+
+        Order GetOrderById(int Id);
     }
 }

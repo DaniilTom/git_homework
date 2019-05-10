@@ -15,6 +15,8 @@ namespace WebStore.Infrastructure.Implementations
         public IEnumerable<MCDescription> DetailedDescription => TestData.MCDescriptions;
 
         // все ниже пока не нужно
+        // весь набор данных заранее предопределен
+        // эта реализация только для получения данных
         public void AddNewProduct(ProductBase product)
         {
             throw new NotImplementedException();
@@ -25,12 +27,12 @@ namespace WebStore.Infrastructure.Implementations
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void DeleteProduct(int id)
         {
             throw new NotImplementedException();
         }
 
-        public ProductBase GetById(int id)
+        public ProductBase GetProductById(int id)
         {
             throw new NotImplementedException();
         }

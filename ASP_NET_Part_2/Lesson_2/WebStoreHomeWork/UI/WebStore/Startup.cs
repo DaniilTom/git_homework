@@ -17,6 +17,7 @@ using WebStore.Domain;
 using WebStore.Interfaces.Api;
 using WebStore.ServiceHosting.Controllers;
 using WebStore.Clients.Values;
+using WebStore.Clients.Employees;
 
 namespace WebStore
 {
@@ -30,7 +31,7 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(); // добавляет сервисов для работы MVC
-            services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
+            services.AddSingleton<IServiceEmployeeData, EmployeesClient>();
             //services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
             //services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
             services.AddScoped<IServiceProductData, SqlProductData>();

@@ -14,12 +14,12 @@ namespace WebStore.Interfaces.Services
 
         IEnumerable<MCDescription> DetailedDescription { get; }
 
-        ProductBase GetById(int id);
-
         void AddNewProduct(ProductBase product);
 
         void AddNewDescription(MCDescription description);
 
-        void Delete(int id);
+        void DeleteProduct(int id);
+
+        ProductBase GetProductById(int Id);
     }
 }
