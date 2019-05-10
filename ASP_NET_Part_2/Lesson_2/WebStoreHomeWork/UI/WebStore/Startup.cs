@@ -18,6 +18,7 @@ using WebStore.Interfaces.Api;
 using WebStore.ServiceHosting.Controllers;
 using WebStore.Clients.Values;
 using WebStore.Clients.Employees;
+using WebStore.Clients.AllData;
 
 namespace WebStore
 {
@@ -34,10 +35,10 @@ namespace WebStore
             services.AddSingleton<IServiceEmployeeData, EmployeesClient>();
             //services.AddSingleton<IServiceMicrocontrollerData, MicrocontrollerDataService>();
             //services.AddSingleton<IServiceCategoryData, CategoriesDataService>();
-            services.AddScoped<IServiceProductData, SqlProductData>();
-            services.AddScoped<IServiceCategoryData, SqlProductData>();
+            services.AddScoped<IServiceProductData, AllDataClient>();
+            services.AddScoped<IServiceCategoryData, AllDataClient>();
 
-            services.AddScoped<IServiceAllData, SqlProductData>();
+            services.AddScoped<IServiceAllData, AllDataClient>();
             services.AddScoped<IServiceCart, CookiesCartService>();
             services.AddDbContext<WebStoreContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<WebStoreDBInitializer>();

@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebStore.Services.InMemory;
 using WebStore.Interfaces.Services;
+using WebStore.Infrastructure.Implementations;
+using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStore.ServiceHosting
 {
@@ -29,6 +32,8 @@ namespace WebStore.ServiceHosting
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
+            services.AddScoped<IServiceAllData, SqlProductData>();
+            services.AddDbContext<WebStoreContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

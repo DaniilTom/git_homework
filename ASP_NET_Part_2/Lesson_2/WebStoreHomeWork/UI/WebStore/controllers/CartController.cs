@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebStore.DAL.Context;
+using WebStore.Domain.DTO;
 using WebStore.Domain.Implementations;
 using WebStore.Domain.Interfaces;
 using WebStore.Interfaces.Services;
@@ -73,10 +74,10 @@ namespace WebStore.controllers
 
             foreach(var item in cart.Items)
             {
-                var order_item = new OrderItem
+                var order_item = new OrderItemDTO
                 {
-                    Order = order,
-                    Product = _DataBase.Products.FirstOrDefault(p => p.Id == item.Product.Id),
+                    ProductId = item.Product.Id,
+                    OrderId = order.Id, 
                     Quantity = item.Count
                 };
                 _DataBase.AddNewOrderItem(order_item);

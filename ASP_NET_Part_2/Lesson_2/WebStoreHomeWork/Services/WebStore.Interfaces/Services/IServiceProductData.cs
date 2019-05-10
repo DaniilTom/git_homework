@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Domain.DTO;
 using WebStore.Domain.Implementations;
 
 namespace WebStore.Interfaces.Services
@@ -10,7 +11,7 @@ namespace WebStore.Interfaces.Services
     // какой-нибудь один интерфейс
     public interface IServiceProductData
     {
-        IEnumerable<ProductBase> Products { get; }
+        IEnumerable<ProductDTO> Products { get; }
 
         IEnumerable<MCDescription> DetailedDescription { get; }
 

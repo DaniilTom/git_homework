@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Domain.DTO;
 using WebStore.Domain.Implementations;
 
 namespace WebStore.Interfaces.Services
@@ -11,13 +12,13 @@ namespace WebStore.Interfaces.Services
     /// </summary>
     public interface IServiceAllData : IServiceCategoryData, IServiceProductData
     {
-        IEnumerable<Order> Orders { get; }
+        IEnumerable<OrderDTO> Orders { get; }
 
-        IEnumerable<OrderItem> OrderItems { get; }
+        IEnumerable<OrderItemDTO> OrderItems { get; }
 
         void AddNewOrder(Order order);
 
-        void AddNewOrderItem(OrderItem orderItem);
+        void AddNewOrderItem(OrderItemDTO orderItem);
 
         Order GetOrderById(int Id);
     }
