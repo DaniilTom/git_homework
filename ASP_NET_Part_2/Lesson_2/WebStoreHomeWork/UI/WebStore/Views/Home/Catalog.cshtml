@@ -1,0 +1,13 @@
+﻿@model IEnumerable<WebStore.Domain.Implementations.ProductBase>
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+@await  Component.InvokeAsync("SideMenu")
+<article>
+    <h3>Товары:</h3>
+
+    @await Component.InvokeAsync("ProductBase")
+
+</article>
+
