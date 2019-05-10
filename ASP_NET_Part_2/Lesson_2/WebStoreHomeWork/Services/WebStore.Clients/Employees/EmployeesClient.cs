@@ -43,6 +43,14 @@ namespace WebStore.Clients.Employees
         }
 
         /*------------------------------------------------------*/
+        public void Edit(Employee employee) => EditAsync(employee);
+        public async Task<HttpResponseMessage> EditAsync(Employee employee)
+        {
+            var response = await _Client.PostAsJsonAsync<Employee>(ServiceAddress, employee);
+            return response.EnsureSuccessStatusCode();
+        }
+
+        /*------------------------------------------------------*/
         // в контроллере UI всегда запрашивается весь список Employees, а уже из него выбирается нужный
         // поэтому этот метод оставлю без реализации
         public Employee GetById(int id)

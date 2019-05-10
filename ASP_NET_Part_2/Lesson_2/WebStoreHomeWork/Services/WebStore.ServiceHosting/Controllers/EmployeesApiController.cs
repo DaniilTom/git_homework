@@ -12,7 +12,7 @@ namespace WebStore.ServiceHosting.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class EmployeesApiController : ControllerBase
+    public class EmployeesApiController : ControllerBase // без интерфейса обошлось
     {
         private readonly IServiceEmployeeData _EmployeeData;
 
@@ -37,6 +37,12 @@ namespace WebStore.ServiceHosting.Controllers
         public void Delete(int id)
         {
             _EmployeeData.Delete(id);
+        }
+
+        [HttpPost]
+        public void Edit([FromBody] Employee employee)
+        {
+            _EmployeeData.Edit(employee);
         }
     }
 }

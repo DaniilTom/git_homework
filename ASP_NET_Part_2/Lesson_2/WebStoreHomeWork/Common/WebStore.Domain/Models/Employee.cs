@@ -13,10 +13,10 @@ namespace WebStore.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Имя обязательно")]
-        [RegularExpression(@"^[A-Z][a-z]{3,100}$")]
+        [RegularExpression(@"(^[A-Z][a-z]{3,100}$|^[А-Я][а-я]{3,100}$)")]
         public string FirstName { get; set; }
 
-        [RegularExpression(@"^[A-Z][a-z]{3,100}$")]
+        [RegularExpression(@"^[A-Z][a-z]{3,100}$|^[А-Я][а-я]{3,100}$")]
         [Required(ErrorMessage = "Фамилия обязательна")]
         public string SurName { get; set; }
 

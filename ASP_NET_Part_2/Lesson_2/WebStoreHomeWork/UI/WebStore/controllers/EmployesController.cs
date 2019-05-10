@@ -84,10 +84,7 @@ namespace WebStore.controllers
             }
             else
             {
-                Employee emp = _EmployeesData.Employees.First(e => e.Id == employee.Id);
-                emp.FirstName = employee.FirstName;
-                emp.SurName = employee.SurName;
-                emp.Age = employee.Age;
+                _EmployeesData.Edit(employee);
             }
 
             return Redirect("/Employes/Index");

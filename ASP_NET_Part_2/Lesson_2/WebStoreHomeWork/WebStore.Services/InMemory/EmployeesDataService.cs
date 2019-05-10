@@ -33,6 +33,16 @@ namespace WebStore.Services.InMemory
             _Employees.Remove(_Employees.FirstOrDefault(e=> e.Id == id));
         }
 
+        public void Edit(Employee employee)
+        {
+            Employee emp = _Employees.FirstOrDefault(e => e.Id == employee.Id);
+            emp.FirstName = employee.FirstName;
+            emp.SurName = employee.SurName;
+            //emp.Patronymic = employee.Patronymic;
+            //emp.Dossier = employee.Dossier;
+            emp.Age = employee.Age;
+        }
+
         public Employee GetById(int id)
         {
             return _Employees.First(e => e.Id == id);
