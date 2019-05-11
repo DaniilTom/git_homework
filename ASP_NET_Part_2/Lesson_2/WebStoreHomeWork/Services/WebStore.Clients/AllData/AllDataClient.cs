@@ -21,7 +21,7 @@ namespace WebStore.Clients.AllData
 
         public IEnumerable<ProductDTO> Products => GetAsync<ProductDTO>("Products").Result;
 
-        public IEnumerable<MCDescription> DetailedDescription => GetAsync<MCDescription>("Descriptions").Result;
+        public IEnumerable<MCDescriptionDTO> DetailedDescription => GetAsync<MCDescriptionDTO>("Descriptions").Result;
 
         public IEnumerable<Category> Categories => GetAsync<Category>("Categories").Result;
 
@@ -39,13 +39,15 @@ namespace WebStore.Clients.AllData
             return new List<T>();
         }
 
-        public void AddNewDescription(MCDescription description) => PutNew<MCDescription>("Description", description);
+        public void AddNewDescription(MCDescriptionDTO description) => PutNew<MCDescriptionDTO>("Description", description);
 
-        public void AddNewOrder(OrderDTO order) => PutNew<OrderDTO>("Description", order);
+        //public void AddNewOrder(OrderDTO order) => PutNew<OrderDTO>("Order", order);
 
-        public void AddNewOrderItem(OrderItemDTO orderItem) => PutNew<OrderItemDTO>("Description", orderItem);
+        //public void AddNewOrderItem(OrderItemDTO orderItem) => PutNew<OrderItemDTO>("OrderItem", orderItem);
 
         public void AddNewProduct(ProductDTO product) => PutNew<ProductDTO>("Product", product);
+
+        public void AddNewOrder(CreateOrderModel model) => PutNew<CreateOrderModel>("Order", model);
 
         private async void PutNew<T>(string address, T obj)
         {

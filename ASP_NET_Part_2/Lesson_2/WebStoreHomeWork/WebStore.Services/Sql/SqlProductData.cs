@@ -41,7 +41,21 @@ namespace WebStore.Infrastructure.Implementations
             }
         }
 
-        public IEnumerable<MCDescription> DetailedDescription => _db.MCDescriptions;
+        public IEnumerable<MCDescriptionDTO> DetailedDescription
+        {
+            get
+            {
+                List<MCDescriptionDTO> DescDTO = new List<MCDescriptionDTO>();
+                var descriptions = _db.MCDescriptions.Include(d => d.Product);
+                return descriptions.Select(d => new MCDescriptionDTO
+                {
+                    Id = d.Id,
+                    ProductId = d.Product.Id,
+                    ProductName = d.Product.Name,
+                    DetailedDesription = String.Join(";", d.DetailedDesriptionList)
+                });
+            }
+        }
 
         public IEnumerable<Category> Categories => _db.Categories;
 
@@ -102,31 +116,40 @@ namespace WebStore.Infrastructure.Implementations
             _db.SaveChanges();
         }
 
-        public void AddNewDescription(MCDescription description)
+        public void AddNewDescription(MCDescriptionDTO description)
         {
-            _db.MCDescriptions.Add(description);
-            _db.SaveChanges();
-        }
-
-        public void AddNewOrder(OrderDTO order)
-        {
-            _db.Orders.Add(new Order
+            _db.MCDescriptions.Add(new MCDescription
             {
-                Contact = order.Contact,
-                UserName = order.UserName,
-                TotalPrice = order.TotalPrice,
+                Id = description.Id,
+                ProductId = description.ProductId,
+                Product = _db.Products.FirstOrDefault(p => p.Id == description.ProductId),
+                DetailedDesriptionList = description.DetailedDesription.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
             });
             _db.SaveChanges();
         }
 
-        public void AddNewOrderItem(OrderItemDTO orderItem)
+        public void AddNewOrder(CreateOrderModel Model)
         {
-            _db.OrderItems.Add(new OrderItem
+            var order = new Order
             {
-                Quantity = orderItem.Quantity,
-                Order = _db.Orders.FirstOrDefault(o => o.Id == orderItem.OrderId),
-                Product = _db.Products.FirstOrDefault(p => p.Id == orderItem.ProductId)
-            });
+                UserName = Model.Order.UserName,
+                Contact = Model.Order.Contact,
+                TotalPrice = Model.Order.TotalPrice
+            };
+
+            _db.Orders.Add(order);
+
+            foreach (var item in Model.OrderItemsDTO)
+            {
+                var order_item = new OrderItem
+                {
+                    Order = order,
+                    Product = _db.Products.FirstOrDefault(p => p.Id == item.ProductId),
+                    Quantity = item.Quantity
+                };
+                _db.OrderItems.Add(order_item);
+            }
+
             _db.SaveChanges();
         }
 
@@ -146,5 +169,7 @@ namespace WebStore.Infrastructure.Implementations
         {
             return _db.Orders.FirstOrDefault(o => o.Id == Id);
         }
+
+        
     }
 }

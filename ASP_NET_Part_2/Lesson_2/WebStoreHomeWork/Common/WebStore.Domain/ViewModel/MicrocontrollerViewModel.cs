@@ -10,6 +10,6 @@ namespace WebStore.ViewModel
     public class MicrocontrollerViewModel
     {
         public ProductDTO ProductBase { get; set; }
-        public MCDescription DetailedDescription { get; set; }
+        public MCDescriptionDTO MCDescription { get; set; }
     }
 }

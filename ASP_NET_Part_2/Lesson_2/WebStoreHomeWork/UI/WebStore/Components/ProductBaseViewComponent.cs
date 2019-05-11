@@ -19,7 +19,8 @@ namespace WebStore.Components
 
         public IViewComponentResult Invoke()
         {
-            return View(GetProducts());
+            IEnumerable<MicrocontrollerViewModel> mv_model = GetProducts();
+            return View(mv_model);
         }
 
         private IEnumerable<MicrocontrollerViewModel> GetProducts()
@@ -30,7 +31,7 @@ namespace WebStore.Components
             return from m in mc
                    from d in desc
                    where m.Id == d.ProductId
-                   select new MicrocontrollerViewModel {ProductBase = m, DetailedDescription = d };
+                   select new MicrocontrollerViewModel {ProductBase = m, MCDescription = d };
         }
     }
 }

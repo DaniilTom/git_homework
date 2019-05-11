@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Domain.DTO;
 using WebStore.Domain.Implementations;
 using WebStore.Domain.Interfaces;
 using WebStore.Interfaces.Services;
@@ -70,7 +71,14 @@ namespace WebStore.Infrastructure.Implementations
             {
                 cart.Items.Add(new ProductContainer
                     {
-                        Product = (ProductBase)product, //приведение к абст.кл. т.к. нельзя сериализовать интерфейсы
+                        Product = new ProductDTO
+                        {
+                            Id = product.Id,
+                            CategoryId = product.CategoryId,
+                            Name = product.Name,
+                            ImageUrl = product.ImageUrl,
+                            Price = product.Price
+                        },
                         Count = 1
                     });
             }

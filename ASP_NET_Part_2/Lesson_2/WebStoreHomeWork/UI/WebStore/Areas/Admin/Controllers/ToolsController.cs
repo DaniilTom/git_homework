@@ -59,12 +59,12 @@ namespace WebStore.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddDescription(int id, string desc)
         {
-            string[] format_desc = desc.Split("\r\n", StringSplitOptions.RemoveEmptyEntries) ;
+            //string[] format_desc = desc.Split("\r\n", StringSplitOptions.RemoveEmptyEntries) ;
 
-            _db.AddNewDescription(new MCDescription
+            _db.AddNewDescription(new MCDescriptionDTO
             {
                 ProductId = id,
-                DetailedDesriptionList = format_desc
+                DetailedDesription = desc
             });
 
             return RedirectToAction("StoreHouse");

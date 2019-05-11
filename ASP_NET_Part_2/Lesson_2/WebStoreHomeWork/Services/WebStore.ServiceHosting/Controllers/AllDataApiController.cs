@@ -51,29 +51,29 @@ namespace WebStore.ServiceHosting.Controllers
         public IEnumerable<Category> Categories => _DataBase.Categories;
 
         [HttpGet("Descriptions")]
-        public IEnumerable<MCDescription> GetDescriptions()
+        public IEnumerable<MCDescriptionDTO> GetDescriptions()
         {
             return DetailedDescription;
         }
-        public IEnumerable<MCDescription> DetailedDescription => _DataBase.DetailedDescription;
+        public IEnumerable<MCDescriptionDTO> DetailedDescription => _DataBase.DetailedDescription;
 
         [HttpPut("new/Description")]
-        public void AddNewDescription([FromBody] MCDescription description)
+        public void AddNewDescription([FromBody] MCDescriptionDTO description)
         {
             _DataBase.AddNewDescription(description);
         }
 
         [HttpPut("new/Order")]
-        public void AddNewOrder([FromBody] OrderDTO order)
+        public void AddNewOrder([FromBody] CreateOrderModel order)
         {
             _DataBase.AddNewOrder(order);
         }
         
-        [HttpPut("new/OrderItem")]
-        public void AddNewOrderItem([FromBody] OrderItemDTO orderItem)
-        {
-            _DataBase.AddNewOrderItem(orderItem);
-        }
+        //[HttpPut("new/OrderItem")]
+        //public void AddNewOrderItem([FromBody] OrderItemDTO orderItem)
+        //{
+        //    _DataBase.AddNewOrderItem(orderItem);
+        //}
         
         [HttpPut("new/Product")]
         public void AddNewProduct([FromBody] ProductDTO product)
@@ -94,6 +94,11 @@ namespace WebStore.ServiceHosting.Controllers
         public ProductBase GetProductById(int Id)
         {
             return _DataBase.GetProductById(Id);
+        }
+
+        public void AddNewOrder(OrderDTO order)
+        {
+            throw new NotImplementedException();
         }
     }
 }

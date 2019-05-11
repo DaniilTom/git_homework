@@ -63,6 +63,8 @@ namespace WebStore.controllers
             var cookie = HttpContext.Request.Cookies[_CartName];
             Cart cart = JsonConvert.DeserializeObject<Cart>(cookie);
 
+            CreateOrderModel model = new CreateOrderModel();
+
             var order = new OrderDTO
             {
                 UserName = User.Identity.Name,
@@ -70,7 +72,8 @@ namespace WebStore.controllers
                 TotalPrice = cart.Items.Sum(pc => pc.Count * pc.Product.Price)
             };
 
-            _DataBase.AddNewOrder(order);
+            //_DataBase.AddNewOrder(order);
+            model.Order = order;
 
             foreach(var item in cart.Items)
             {
@@ -80,8 +83,12 @@ namespace WebStore.controllers
                     OrderId = order.Id, 
                     Quantity = item.Count
                 };
-                _DataBase.AddNewOrderItem(order_item);
+                //_DataBase.AddNewOrderItem(order_item);
+                model.OrderItemsDTO.Add(order_item);
             }
+
+            _DataBase.AddNewOrder(model);
+
             HttpContext.Response.Cookies.Delete(_CartName);
 
             return RedirectToAction("Catalog", "Home");

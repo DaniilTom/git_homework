@@ -16,9 +16,11 @@ namespace WebStore.Interfaces.Services
 
         IEnumerable<OrderItemDTO> OrderItems { get; }
 
-        void AddNewOrder(OrderDTO order);
+        //void AddNewOrder(OrderDTO order);
 
-        void AddNewOrderItem(OrderItemDTO orderItem);
+        //void AddNewOrderItem(OrderItemDTO orderItem);
+
+        void AddNewOrder(CreateOrderModel orderModel);
 
         Order GetOrderById(int Id);
     }

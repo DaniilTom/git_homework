@@ -10,7 +10,7 @@
             <h5>@view.ProductBase.Name</h5>
             <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@view.ProductBase.Id">Добавить в корзину</a>
             <ul>
-                @foreach(var d in view.DetailedDescription.DetailedDesriptionList)
+                @foreach(var d in view.MCDescription.DetailedDesription.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     <li>@d</li>
                 }

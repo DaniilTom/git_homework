@@ -20,7 +20,13 @@ namespace WebStore.Infrastructure.Implementations
                                                                                     Price = p.Price
                                                                                 });
 
-        public IEnumerable<MCDescription> DetailedDescription => TestData.MCDescriptions;
+        public IEnumerable<MCDescriptionDTO> DetailedDescription => TestData.MCDescriptions.Select(d => new MCDescriptionDTO
+        {
+            Id = d.Id,
+            ProductId = d.ProductId,
+            ProductName = d.Product.Name,
+            DetailedDesription = String.Join(";", d.DetailedDesriptionList)
+        });
 
         // все ниже пока не нужно
         // весь набор данных заранее предопределен
@@ -30,7 +36,7 @@ namespace WebStore.Infrastructure.Implementations
             throw new NotImplementedException();
         }
 
-        public void AddNewDescription(MCDescription description)
+        public void AddNewDescription(MCDescriptionDTO description)
         {
             throw new NotImplementedException();
         }

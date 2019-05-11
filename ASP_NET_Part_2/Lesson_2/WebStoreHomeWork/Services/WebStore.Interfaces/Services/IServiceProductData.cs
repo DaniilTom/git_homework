@@ -13,11 +13,11 @@ namespace WebStore.Interfaces.Services
     {
         IEnumerable<ProductDTO> Products { get; }
 
-        IEnumerable<MCDescription> DetailedDescription { get; }
+        IEnumerable<MCDescriptionDTO> DetailedDescription { get; }
 
         void AddNewProduct(ProductDTO product);
 
-        void AddNewDescription(MCDescription description);
+        void AddNewDescription(MCDescriptionDTO description);
 
         void DeleteProduct(int id);
 
