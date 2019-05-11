@@ -20,7 +20,7 @@ namespace WebStore.Components
 
         public IViewComponentResult Invoke()
         {
-            return View(_Categories.GetCategories());
+            return View(_Categories.Categories);
         }
     }
 }

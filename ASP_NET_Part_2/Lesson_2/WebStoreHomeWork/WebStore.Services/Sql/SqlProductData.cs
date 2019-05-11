@@ -34,8 +34,7 @@ namespace WebStore.Infrastructure.Implementations
                         CategoryId = product.CategoryId,
                         ImageUrl = product.ImageUrl,
                         Price = product.Price,
-                        Category = product.Category
-
+                        //Category = product.Category
                     });
                 }
                 return ProductsDTO;
@@ -44,7 +43,7 @@ namespace WebStore.Infrastructure.Implementations
 
         public IEnumerable<MCDescription> DetailedDescription => _db.MCDescriptions;
 
-        public IEnumerable<Category> GetCategories() => _db.Categories;
+        public IEnumerable<Category> Categories => _db.Categories;
 
         public IEnumerable<OrderDTO> Orders
         {
@@ -64,6 +63,7 @@ namespace WebStore.Infrastructure.Implementations
                         {
                             Id = i.Id,
                             ProductId = i.Product.Id,
+                            ProductName = i.Product.Name,
                             OrderId = i.Order.Id,
                             Quantity = i.Quantity
                         })
@@ -88,9 +88,17 @@ namespace WebStore.Infrastructure.Implementations
             }
         }
 
-        public void AddNewProduct(ProductBase prod)
+        public void AddNewProduct(ProductDTO prod)
         {
-            _db.Products.Add(prod);
+            _db.Products.Add(new ProductBase
+            {
+                Id = prod.Id,
+                CategoryId = prod.CategoryId,
+                Name = prod.Name,
+                ImageUrl = prod.ImageUrl,
+                Price = prod.Price,
+                Category = _db.Categories.FirstOrDefault(c => c.Id == prod.Id)
+            });
             _db.SaveChanges();
         }
 
@@ -100,9 +108,14 @@ namespace WebStore.Infrastructure.Implementations
             _db.SaveChanges();
         }
 
-        public void AddNewOrder(Order order)
+        public void AddNewOrder(OrderDTO order)
         {
-            _db.Orders.Add(order);
+            _db.Orders.Add(new Order
+            {
+                Contact = order.Contact,
+                UserName = order.UserName,
+                TotalPrice = order.TotalPrice,
+            });
             _db.SaveChanges();
         }
 

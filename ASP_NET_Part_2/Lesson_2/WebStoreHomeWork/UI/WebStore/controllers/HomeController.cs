@@ -31,7 +31,7 @@ namespace WebStore.controllers
 
         public IActionResult Catalog()
         {
-            return View(_MicrocontrollerData.Products);
+            return View();
         }
     }
 }

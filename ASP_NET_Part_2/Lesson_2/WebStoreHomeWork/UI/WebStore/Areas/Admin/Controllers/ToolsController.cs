@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using WebStore.Domain.Implementations;
 using Microsoft.EntityFrameworkCore;
+using WebStore.Domain.DTO;
 
 namespace WebStore.Areas.Admin.Controllers
 {
@@ -37,11 +38,11 @@ namespace WebStore.Areas.Admin.Controllers
             // выбрасывалось NullReferenceExecption
 
             var storeHouseVM = from mic in _db.Products
-                               from cat in _db.GetCategories()
+                               from cat in _db.Categories
                                where mic.CategoryId == cat.Id
                                select new StoreHouseViewModel { Product = mic, Category = cat};
 
-            var categories = _db.GetCategories();
+            var categories = _db.Categories;
             ViewBag.Categories = categories;
             ViewData["Cat"] = categories;
             return View(storeHouseVM);
@@ -50,7 +51,7 @@ namespace WebStore.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult CreateNew(string name, int price, string catId)
         {
-            _db.AddNewProduct(new Domain.Implementations.ProductBase { Name = name, Price = price, CategoryId = int.Parse(catId)});
+            _db.AddNewProduct(new ProductDTO { Name = name, Price = price, CategoryId = int.Parse(catId)});
 
             return RedirectToAction("StoreHouse");
         }
@@ -60,7 +61,7 @@ namespace WebStore.Areas.Admin.Controllers
         {
             string[] format_desc = desc.Split("\r\n", StringSplitOptions.RemoveEmptyEntries) ;
 
-            _db.AddNewDescription(new Domain.Implementations.MCDescription
+            _db.AddNewDescription(new MCDescription
             {
                 ProductId = id,
                 DetailedDesriptionList = format_desc

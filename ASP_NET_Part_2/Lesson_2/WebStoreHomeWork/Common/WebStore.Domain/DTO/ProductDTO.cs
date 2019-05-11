@@ -16,7 +16,7 @@ namespace WebStore.Domain.DTO
 
         public string ImageUrl { get; set; }
 
-        public Category Category { get; set; }
+        //public Category Category { get; set; }
 
         public int Price { get; set; }
     }

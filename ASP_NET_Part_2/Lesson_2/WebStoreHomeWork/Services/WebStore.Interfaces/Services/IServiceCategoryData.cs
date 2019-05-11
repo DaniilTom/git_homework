@@ -8,6 +8,6 @@ namespace WebStore.Interfaces.Services
 {
     public interface IServiceCategoryData
     {
-        IEnumerable<Category> GetCategories();
+        IEnumerable<Category> Categories { get; }
     }
 }

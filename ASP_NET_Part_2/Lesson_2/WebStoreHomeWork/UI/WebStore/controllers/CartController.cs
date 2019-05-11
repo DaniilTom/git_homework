@@ -63,7 +63,7 @@ namespace WebStore.controllers
             var cookie = HttpContext.Request.Cookies[_CartName];
             Cart cart = JsonConvert.DeserializeObject<Cart>(cookie);
 
-            var order = new Order
+            var order = new OrderDTO
             {
                 UserName = User.Identity.Name,
                 Contact = "1 5 Net Core st.",

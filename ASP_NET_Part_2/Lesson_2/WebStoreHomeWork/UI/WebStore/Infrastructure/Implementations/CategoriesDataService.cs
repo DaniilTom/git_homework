@@ -10,6 +10,6 @@ namespace WebStore.Infrastructure.Implementations
 {
     public class CategoriesDataService : IServiceCategoryData
     {
-        public IEnumerable<Category> GetCategories() => TestData.Categories;
+        public IEnumerable<Category> Categories => TestData.Categories;
     }
 }

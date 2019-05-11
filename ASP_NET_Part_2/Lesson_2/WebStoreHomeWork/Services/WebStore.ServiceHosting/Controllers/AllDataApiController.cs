@@ -29,6 +29,11 @@ namespace WebStore.ServiceHosting.Controllers
         }
         public IEnumerable<OrderDTO> Orders => _DataBase.Orders;
 
+        [HttpGet("OrderItems")]
+        public IEnumerable<OrderItemDTO> GetOrderItems()
+        {
+            return OrderItems;
+        }
         public IEnumerable<OrderItemDTO> OrderItems => _DataBase.OrderItems;
 
         [HttpGet("Products")]
@@ -41,27 +46,37 @@ namespace WebStore.ServiceHosting.Controllers
         [HttpGet("Categories")]
         public IEnumerable<Category> GetCategories()
         {
-            return _DataBase.GetCategories();
+            return Categories;
         }
+        public IEnumerable<Category> Categories => _DataBase.Categories;
 
+        [HttpGet("Descriptions")]
+        public IEnumerable<MCDescription> GetDescriptions()
+        {
+            return DetailedDescription;
+        }
         public IEnumerable<MCDescription> DetailedDescription => _DataBase.DetailedDescription;
 
-        public void AddNewDescription(MCDescription description)
+        [HttpPut("new/Description")]
+        public void AddNewDescription([FromBody] MCDescription description)
         {
             _DataBase.AddNewDescription(description);
         }
 
-        public void AddNewOrder(Order order)
+        [HttpPut("new/Order")]
+        public void AddNewOrder([FromBody] OrderDTO order)
         {
             _DataBase.AddNewOrder(order);
         }
-
-        public void AddNewOrderItem(OrderItemDTO orderItem)
+        
+        [HttpPut("new/OrderItem")]
+        public void AddNewOrderItem([FromBody] OrderItemDTO orderItem)
         {
             _DataBase.AddNewOrderItem(orderItem);
         }
-
-        public void AddNewProduct(ProductBase product)
+        
+        [HttpPut("new/Product")]
+        public void AddNewProduct([FromBody] ProductDTO product)
         {
             _DataBase.AddNewProduct(product);
         }

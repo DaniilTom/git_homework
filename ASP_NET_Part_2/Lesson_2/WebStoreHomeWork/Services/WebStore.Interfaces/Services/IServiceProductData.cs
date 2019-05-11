@@ -15,7 +15,7 @@ namespace WebStore.Interfaces.Services
 
         IEnumerable<MCDescription> DetailedDescription { get; }
 
-        void AddNewProduct(ProductBase product);
+        void AddNewProduct(ProductDTO product);
 
         void AddNewDescription(MCDescription description);
 

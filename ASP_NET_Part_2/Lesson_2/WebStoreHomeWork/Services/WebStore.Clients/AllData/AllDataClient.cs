@@ -15,54 +15,44 @@ namespace WebStore.Clients.AllData
     {
         public AllDataClient(IConfiguration configuration) : base (configuration, "api/AllDataApi") { }
 
-        public IEnumerable<OrderDTO> Orders => GetOrders().Result;
-        public async Task<IEnumerable<OrderDTO>> GetOrders()
+        public IEnumerable<OrderDTO> Orders => GetAsync<OrderDTO>("Orders").Result;
+
+        public IEnumerable<OrderItemDTO> OrderItems => GetAsync<OrderItemDTO>("OrderItems").Result;
+
+        public IEnumerable<ProductDTO> Products => GetAsync<ProductDTO>("Products").Result;
+
+        public IEnumerable<MCDescription> DetailedDescription => GetAsync<MCDescription>("Descriptions").Result;
+
+        public IEnumerable<Category> Categories => GetAsync<Category>("Categories").Result;
+
+        /// <summary>
+        /// Общий для всех методов получения данных
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<T>> GetAsync<T>(string address)
         {
-            var response = await _Client.GetAsync($"{ServiceAddress}/Orders");
+            var response = await _Client.GetAsync($"{ServiceAddress}/{address}");
             if (response.IsSuccessStatusCode)
-                return response.Content.ReadAsAsync<List<OrderDTO>>().Result;
-            return new List<OrderDTO>();
+                return response.Content.ReadAsAsync<List<T>>().Result;
+            return new List<T>();
         }
 
-        public IEnumerable<OrderItemDTO> OrderItems => throw new NotImplementedException();
+        public void AddNewDescription(MCDescription description) => PutNew<MCDescription>("Description", description);
 
-        public IEnumerable<ProductDTO> Products => GetProducts().Result;
-        public async Task<IEnumerable<ProductDTO>> GetProducts()
+        public void AddNewOrder(OrderDTO order) => PutNew<OrderDTO>("Description", order);
+
+        public void AddNewOrderItem(OrderItemDTO orderItem) => PutNew<OrderItemDTO>("Description", orderItem);
+
+        public void AddNewProduct(ProductDTO product) => PutNew<ProductDTO>("Product", product);
+
+        private async void PutNew<T>(string address, T obj)
         {
-            var response = await _Client.GetAsync($"{ServiceAddress}/Products");
-            if (response.IsSuccessStatusCode)
-                return response.Content.ReadAsAsync<List<ProductDTO>>().Result;
-            return new List<ProductDTO>();
-        }
-
-        public IEnumerable<MCDescription> DetailedDescription => throw new NotImplementedException();
-
-        public void AddNewDescription(MCDescription description)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddNewOrder(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddNewOrderItem(OrderItemDTO orderItem)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddNewProduct(ProductBase product)
-        {
-            throw new NotImplementedException();
+            var response = await _Client.PutAsJsonAsync<T>($"{ServiceAddress}/new/{address}", obj);
         }
 
         public void DeleteProduct(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Category> GetCategories()
         {
             throw new NotImplementedException();
         }
