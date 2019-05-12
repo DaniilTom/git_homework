@@ -28,10 +28,31 @@ namespace WebStore.Components
             var mc = _MicrocontrollerData.Products;
             var desc = _MicrocontrollerData.DetailedDescription;
 
-            return from m in mc
-                   from d in desc
-                   where m.Id == d.ProductId
-                   select new MicrocontrollerViewModel {ProductBase = m, MCDescription = d };
+            List<MicrocontrollerViewModel> list = new List<MicrocontrollerViewModel>();
+
+            foreach(var product in mc)
+            {
+                MicrocontrollerViewModel mvModel = new MicrocontrollerViewModel { ProductBase = product };
+                foreach(var d in desc)
+                {
+                    if (product.Id == d.Id)
+                    {
+                        mvModel.MCDescription = d;
+                        break;
+                    }
+                }
+                if (mvModel.MCDescription == null)
+                    mvModel.MCDescription = new Domain.DTO.MCDescriptionDTO { DetailedDesription = "Нет описания;" };
+
+                list.Add(mvModel);
+            }
+
+            return list;
+
+            //return from m in mc
+            //       from d in desc
+            //       where m.Id == d.ProductId
+            //       select new MicrocontrollerViewModel {ProductBase = m, MCDescription = d };
         }
     }
 }
