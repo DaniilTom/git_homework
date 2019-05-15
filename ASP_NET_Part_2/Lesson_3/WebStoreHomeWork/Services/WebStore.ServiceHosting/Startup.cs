@@ -14,6 +14,9 @@ using WebStore.Interfaces.Services;
 using WebStore.Infrastructure.Implementations;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using WebStore.Data;
+using WebStore.Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebStore.ServiceHosting
 {
@@ -34,11 +37,21 @@ namespace WebStore.ServiceHosting
             services.AddSingleton<IServiceEmployeeData, EmployeesDataService>();
             services.AddScoped<IServiceAllData, SqlProductData>();
             services.AddDbContext<WebStoreContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<WebStoreDBInitializer>();
+
+            services.AddIdentity<User, IdentityRole>()
+               .AddEntityFrameworkStores<WebStoreContext>()
+               .AddDefaultTokenProviders();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDBInitializer _dbI)
         {
+            _dbI.InitializeAsync().Wait();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
