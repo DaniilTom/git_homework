@@ -123,7 +123,7 @@ namespace WebStore.ServiceHosting.Controllers
         [HttpPost("GetNormalizedEmail")]
         public async Task<string> GetNormalizedEmailAsync([FromBody] User user) => await _UserStore.GetNormalizedEmailAsync(user);
 
-        [HttpPost("SetEmail/{email}")]
+        [HttpPost("SetNormalizedEmail/{email}")]
         public async Task SetNormalizedEmailAsync([FromBody] User user, string email) => await _UserStore.SetNormalizedEmailAsync(user, email);
 
         [HttpPost("GetPhoneNumber")]

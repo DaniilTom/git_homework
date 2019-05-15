@@ -204,6 +204,7 @@ namespace WebStore.Clients.Users
 
         public async Task SetNormalizedEmailAsync(User user, string email, CancellationToken cancel)
         {
+            if (string.IsNullOrEmpty(email)) email = "userBug@bug.com";
             await PostAsync($"{ServiceAddress}/SetnormalizedEmail/{email}", user, cancel);
         }
 

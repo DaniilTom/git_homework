@@ -11,7 +11,7 @@
             <th rowspan="2">Id</th>
             <th rowspan="2">User Name</th>
             <th rowspan="2">Contact</th>
-            <th colspan="2" id="prod">Products</th>
+            <th colspan="2" scope="colgroup">Products</th>
         </tr>
         <tr>
             <th id="name">Name</th>
@@ -21,20 +21,24 @@
     <tbody>
         @foreach (var order in Model)
         {
+
+            int rowSpanInt = order.Items.Count() + 1;
+            string rowSpan = rowSpanInt.ToString();
+
         <tr>
-            <td>@order.Id</td>
-            <td>@order.UserName</td>
-            <td>@order.Contact</td>
+            <td rowspan="@rowSpan">@order.Id</td>
+            <td rowspan="@rowSpan">@order.UserName</td>
+            <td rowspan="@rowSpan">@order.Contact</td>
+        </tr>
 
             @foreach (var item in order.Items)
             {
-
-                <td headers="prod name">@item.ProductName</td>
-                <td headers="prod quantity">@item.Quantity</td>
-
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+            </tr>
             }
-        </tr>
-            }
+        }
     </tbody>
     </table>
 
