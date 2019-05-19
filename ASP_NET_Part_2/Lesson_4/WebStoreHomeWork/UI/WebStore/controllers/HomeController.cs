@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.controllers
@@ -24,8 +25,9 @@ namespace WebStore.controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Contact([FromServices] ILogger<HomeController> log)
         {
+            log.LogWarning("Контакты");
             return View();
         }
 

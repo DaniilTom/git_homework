@@ -1,0 +1,66 @@
+2019-05-19 22:35:40,576 [7] ?     - Request starting HTTP/1.1 GET http://localhost:50043/  
+
+2019-05-19 22:35:41,239 [7] ?     - Route matched with {action = "Index", controller = "Home", area = ""}. Executing action WebStore.controllers.HomeController.Index (WebStore)
+
+2019-05-19 22:35:41,380 [7] ?     - Executing action method WebStore.controllers.HomeController.Index (WebStore) - Validation state: Valid
+
+2019-05-19 22:35:41,389 [7] ?     - Executed action method WebStore.controllers.HomeController.Index (WebStore), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.0382ms.
+
+2019-05-19 22:35:41,478 [7] ?     - Executing ViewResult, running view Index.
+
+2019-05-19 22:35:42,492 [7] ?     - Executed ViewResult - view Index executed in 952.1724ms.
+
+2019-05-19 22:35:42,521 [7] ?     - Executed action WebStore.controllers.HomeController.Index (WebStore) in 1253.9605ms
+
+2019-05-19 22:35:42,538 [7] ?     - Request finished in 1973.5588ms 200 text/html; charset=utf-8
+
+2019-05-19 22:36:23,734 [11] ?     - Request starting HTTP/1.1 GET http://localhost:50043/Home/Contact  
+
+2019-05-19 22:36:23,764 [11] ?     - Route matched with {action = "Contact", controller = "Home", area = ""}. Executing action WebStore.controllers.HomeController.Contact (WebStore)
+
+2019-05-19 22:36:23,784 [11] ?     - Executing action method WebStore.controllers.HomeController.Contact (WebStore) with arguments (Microsoft.Extensions.Logging.Logger`1[WebStore.controllers.HomeController]) - Validation state: Valid
+
+2019-05-19 22:36:23,787 [11] ?     - Контакты
+
+2019-05-19 22:36:23,791 [11] ?     - Executed action method WebStore.controllers.HomeController.Contact (WebStore), returned result Microsoft.AspNetCore.Mvc.ViewResult in 3.6786ms.
+
+2019-05-19 22:36:23,799 [11] ?     - Executing ViewResult, running view Contact.
+
+2019-05-19 22:36:23,824 [11] ?     - Executed ViewResult - view Contact executed in 29.637ms.
+
+2019-05-19 22:36:23,827 [11] ?     - Executed action WebStore.controllers.HomeController.Contact (WebStore) in 59.4313ms
+
+2019-05-19 22:36:23,832 [11] ?     - Request finished in 96.3559ms 200 text/html; charset=utf-8
+
+2019-05-19 22:36:31,160 [6] ?     - Request starting HTTP/1.1 GET http://localhost:50043/Home/Catalog  
+
+2019-05-19 22:36:31,167 [6] ?     - Route matched with {action = "Catalog", controller = "Home", area = ""}. Executing action WebStore.controllers.HomeController.Catalog (WebStore)
+
+2019-05-19 22:36:31,172 [6] ?     - Executing action method WebStore.controllers.HomeController.Catalog (WebStore) - Validation state: Valid
+
+2019-05-19 22:36:31,176 [6] ?     - Executed action method WebStore.controllers.HomeController.Catalog (WebStore), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.2885ms.
+
+2019-05-19 22:36:31,193 [6] ?     - Executing ViewResult, running view Catalog.
+
+2019-05-19 22:36:32,259 [6] ?     - Executed ViewResult - view Catalog executed in 1080.3288ms.
+
+2019-05-19 22:36:32,262 [6] ?     - Executed action WebStore.controllers.HomeController.Catalog (WebStore) in 1092.2367ms
+
+2019-05-19 22:36:32,266 [6] ?     - Request finished in 1105.9029ms 200 text/html; charset=utf-8
+
+2019-05-19 22:36:34,006 [6] ?     - Request starting HTTP/1.1 GET http://localhost:50043/  
+
+2019-05-19 22:36:34,010 [6] ?     - Route matched with {action = "Index", controller = "Home", area = ""}. Executing action WebStore.controllers.HomeController.Index (WebStore)
+
+2019-05-19 22:36:34,013 [6] ?     - Executing action method WebStore.controllers.HomeController.Index (WebStore) - Validation state: Valid
+
+2019-05-19 22:36:34,015 [6] ?     - Executed action method WebStore.controllers.HomeController.Index (WebStore), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0192ms.
+
+2019-05-19 22:36:34,018 [6] ?     - Executing ViewResult, running view Index.
+
+2019-05-19 22:36:34,022 [6] ?     - Executed ViewResult - view Index executed in 3.8662ms.
+
+2019-05-19 22:36:34,024 [6] ?     - Executed action WebStore.controllers.HomeController.Index (WebStore) in 12.0692ms
+
+2019-05-19 22:36:34,027 [6] ?     - Request finished in 21.6766ms 200 text/html; charset=utf-8
+

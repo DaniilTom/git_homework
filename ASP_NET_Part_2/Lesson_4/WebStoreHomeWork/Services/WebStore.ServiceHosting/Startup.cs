@@ -45,6 +45,18 @@ namespace WebStore.ServiceHosting
                .AddEntityFrameworkStores<WebStoreContext>()
                .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(cfg =>
+            {
+                cfg.Password.RequiredLength = 3;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+
+                cfg.Lockout.MaxFailedAccessAttempts = 10;
+                cfg.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                cfg.Lockout.AllowedForNewUsers = true;
+            });
+
 
         }
 

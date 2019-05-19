@@ -1,0 +1,60 @@
+INFO  1 2019-05-19 22:38:01,077 [1] ?     - Инициализация БД...
+
+INFO  1 2019-05-19 22:38:03,112 [1] ?     - Entity Framework Core 2.2.4-servicing-10062 initialized 'WebStoreContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  6 2019-05-19 22:38:07,035 [6] ?     - Executed DbCommand (455ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+
+INFO  13 2019-05-19 22:38:07,058 [13] ?     - Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+
+INFO  6 2019-05-19 22:38:07,081 [6] ?     - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+
+INFO  6 2019-05-19 22:38:07,122 [6] ?     - No migrations were applied. The database is already up to date.
+
+INFO  14 2019-05-19 22:38:07,816 [14] ?     - Executed DbCommand (33ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0
+
+INFO  13 2019-05-19 22:38:08,010 [13] ?     - Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0
+
+INFO  6 2019-05-19 22:38:08,057 [6] ?     - Executed DbCommand (3ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0
+
+INFO  6 2019-05-19 22:38:08,160 [6] ?     - Executed DbCommand (12ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END
+
+INFO  6 2019-05-19 22:38:08,171 [6] ?     - Инициализация БД: OK
+
+INFO  13 2019-05-19 22:38:08,652 [13] ?     - Request starting HTTP/1.1 GET http://localhost:52022/api/values  
+
+INFO  13 2019-05-19 22:38:08,738 [13] ?     - Executing endpoint 'WebStore.ServiceHosting.Controllers.ValuesController.Get (WebStore.ServiceHosting)'
+
+INFO  13 2019-05-19 22:38:08,766 [13] ?     - Route matched with {action = "Get", controller = "Values"}. Executing action WebStore.ServiceHosting.Controllers.ValuesController.Get (WebStore.ServiceHosting)
+
+INFO  13 2019-05-19 22:38:08,779 [13] ?     - Executing action method WebStore.ServiceHosting.Controllers.ValuesController.Get (WebStore.ServiceHosting) - Validation state: Valid
+
+INFO  13 2019-05-19 22:38:08,784 [13] ?     - Executed action method WebStore.ServiceHosting.Controllers.ValuesController.Get (WebStore.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 0.5012ms.
+
+INFO  13 2019-05-19 22:38:08,801 [13] ?     - Executing ObjectResult, writing value of type 'System.String[]'.
+
+INFO  13 2019-05-19 22:38:08,910 [13] ?     - Executed action WebStore.ServiceHosting.Controllers.ValuesController.Get (WebStore.ServiceHosting) in 137.0918ms
+
+INFO  13 2019-05-19 22:38:08,913 [13] ?     - Executed endpoint 'WebStore.ServiceHosting.Controllers.ValuesController.Get (WebStore.ServiceHosting)'
+
+INFO  13 2019-05-19 22:38:08,923 [13] ?     - Request finished in 272.4742ms 200 application/json; charset=utf-8
+

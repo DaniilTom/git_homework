@@ -1,0 +1,16 @@
+INFO  7 2019-05-19 22:38:01,993 [7] ?     - Request starting HTTP/1.1 GET http://localhost:50043/  
+
+INFO  7 2019-05-19 22:38:02,800 [7] ?     - Route matched with {action = "Index", controller = "Home", area = ""}. Executing action WebStore.controllers.HomeController.Index (WebStore)
+
+INFO  7 2019-05-19 22:38:02,883 [7] ?     - Executing action method WebStore.controllers.HomeController.Index (WebStore) - Validation state: Valid
+
+INFO  7 2019-05-19 22:38:02,898 [7] ?     - Executed action method WebStore.controllers.HomeController.Index (WebStore), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.1535ms.
+
+INFO  7 2019-05-19 22:38:02,983 [7] ?     - Executing ViewResult, running view Index.
+
+INFO  7 2019-05-19 22:38:04,499 [7] ?     - Executed ViewResult - view Index executed in 1514.9648ms.
+
+INFO  7 2019-05-19 22:38:04,532 [7] ?     - Executed action WebStore.controllers.HomeController.Index (WebStore) in 1699.3452ms
+
+INFO  7 2019-05-19 22:38:04,564 [7] ?     - Request finished in 2564.0827ms 200 text/html; charset=utf-8
+
