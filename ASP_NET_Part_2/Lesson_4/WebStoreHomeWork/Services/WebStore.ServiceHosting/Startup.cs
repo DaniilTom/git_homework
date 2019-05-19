@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
 using WebStore.Domain;
 using Microsoft.AspNetCore.Identity;
+using WebStore.Logger;
 
 namespace WebStore.ServiceHosting
 {
@@ -48,8 +49,10 @@ namespace WebStore.ServiceHosting
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDBInitializer _dbI)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDBInitializer _dbI, ILoggerFactory log)
         {
+            log.AddLog4Net();
+
             _dbI.InitializeAsync().Wait();
 
             if (env.IsDevelopment())

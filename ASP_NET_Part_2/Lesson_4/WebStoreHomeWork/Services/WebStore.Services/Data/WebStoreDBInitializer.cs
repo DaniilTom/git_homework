@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,56 +15,72 @@ namespace WebStore.Data
         private readonly WebStoreContext _db;
         private readonly UserManager<User> _um;
         private readonly RoleManager<IdentityRole> _rm;
+        private readonly ILogger<WebStoreDBInitializer> _log;
 
-        public WebStoreDBInitializer(WebStoreContext db, UserManager<User> um, RoleManager<IdentityRole> rm)
+        public WebStoreDBInitializer(WebStoreContext db, UserManager<User> um, RoleManager<IdentityRole> rm, ILogger<WebStoreDBInitializer> log)
         {
             _db = db;
             _um = um;
             _rm = rm;
+            _log = log;
         }
 
         public async Task InitializeAsync()
         {
-            await _db.Database.MigrateAsync();
-
-            await InitRoleAsync();
-
-            if (await _db.Products.AnyAsync())
-                return;
-
-            using (var transaction = await _db.Database.BeginTransactionAsync())
+            try
             {
-                await _db.Categories.AddRangeAsync(TestData.Categories);
+                _log.LogInformation("Инициализация БД...");
 
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Categories] ON");
-                await _db.SaveChangesAsync();
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Categories] OFF");
+                await _db.Database.MigrateAsync();
 
-                transaction.Commit();
+                await InitRoleAsync();
+
+                if (await _db.Products.AnyAsync())
+                {
+                    _log.LogInformation("Инициализация БД: OK");
+                    return;
+                }
+
+                using (var transaction = await _db.Database.BeginTransactionAsync())
+                {
+                    await _db.Categories.AddRangeAsync(TestData.Categories);
+
+                    await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Categories] ON");
+                    await _db.SaveChangesAsync();
+                    await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Categories] OFF");
+
+                    transaction.Commit();
+                }
+
+                using (var transaction = await _db.Database.BeginTransactionAsync())
+                {
+                    await _db.Products.AddRangeAsync(TestData.Products);
+
+                    await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
+                    await _db.SaveChangesAsync();
+                    await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
+
+                    transaction.Commit();
+                }
+
+
+                using (var transaction = await _db.Database.BeginTransactionAsync())
+                {
+                    await _db.MCDescriptions.AddRangeAsync(TestData.MCDescriptions);
+
+                    await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[MCDescriptions] ON");
+                    await _db.SaveChangesAsync();
+                    await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[MCDescriptions] OFF");
+
+                    transaction.Commit();
+                }
+                _log.LogInformation("Инициализация БД: OK");
             }
-
-            using (var transaction = await _db.Database.BeginTransactionAsync())
+            catch(Exception e)
             {
-                await _db.Products.AddRangeAsync(TestData.Products);
-
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
-                await _db.SaveChangesAsync();
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
-
-                transaction.Commit();
+                _log.LogError("Во время инициализации возникло исключение" + e.GetType().Name + ";" + e.Message);
             }
             
-
-            using (var transaction = await _db.Database.BeginTransactionAsync())
-            {
-                await _db.MCDescriptions.AddRangeAsync(TestData.MCDescriptions);
-
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[MCDescriptions] ON");
-                await _db.SaveChangesAsync();
-                await _db.Database.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[MCDescriptions] OFF");
-
-                transaction.Commit();
-            }
         }
 
         private async Task InitRoleAsync()
