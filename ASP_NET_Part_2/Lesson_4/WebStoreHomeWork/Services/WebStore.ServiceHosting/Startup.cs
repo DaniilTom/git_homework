@@ -53,6 +53,8 @@ namespace WebStore.ServiceHosting
         {
             log.AddLog4Net();
 
+            app.UseStaticFiles();
+
             _dbI.InitializeAsync().Wait();
 
             if (env.IsDevelopment())

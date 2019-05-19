@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using Microsoft.Extensions.Logging;
 
 namespace WebStore.Logger
 {
@@ -11,10 +12,8 @@ namespace WebStore.Logger
         private readonly string _ConfigurationFile;
         private readonly ConcurrentDictionary<string, Log4NetLogger> _Loggers = new ConcurrentDictionary<string, Log4NetLogger>();
 
-        public Log4NetLoggerProvider(string ConfigurationFile)
-        {
-            _ConfigurationFile = ConfigurationFile;
-        }
+        public Log4NetLoggerProvider(string ConfigurationFile) => _ConfigurationFile = ConfigurationFile;
+
 
         public ILogger CreateLogger(string CategoryName)
         {

@@ -19,7 +19,6 @@ namespace WebStore
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging(log => log.SetMinimumLevel(LogLevel.Information))
                 .UseStartup<Startup>();
     }
 }

@@ -1,8 +1,8 @@
-﻿using log4net;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Xml;
+using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace WebStore.Logger
 {
@@ -21,15 +21,12 @@ namespace WebStore.Logger
             log4net.Config.XmlConfigurator.Configure(logger_repository, xml);
         }
 
-        public IDisposable BeginScope<TState>(TState state)
+        public bool IsEnabled(LogLevel LogLevel)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool IsEnabled(LogLevel logLevel)
-        {
-            switch (logLevel)
+            switch (LogLevel)
             {
+                default: throw new ArgumentOutOfRangeException(nameof(LogLevel), LogLevel, null);
+
                 case LogLevel.Trace:
                 case LogLevel.Debug:
                     return _Log.IsDebugEnabled;
@@ -48,49 +45,43 @@ namespace WebStore.Logger
 
                 case LogLevel.None:
                     return false;
-
-                default: throw new ArgumentOutOfRangeException(nameof(LogLevel), logLevel, null);
             }
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(LogLevel LogLevel, EventId Id, TState State, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (!IsEnabled(logLevel)) return;
+            if (!IsEnabled(LogLevel)) return;
             if (formatter is null) throw new ArgumentNullException(nameof(formatter));
 
-            var msg = formatter(state, exception);
+            var msg = formatter(State, exception);
 
-            if (string.IsNullOrEmpty(msg)) return;
+            if (string.IsNullOrEmpty(msg) && exception is null) return;
 
-            switch (logLevel)
+            switch (LogLevel)
             {
+                default: throw new ArgumentOutOfRangeException(nameof(LogLevel), LogLevel, null);
+
                 case LogLevel.Trace:
                 case LogLevel.Debug:
                     _Log.Debug(msg);
                     break;
-
                 case LogLevel.Information:
                     _Log.Info(msg);
                     break;
-
                 case LogLevel.Warning:
                     _Log.Warn(msg);
                     break;
-
                 case LogLevel.Error:
                     _Log.Error(msg ?? exception.ToString());
                     break;
-
                 case LogLevel.Critical:
                     _Log.Fatal(msg ?? exception.ToString());
                     break;
-
                 case LogLevel.None:
                     break;
-
-                default: throw new ArgumentOutOfRangeException(nameof(LogLevel), logLevel, null);
             }
-
         }
+
+        public IDisposable BeginScope<TState>(TState State) => null;
     }
 }
