@@ -21,6 +21,8 @@
 
         @await Html.PartialAsync("Partial/_Navigation")
 
+        @await  Component.InvokeAsync("BreadCrumbs")
+
         @RenderBody()
 
         @await  Html.PartialAsync("Partial/_Footer")
