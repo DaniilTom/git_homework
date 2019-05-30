@@ -21,7 +21,8 @@ namespace WebStore.controllers
             var action_list = asm.GetTypes()
                 .Where(type => typeof(Controller).IsAssignableFrom(type)) //filter controllers
                 .SelectMany(type => type.GetMethods())
-                .Where(method => method.IsPublic && !method.IsDefined(typeof(NonActionAttribute)) && !method.IsConstructor);
+                .Where(method => method.IsPublic && !method.IsDefined(typeof(NonActionAttribute))
+                                                    && !method.IsConstructor && method.ReturnType == typeof(IActionResult));
 
             foreach(var action in action_list)
             {
