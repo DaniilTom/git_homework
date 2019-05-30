@@ -5,11 +5,11 @@
 
 <nav>
     <ul class="menu" id="main_page_menu">
-        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-        <li><a asp-controller="Employes" asp-action="Index">Employes</a></li>
-        <li><a asp-controller="Employes" asp-action="Edit">Create New</a></li>
-        <li><a asp-controller="Home" asp-action="Catalog">Каталог</a></li>
-        <li><a asp-controller="Home" asp-action="Contact">Контакты</a></li>
+        <li><a current-route asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a current-route asp-controller="Employes" asp-action="Index">Employes</a></li>
+        <li><a current-route asp-controller="Employes" asp-action="Edit">Create New</a></li>
+        <li><a current-route asp-controller="Home" asp-action="Catalog">Каталог</a></li>
+        <li><a current-route asp-controller="Home" asp-action="Contact">Контакты</a></li>
         <li><a asp-controller="Test" asp-action="Index">Get Ok From Serv</a></li>
     </ul>
 </nav>
