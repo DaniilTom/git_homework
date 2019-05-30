@@ -15,19 +15,24 @@
     <link rel=" stylesheet" href="~/bootstrap/dist/css/bootstrap.min.css"/>
     <title>@ViewBag.Title</title>
 </head>
-    <body>
+<body>
 
-        @await Html.PartialAsync("Partial/_Header")
+    @await Html.PartialAsync("Partial/_Header")
 
-        @await Html.PartialAsync("Partial/_Navigation")
+    @await Html.PartialAsync("Partial/_Navigation")
 
-        @await  Component.InvokeAsync("BreadCrumbs")
+    @await Component.InvokeAsync("BreadCrumbs")
 
-        @RenderBody()
+    <hr />
+    <p>BreadCrumbs by SmartBreacrumbs:</p>
+    <breadcrumb></breadcrumb>
+    <hr />
 
-        @await  Html.PartialAsync("Partial/_Footer")
+    @RenderBody()
 
-        @await RenderSectionAsync("Scripts", false)
-    </body>
+    @await Html.PartialAsync("Partial/_Footer")
+
+    @await RenderSectionAsync("Scripts", false)
+</body>
 </html>
 

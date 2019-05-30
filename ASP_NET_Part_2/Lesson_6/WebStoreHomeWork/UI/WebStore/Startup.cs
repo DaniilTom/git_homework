@@ -22,6 +22,7 @@ using WebStore.Clients.AllData;
 using WebStore.Clients.Users;
 using Microsoft.Extensions.Logging;
 using WebStore.Logger;
+using SmartBreadcrumbs.Extensions;
 
 namespace WebStore
 {
@@ -88,6 +89,12 @@ namespace WebStore
                 cfg.AccessDeniedPath = "/Account/AccessDenied"; //если доступ запрещен
 
                 cfg.SlidingExpiration = true;
+            });
+
+            services.AddBreadcrumbs(GetType().Assembly, option =>
+            {
+                option.TagName = "nav";
+                option.SeparatorElement = "<li class=\"separator\">&nbsp;&rarr;&nbsp;</li>";
             });
         }
 
