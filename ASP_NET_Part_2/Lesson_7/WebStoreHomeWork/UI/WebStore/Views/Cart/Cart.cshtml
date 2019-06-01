@@ -24,7 +24,8 @@
                 <td><img src="@prodCont.Product.ImageUrl" alt="@prodCont.Product.Name" width="100" /></td>
                 <td>@prodCont.Product.Name</td>
                 <td>
-                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@prodCont.Product.Id">
+                    @*asp-controller="Cart" asp-action="AddToCart" asp-route-id="@prodCont.Product.Id"*@
+                    <a data-id="@prodCont.Product.Id" class="btn btn-dark CallAddToCart">
                         <i class="fa fa-plus text-secondary"></i>
                     </a>
                     <span>&emsp;@prodCont.Count&emsp;</span>

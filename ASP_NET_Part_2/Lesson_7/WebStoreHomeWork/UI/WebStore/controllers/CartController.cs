@@ -43,6 +43,12 @@ namespace WebStore.controllers
             return RedirectToAction("Cart");
         }
 
+        public IActionResult AddToCartAJAX(int id)
+        {
+            AddToCart(id);
+            return Json(new { id, message = $"Товар {id} добавлен к корзине" });
+        }
+
         public IActionResult DecrementProduct(int id)
         {
             IProduct product = _DataBase.Products.FirstOrDefault(m => m.Id == id);
