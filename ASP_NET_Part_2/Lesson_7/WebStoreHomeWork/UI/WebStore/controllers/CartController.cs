@@ -46,7 +46,7 @@ namespace WebStore.controllers
         public IActionResult AddToCartAJAX(int id)
         {
             AddToCart(id);
-            return Json(new { id, message = $"Товар {id} добавлен к корзине" });
+            return Json(new { id, message = $"Товар {id} добавлен" });
         }
 
         public IActionResult DecrementProduct(int id)
@@ -55,12 +55,22 @@ namespace WebStore.controllers
             _CartService.DecrementProduct(product);
             return RedirectToAction("Cart");
         }
+        public IActionResult DecrementFromCartAJAX(int id)
+        {
+            DecrementProduct(id);
+            return Json(new { id, message = $"Товар {id} убавлен" });
+        }
 
         public IActionResult RemoveFromCart(int id)
         {
             IProduct product = _DataBase.Products.FirstOrDefault(m => m.Id == id);
             _CartService.RemoveFromCart(product);
             return RedirectToAction("Cart");
+        }
+        public IActionResult RemoveFromCartAJAX(int id)
+        {
+            RemoveFromCart(id);
+            return Json(new { id, message = $"Товар {id} удален" });
         }
 
         public IActionResult Checkout()

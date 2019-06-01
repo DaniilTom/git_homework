@@ -42,7 +42,9 @@
     <script>
         $(function () {
             Cart.init({
-                addToCartLink: "@Url.Action("AddToCartAJAX","Cart")"
+                addToCartLink: "@Url.Action("AddToCartAJAX","Cart")",
+                decrementFromCartLink: "@Url.Action("DecrementFromCartAJAX", "Cart")",
+                removeFromCartLink: "@Url.Action("RemoveFromCartAJAX", "Cart")"
             });
         });
     </script>

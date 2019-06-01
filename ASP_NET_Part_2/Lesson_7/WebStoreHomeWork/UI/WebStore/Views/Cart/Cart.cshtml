@@ -28,11 +28,14 @@
                     <a data-id="@prodCont.Product.Id" class="btn btn-dark CallAddToCart">
                         <i class="fa fa-plus text-secondary"></i>
                     </a>
-                    <span>&emsp;@prodCont.Count&emsp;</span>
-                    <a asp-controller="Cart" asp-action="DecrementProduct" asp-route-id="@prodCont.Product.Id">
+
+                    <span id="prod_count_@prodCont.Product.Id">&emsp;@prodCont.Count&emsp;</span>
+
+                    <a data-id="@prodCont.Product.Id" class="btn btn-dark CallDecrementFromCart">
                         <i class="fa fa-minus text-secondary"></i>
                     </a>
-                    <a asp-controller="Cart" asp-action="DecrementProduct" asp-route-id="@prodCont.Product.Id" style="float: right;">
+
+                    <a  class="btn CallRemoveFromCart" data-id="@prodCont.Product.Id" style="float: right;">
                         <i class="fa fa-trash text-danger">Удалить</i>
                     </a>
                 </td>
