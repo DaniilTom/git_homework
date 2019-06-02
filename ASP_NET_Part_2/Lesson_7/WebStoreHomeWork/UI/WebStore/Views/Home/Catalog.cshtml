@@ -6,7 +6,7 @@
 <article>
     <h3>Товары:</h3>
 
-    @await Component.InvokeAsync("ProductBase")
+    @await Component.InvokeAsync("ProductBase", new { Page = ViewBag.Page, PageSize = ViewBag.PageSize })
 
 </article>
 

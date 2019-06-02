@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SmartBreadcrumbs.Attributes;
 using WebStore.Interfaces.Services;
@@ -13,11 +14,11 @@ namespace WebStore.controllers
     //[Controller]
     public class HomeController : Controller
     {
-        //private readonly IServiceProductData _MicrocontrollerData;
+        private readonly IConfiguration _Configuration;
 
-        public HomeController(/*IServiceProductData ProductData*/)
+        public HomeController(IConfiguration Configuration)
         {
-            //_MicrocontrollerData = ProductData;
+            _Configuration = Configuration;
         }
 
         [DefaultBreadcrumb("Home")]
@@ -35,8 +36,10 @@ namespace WebStore.controllers
         }
 
         [Breadcrumb("Catalog", FromAction = "Contact")] //FromAction просто так, посмотреть
-        public IActionResult Catalog()
+        public IActionResult Catalog(int page = 0)
         {
+            ViewBag.PageSize = int.Parse(_Configuration["PageSize"]);
+            ViewBag.Page = page;
             return View();
         }
     }

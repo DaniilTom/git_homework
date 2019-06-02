@@ -17,15 +17,25 @@ namespace WebStore.Components
             _MicrocontrollerData = ProductData;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int page, int pageSize)
         {
-            IEnumerable<MicrocontrollerViewModel> mv_model = GetProducts();
+            IEnumerable<MicrocontrollerViewModel> mv_model = GetProducts(page, pageSize);
             return View(mv_model);
         }
 
-        private IEnumerable<MicrocontrollerViewModel> GetProducts()
+        private IEnumerable<MicrocontrollerViewModel> GetProducts(int page, int pageSize)
         {
-            var mc = _MicrocontrollerData.Products;
+            int count = _MicrocontrollerData.Products.Count();
+            ViewBag.PageCount = (int)Math.Ceiling((double)count / pageSize);
+
+            int skip = 0;
+
+            if (page != 0)
+                skip = (page - 1) * pageSize;
+            else
+                pageSize = count;
+
+            var mc = _MicrocontrollerData.Products.Skip(skip).Take(pageSize);
             var desc = _MicrocontrollerData.DetailedDescription;
 
             List<MicrocontrollerViewModel> list = new List<MicrocontrollerViewModel>();

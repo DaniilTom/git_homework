@@ -17,12 +17,32 @@ namespace WebStore.TagHelpers
         [HtmlAttributeName("asp-action")]
         public string Action { get; set; }
 
+        private IDictionary<string, string> _RouteValues;
+
+        [HtmlAttributeName("asp-all-route", DictionaryAttributePrefix = "asp-route-")]
+        public IDictionary<string, string> RouteValues
+        {
+            get => _RouteValues ?? (_RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase));
+            set => _RouteValues = value;
+        }
+
         [HtmlAttributeNotBound, ViewContext]
         public ViewContext ViewContext { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             base.Process(context, output);
+
+            if(RouteValues.ContainsKey("page"))
+            {
+                string current_page = ViewContext.HttpContext.Request.Query["page"];
+                //string current_page = ViewContext.RouteData.Values["page"]?.ToString(); // тут нет "page". почему?
+                if (current_page == _RouteValues["page"])
+                {
+                    output.Attributes.Add("class", "current-route");
+                }
+                return;
+            }
 
             string current_controller = ViewContext.RouteData.Values["Controller"].ToString();
             string current_action = ViewContext.RouteData.Values["Action"].ToString();
