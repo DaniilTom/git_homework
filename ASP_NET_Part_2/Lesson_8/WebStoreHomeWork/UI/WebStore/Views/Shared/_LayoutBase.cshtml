@@ -21,6 +21,9 @@
 <body>
     <partial name="Partial/_Header"/>
 
+    <span id="time"></span>
+    <hr />
+
     @await Html.PartialAsync("Partial/_Navigation")
 
     @await Component.InvokeAsync("BreadCrumbs")
@@ -46,6 +49,27 @@
                 removeFromCartLink: "@Url.Action("RemoveFromCartAJAX", "Cart")"
             });
         });
+    </script>
+    <script>
+        var options = {
+            era: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long',
+            timezone: 'UTC',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+        };
+
+        function timeUpdate() {
+            var tag_time = $("#time");
+            var date = new Date();
+            tag_time.html(date);
+        }
+
+        setInterval(timeUpdate, 1000);
     </script>
 </body>
 </html>
