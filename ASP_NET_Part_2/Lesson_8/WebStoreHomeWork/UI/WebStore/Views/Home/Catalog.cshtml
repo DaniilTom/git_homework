@@ -6,7 +6,7 @@
 <article>
     <h3>Товары:</h3>
 
-    <div id="page-catalog">
+    <div id="page-catalog" style="overflow: hidden;">
         <!-- Постраничное обновление происходит через AJAX и HomeController.GetPartialCatalog -->
         @*@await Component.InvokeAsync("ProductBase", new { Page = ViewBag.Page, PageSize = ViewBag.PageSize })*@
     </div>
@@ -15,6 +15,7 @@
 
 @section scripts{ 
     <script src="~/js/Catalog/CatalogPageAJAX.js"></script>
+    <script src="~/js/jquery-loading-overlay/loadingoverlay.min.js"></script>
     <script>
         $(function () {
             PartialCatalog.init({

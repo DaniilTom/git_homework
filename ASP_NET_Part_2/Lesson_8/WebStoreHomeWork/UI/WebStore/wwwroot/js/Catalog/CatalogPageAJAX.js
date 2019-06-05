@@ -9,6 +9,7 @@
         // первая загрузка
         $.get(PartialCatalog._properties.path)
             .done(function (result) {
+                $("#page-catalog").LoadingOverlay("show");
                 PartialCatalog.refreshPartialCatalog(result);
                 PartialCatalog.initEvent(); // редактируем кнопки после их появления
             })
@@ -28,6 +29,7 @@
      * @param {Event} event
      */
     getPartialCatalog: function (event) {
+        $("#page-catalog").LoadingOverlay("show");
         event.preventDefault();
         //var button = $(this);
         var page = $(this).data("page");
@@ -40,5 +42,6 @@
     refreshPartialCatalog: function (result) {
         $("#page-catalog").html(result);
         PartialCatalog.initEvent();
+        $("#page-catalog").LoadingOverlay("hide");
     }
 }
