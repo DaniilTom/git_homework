@@ -1,9 +1,10 @@
 ﻿
 @model IEnumerable<WebStore.Domain.ViewModel.MicrocontrollerViewModel>
 
-@for(int i = 0; i < ViewBag.PageCount; i++)
+@for (int i = 0; i < ViewBag.PageCount; i++)
 {
-    <a class="page-num" current-route asp-controller="Home" asp-action="Catalog" asp-route-page="@(i+1)">@(i+1)</a>
+    @*<a class="page-num btn" current-route asp-controller="Home" asp-action="GetPartialCatalog" asp-route-page="@(i+1)">@(i+1)</a>*@
+    <button class="page-num btn" data-page="@(i+1)">@(i+1)</button>
 }
 
 <ul class="cat_menu" style="list-style: none;">
@@ -15,11 +16,11 @@
             <h5>@view.ProductBase.Name</h5>
             <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@view.ProductBase.Id">Добавить в корзину</a>
             <ul>
-                @foreach(var d in view.MCDescription.DetailedDesription.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                @foreach (var d in view.MCDescription.DetailedDesription.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     <li>@d</li>
                 }
             </ul>
-</li>
+        </li>
     }
 </ul>

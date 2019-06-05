@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebStore.Domain.DTO;
 using WebStore.Domain.Implementations;
 
-namespace WebStore.ViewModel
+namespace WebStore.Domain.ViewModel
 {
     public class MicrocontrollerViewModel
     {

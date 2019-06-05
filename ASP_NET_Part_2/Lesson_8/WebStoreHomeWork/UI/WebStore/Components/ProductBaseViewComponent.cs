@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Interfaces.Services;
-using WebStore.ViewModel;
+using WebStore.Domain.ViewModel;
 
 namespace WebStore.Components
 {

@@ -15,7 +15,7 @@ namespace WebStore.Tests
         [TestInitialize]
         public void Init()
         {
-            _Controller = new HomeController();
+            _Controller = new HomeController(null, null);
         }
 
         [TestMethod]
