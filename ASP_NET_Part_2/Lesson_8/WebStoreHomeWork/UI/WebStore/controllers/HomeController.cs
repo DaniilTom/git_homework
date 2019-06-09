@@ -73,32 +73,19 @@ namespace WebStore.controllers
             var mc = _ProductData.Products.Skip(skip).Take(pageSize);
             var desc = _ProductData.DetailedDescription;
 
-            //List<MicrocontrollerViewModel> list = new List<MicrocontrollerViewModel>();
-
-            //foreach (var product in mc)
-            //{
-            //    MicrocontrollerViewModel mvModel = new MicrocontrollerViewModel { ProductBase = product };
-            //    foreach (var d in desc)
-            //    {
-            //        if (product.Id == d.Id)
-            //        {
-            //            mvModel.MCDescription = d;
-            //            break;
-            //        }
-            //    }
-            //    if (mvModel.MCDescription == null)
-            //        mvModel.MCDescription = new Domain.DTO.MCDescriptionDTO { DetailedDesription = "Нет описания;" };
-
-            //    list.Add(mvModel);
-            //}
-
-            //return list;
-
             return mc.Select(p => new MicrocontrollerViewModel
             {
                 ProductBase = p,
                 MCDescription = desc.FirstOrDefault(d => p.Id == d.ProductId) ?? new Domain.DTO.MCDescriptionDTO { DetailedDesription = "Нет описания;" }
             });
         }
+
+        public IActionResult Test()
+        {
+            Task.Delay(2000);
+            return Json(new { Message = "OK" });
+        }
+
+        public IActionResult SignalRTest() => View();
     }
 }

@@ -23,6 +23,7 @@ using WebStore.Clients.Users;
 using Microsoft.Extensions.Logging;
 using WebStore.Logger;
 using SmartBreadcrumbs.Extensions;
+using WebStore.Hubs;
 
 namespace WebStore
 {
@@ -36,6 +37,9 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(); // добавляет сервисов для работы MVC
+
+            services.AddSignalR();
+
             services.AddSingleton<IServiceEmployeeData, EmployeesClient>();
 
             services.AddScoped<IServiceProductData, AllDataClient>();
@@ -112,17 +116,9 @@ namespace WebStore
 
             app.UseAuthentication();
 
-            //app.Use(async(context, next) =>
-            //{
-            //    await context.Response.WriteAsync("<script>alert(\"Hey\");</script>");
-            //    await next.Invoke();
-            //}
-            //);
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+            app.UseSignalR(routes => {
+                routes.MapHub<InformationHub>("/info");
+            });
 
             app.UseMvc(route =>
             {

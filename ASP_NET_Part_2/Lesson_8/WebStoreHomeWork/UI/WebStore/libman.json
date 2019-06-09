@@ -7,7 +7,6 @@
       "destination": "wwwroot/js/jquery-validation-unobtrusive/"
     },
     {
-      "provider": "cdnjs",
       "library": "jquery-validate@1.19.0",
       "destination": "wwwroot/js/jquery-validate/",
       "files": [
@@ -18,10 +17,6 @@
         "localization/messages_ru.min.js",
         "localization/messages_ru.js"
       ]
-    },
-    {
-      "library": "jquery@3.4.0",
-      "destination": "wwwroot/js/jquery/"
     },
     {
       "provider": "unpkg",
@@ -175,13 +170,36 @@
       ]
     },
     {
-      "provider": "cdnjs",
       "library": "font-awesome@5.8.1",
       "destination": "wwwroot/font-awesome/"
     },
     {
       "library": "jquery-loading-overlay@2.1.6",
       "destination": "wwwroot/js/jquery-loading-overlay/"
+    },
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/js/jquery/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "@aspnet/signalr@1.1.2",
+      "destination": "wwwroot/signalr/",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map",
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map"
+      ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery-ajax-unobtrusive@3.2.6",
+      "destination": "wwwroot/js/jquery-ajax-unobtrusive/",
+      "files": [
+        "dist/jquery.unobtrusive-ajax.js",
+        "dist/jquery.unobtrusive-ajax.min.js"
+      ]
     }
   ]
 }
