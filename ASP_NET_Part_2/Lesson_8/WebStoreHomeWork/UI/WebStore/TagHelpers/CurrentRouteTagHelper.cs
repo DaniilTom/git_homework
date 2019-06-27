@@ -36,7 +36,6 @@ namespace WebStore.TagHelpers
             if(RouteValues.ContainsKey("page"))
             {
                 string current_page = ViewContext.HttpContext.Request.Query["page"];
-                //string current_page = ViewContext.RouteData.Values["page"]?.ToString(); // тут нет "page". почему?
                 if (current_page == _RouteValues["page"])
                 {
                     output.Attributes.Add("class", "current-route");

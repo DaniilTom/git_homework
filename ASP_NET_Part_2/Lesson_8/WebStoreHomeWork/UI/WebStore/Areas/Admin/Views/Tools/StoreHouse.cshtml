@@ -4,11 +4,10 @@
 }
 
 <h4>StoreHouse</h4>
-<p><a asp-area="" asp-controller="Home" asp-action="Catalog">В каталог</a></p>
 
 <div class="products" style="float: left; width: 45%; padding: 10px;">
     <h4>Продукты</h4>
-    <table title="Product" border="1" cellpadding="0" cellspacing="0">
+    <table title="Product" border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
                 <th>ID</th>
@@ -17,21 +16,13 @@
             </tr>
         </thead>
         <tbody>
-            <!--<td contenteditable="true">vm.Product.Name</td> тоже как вариант-->
             @foreach (var vm in Model)
             {
                 <tr>
-                    <td>
-                        <label asp-for="@vm.Product.Id">@vm.Product.Id</label>
-                        <input asp-for="@vm.Product.Id" type="hidden" />
-                    </td>
-                    <td>
-                        <input asp-for="@vm.Product.Name" />
-                    </td>
-                    <td>
-                        <select asp-for="@vm.Category.Name"
-                                asp-items="((IEnumerable<WebStore.Domain.Implementations.Category>)ViewBag.Categories).Select(c => new SelectListItem { Text = c.Name, Value = c.Name }).OrderByDescending(s => s.Value)"></select>
-                    </td>
+                    <td>@vm.Product.Id</td>
+                    <td>@vm.Product.Name</td>
+                    <td>@vm.Category.Name</td>
+                    <td><a asp-action="EditProduct" asp-route-id="@vm.Product.Id">Редактировать</a></td>
                 </tr>
             }
         </tbody>
@@ -39,7 +30,7 @@
     <hr>
 </div>
 
-<div class="categories" style="float: left; width: 30%; padding: 10px;">
+<div class="categories" style="float: left; width: 45%; padding: 10px;">
     <h4>Категории</h4>
     <table title="Categories" border="1">
         <thead>
@@ -59,41 +50,5 @@
         </tbody>
     </table>
 </div>
-
-<div>
-    <form method="post" style="clear: both;" asp-action="CreateNew">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" />
-        <br />
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price" />
-        <br />
-        <label for="catId">Category ID</label>
-        <select name="catId" id="catId" asp-items="((IEnumerable<WebStore.Domain.Implementations.Category>)ViewBag.Categories).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() })"></select>
-
-        <input type="submit" />
-    </form>
-</div>
-<hr />
-<div style="float: left; width: 45%; padding: 10px;">
-    <form method="post" style="clear: both;" asp-action="AddDescription">
-        <label for="id">Id</label>
-        <input type="number" id="id" name="id" required/>
-        <br />
-        <label for="desc">Description</label>
-        @*<input type="text" id="desc" name="desc_enum" />*@
-        <textarea rows="10" cols="30" name="desc" placeholder="Одна строка - один пункт списка описания"></textarea>
-
-        <input type="submit" />
-    </form>
-</div>
-
-<div style="float: left; width: 30%; padding: 10px;">
-    <form asp-action="UploadImgAsync" method="post" enctype="multipart/form-data">
-        <label for="id">Id</label>
-        <input type="number" id="id" name="id" required/>
-
-        <input type="file" name="file" /><br>
-        <input type="submit" value="Загрузить" />
-    </form>
-</div>
+<br />
+<div style="clear: both;"><a asp-action="EditProduct">Добавить новый товар</a></div>

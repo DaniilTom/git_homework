@@ -13,6 +13,7 @@ using System.IO;
 using WebStore.Domain.Implementations;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Domain.DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebStore.Areas.Admin.Controllers
 {
@@ -20,10 +21,12 @@ namespace WebStore.Areas.Admin.Controllers
     public class ToolsController : Controller
     {
         private readonly IServiceAllData _db;
+        private readonly WebStoreContext _wsContext;
 
-        public ToolsController(IServiceAllData db)
+        public ToolsController(IServiceAllData db, WebStoreContext wsContext)
         {
             _db = db;
+            _wsContext = wsContext;
         }
 
         public IActionResult Index()
@@ -33,9 +36,6 @@ namespace WebStore.Areas.Admin.Controllers
 
         public IActionResult StoreHouse()
         {
-            // сначала в представление передавался контекст БД (т.е. _db)
-            // но при вызове _db.ProductBase.Category.Name
-            // выбрасывалось NullReferenceExecption
 
             var storeHouseVM = from mic in _db.Products
                                from cat in _db.Categories
@@ -86,6 +86,66 @@ namespace WebStore.Areas.Admin.Controllers
         public IActionResult Orders()
         {
             return View(_db.Orders);
+        }
+
+        [HttpGet]
+        public IActionResult EditProduct(int? id)
+        {
+            var prod = new ProductDTO();
+            ViewBag.Categories = _db.Categories.Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+            if (id != null)
+            {
+                ViewBag.Description = _db.DetailedDescription.FirstOrDefault(d => d.ProductId == id).DetailedDesription;//.Replace(";", ";\n");
+                prod = _db.Products.FirstOrDefault(p => p.Id == id);
+            }
+            return View(prod);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(ProductDTO prod, string desc, IFormFile file)
+        {
+            string fileName;
+
+            if (file != null)
+                fileName = prod.Name + file.FileName.Substring(file.FileName.LastIndexOf('.'));
+            else fileName = prod.ImageUrl;
+
+            ProductBase editProduct;
+            if (prod.Id == 0)
+            {
+                editProduct = new ProductBase()
+                {
+                    Name = prod.Name,
+                    ImageUrl = fileName,
+                    CategoryId = prod.CategoryId,
+                    Category = _wsContext.Categories.First(c => c.Id == prod.CategoryId),
+                    Price = prod.Price
+                };
+
+                _wsContext.Products.Add(editProduct);
+            }
+            else
+            {
+                editProduct = _wsContext.Products.First(p => p.Id == prod.Id);
+                editProduct.Name = prod.Name;
+                editProduct.ImageUrl = fileName;
+                editProduct.CategoryId = prod.CategoryId;
+                editProduct.Category = _wsContext.Categories.First(c => c.Id == prod.CategoryId);
+                editProduct.Price = prod.Price;
+            }
+            _wsContext.SaveChanges();
+
+            if(!string.IsNullOrEmpty(desc))
+            {
+                _wsContext.MCDescriptions.Add(new MCDescription
+                {
+                    Product = editProduct,
+                    DetailedDesriptionList = desc.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                });
+            }
+            _wsContext.SaveChanges();
+
+            return RedirectToAction("StoreHouse");
         }
     }
 }
