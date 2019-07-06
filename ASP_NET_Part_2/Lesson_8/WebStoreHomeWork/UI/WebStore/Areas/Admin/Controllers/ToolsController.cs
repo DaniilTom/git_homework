@@ -102,13 +102,28 @@ namespace WebStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProduct(ProductDTO prod, string desc, IFormFile file)
+        public IActionResult EditProduct(ProductDTO prod, string desc, IFormFile file, [FromServices] IHostingEnvironment _appEnvironment)
         {
-            string fileName;
+            string fileUrl; //= "/img/" + prod.Name + file.FileName.Substring(file.FileName.LastIndexOf('.'));
 
+            Task Download = null;
             if (file != null)
-                fileName = prod.Name + file.FileName.Substring(file.FileName.LastIndexOf('.'));
-            else fileName = prod.ImageUrl;
+            {
+                fileUrl = "/img/" + prod.Name + file.FileName.Substring(file.FileName.LastIndexOf('.'));
+                Download = UploadImgAsync(fileUrl, file, _appEnvironment);
+            }
+            else
+            {
+                string path = _appEnvironment.WebRootPath;
+                string oldName = path + _wsContext.Products.First(p => p.Id == prod.Id).ImageUrl;
+                string newName = path + "/img/" + prod.Name + ".jpg";
+                fileUrl = "/img/" + prod.Name + ".jpg";
+                try
+                {
+                    System.IO.File.Move(oldName, newName);
+                }
+                catch (Exception) { }
+            }
 
             ProductBase editProduct;
             if (prod.Id == 0)
@@ -116,7 +131,7 @@ namespace WebStore.Areas.Admin.Controllers
                 editProduct = new ProductBase()
                 {
                     Name = prod.Name,
-                    ImageUrl = fileName,
+                    ImageUrl = fileUrl,
                     CategoryId = prod.CategoryId,
                     Category = _wsContext.Categories.First(c => c.Id == prod.CategoryId),
                     Price = prod.Price
@@ -128,7 +143,7 @@ namespace WebStore.Areas.Admin.Controllers
             {
                 editProduct = _wsContext.Products.First(p => p.Id == prod.Id);
                 editProduct.Name = prod.Name;
-                editProduct.ImageUrl = fileName;
+                editProduct.ImageUrl = fileUrl;
                 editProduct.CategoryId = prod.CategoryId;
                 editProduct.Category = _wsContext.Categories.First(c => c.Id == prod.CategoryId);
                 editProduct.Price = prod.Price;
@@ -145,7 +160,18 @@ namespace WebStore.Areas.Admin.Controllers
             }
             _wsContext.SaveChanges();
 
+            if(Download != null)Task.WaitAll(Download);
+
             return RedirectToAction("StoreHouse");
+        }
+
+        private async Task UploadImgAsync(string fileName, IFormFile file, IHostingEnvironment _appEnvironment)
+        {
+            string path = _appEnvironment.WebRootPath +  fileName;
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
         }
     }
 }
