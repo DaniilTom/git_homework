@@ -1,0 +1,25 @@
+﻿
+@model IEnumerable<WebStore.ViewModel.MicrocontrollerViewModel>
+
+@for(int i = 0; i < ViewBag.PageCount; i++)
+{
+    <a current-route asp-controller="Home" asp-action="Catalog" asp-route-page="@(i+1)">@(i+1)</a>
+}
+
+<ul class="cat_menu" style="list-style: none;">
+    @foreach (var view in Model)
+    {
+        <li>
+            <a href="@view.ProductBase.ImageUrl" target="_blank"><img src="@view.ProductBase.ImageUrl" alt="@view.ProductBase.Name" width="100"></a>
+            <br>
+            <h5>@view.ProductBase.Name</h5>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@view.ProductBase.Id">Добавить в корзину</a>
+            <ul>
+                @foreach(var d in view.MCDescription.DetailedDesription.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    <li>@d</li>
+                }
+            </ul>
+</li>
+    }
+</ul>
