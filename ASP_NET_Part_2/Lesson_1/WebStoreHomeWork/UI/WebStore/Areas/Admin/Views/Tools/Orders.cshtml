@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebStore.Domain.Implementations.Order>
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h3>Orders</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th rowspan="2">Id</th>
+            <th rowspan="2">User Name</th>
+            <th rowspan="2">Contact</th>
+            <th colspan="2" id="prod">Products</th>
+        </tr>
+        <tr>
+            <th id="name">Name</th>
+            <th id="quantity">Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.UserName</td>
+            <td>@order.Contact</td>
+
+            @foreach (var item in order.Items)
+            {
+
+                <td headers="prod name">@item.Product.Name</td>
+                <td headers="prod quantity">@item.Quantity</td>
+
+            }
+        </tr>
+            }
+    </tbody>
+    </table>
+
